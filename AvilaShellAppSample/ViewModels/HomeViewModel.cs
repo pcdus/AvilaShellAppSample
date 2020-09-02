@@ -38,7 +38,7 @@ namespace AvilaShellAppSample.ViewModels
         }
 
         public Command CallCommand => new Command(this.Call);
-        public Command OpenMapCommand => new Command(this.OpenMapAsync);
+        //public Command OpenMapCommand => new Command(this.OpenMapAsync);
 
         public HomeViewModel()
         {
