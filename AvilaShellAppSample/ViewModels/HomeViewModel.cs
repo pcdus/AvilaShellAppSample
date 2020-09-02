@@ -3,10 +3,11 @@ using System.Threading.Tasks;
 using AvilaShellAppSample.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using MvvmHelpers;
 
 namespace AvilaShellAppSample.ViewModels
 {
-    public class HomeViewModel : BaseViewModel
+    public class HomeViewModel : AvilaViewModelBase
     {
 
         ImageSource avilaIndoorImageSource = null;

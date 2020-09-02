@@ -10,7 +10,7 @@ using AvilaShellAppSample.Services;
 
 namespace AvilaShellAppSample.ViewModels
 {
-    public class BaseViewModel : INotifyPropertyChanged
+    public class AvilaViewModelBase : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
