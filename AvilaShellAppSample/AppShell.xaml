@@ -23,8 +23,11 @@
         </ResourceDictionary>
     </Shell.Resources>
     <TabBar>
-        <ShellContent Title="About" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Home" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}"/>
         <ShellContent Title="Browse" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Booking" Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}"/>
+        <ShellContent Title="About" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+
     </TabBar>
     <!--
         If you would like to navigate to this content you can do so by calling

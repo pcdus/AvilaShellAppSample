@@ -1,5 +1,163 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AvilaShellAppSample.Views.HomePage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AvilaShellAppSample.Views.HomePage"
+             xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
+             xmlns:local="clr-namespace:AvilaShellAppSample;assembly=AvilaShellAppSample"
+             xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
+             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel />
+    </ContentPage.BindingContext>
+      <ContentPage.Resources>
+    <ResourceDictionary>
+       <conv:ByteArrayToImageSourceConverter  x:Key="ByteArrayToImageSourceConverter" />
+   </ResourceDictionary>
+ </ContentPage.Resources>
     <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="16"
+                         Margin="0"
+                         Padding="0">
+
+                <!-- Image + menu -->
+                <Image x:Name="avilaImage"
+                       Source="{Binding AvilaIndoorImageSource}"
+                       Aspect="Fill"/>
+                
+                <ctrl:ShadowFrame>
+                    <StackLayout>
+                    <Label Text="Welcome to Avila" />
+                    </StackLayout>
+                </ctrl:ShadowFrame>
+
+                <!-- Phone -->
+                <ctrl:ShadowFrame>
+                    <StackLayout>
+                        <Label Text="Téléphone"
+                               TextColor="{StaticResource HomeHeader}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource Glyph="{StaticResource FaIconPhone}"
+                                                     Color="{StaticResource HomeDetails}"
+                                                     FontFamily="FontAwesomeSolid"
+                                                     Size="30" />
+                                </Image.Source>
+                            </Image>
+                            <Label Grid.Column="1"
+                                   Text="{Binding AvilaPhoneNumber}"
+                                   TextColor="{StaticResource HomeDetails}"
+                                   VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </StackLayout>
+                    <ctrl:ShadowFrame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CallCommand}"/>
+                    </ctrl:ShadowFrame.GestureRecognizers>   
+                </ctrl:ShadowFrame>
+
+                <!-- Address -->
+                <ctrl:ShadowFrame>
+                    <StackLayout>
+                        <Label Text="Adresse"
+                               TextColor="{StaticResource HomeHeader}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource Glyph="{StaticResource FaIconMap}"
+                                                     Color="{StaticResource HomeDetails}"
+                                                     FontFamily="FontAwesomeSolid"
+                                                     Size="30" />
+                                </Image.Source>
+                            </Image>
+                            <Label Grid.Column="1"
+                                   TextColor="{StaticResource HomeDetails}"
+                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Start">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding AvilaAddress.StreetNumber}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding AvilaAddress.StreetName}" />
+                                        <Span Text="&#10;" />
+                                        <Span Text="{Binding AvilaAddress.ZipCode}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding AvilaAddress.City}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Grid>
+                    </StackLayout>
+                    <ctrl:ShadowFrame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenMapCommand}"/>
+                    </ctrl:ShadowFrame.GestureRecognizers>   
+                </ctrl:ShadowFrame>
+
+                <!-- Schedule -->
+                <ctrl:ShadowFrame>
+                    <StackLayout>
+                        <Label Text="Horaires"
+                               TextColor="{StaticResource HomeHeader}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource Glyph="{StaticResource FaIconClock}"
+                                                     Color="{StaticResource HomeDetails}"
+                                                     FontFamily="FontAwesomeSolid"
+                                                     Size="30" />
+                                </Image.Source>
+                            </Image>
+                            <Label Grid.Column="1"
+                                   TextColor="{StaticResource HomeDetails}"
+                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Start">
+                                <Label.Text>
+                                    Lundi : 9h - 20h&#10;Mardi : 9h - 20h&#10;Mercredi : 9h - 20h&#10;Jeudi : 9h - 20h&#10;Vendredi : 9h - 20h&#10;Samedi : 9h - 17h&#10;Dimanche : fermé
+                                </Label.Text>
+                            </Label>
+                        </Grid>
+                    </StackLayout>
+                </ctrl:ShadowFrame>
+
+                <!-- Mail -->
+                <ctrl:ShadowFrame>
+                    <StackLayout>
+                        <Label Text="Mail"
+                               TextColor="{StaticResource HomeHeader}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource Glyph="{StaticResource FaIconMail}"
+                                                     Color="{StaticResource HomeDetails}"
+                                                     FontFamily="FontAwesomeSolid"
+                                                     Size="30" />
+                                </Image.Source>
+                            </Image>
+                            <Label Grid.Column="1"
+                                   Text="avila.coiffure@voila.fr"
+                                   TextColor="{StaticResource HomeDetails}"
+                                   VerticalTextAlignment="Center" HorizontalTextAlignment="Start">
+                            </Label>
+                        </Grid>
+                    </StackLayout>
+                </ctrl:ShadowFrame>
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

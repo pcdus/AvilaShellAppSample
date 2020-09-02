@@ -3,8 +3,8 @@ namespace AvilaShellAppSample.Models
 {
     public class News
     {
-        public News()
-        {
-        }
+        public string Id { get; set; }
+        public string Date { get; set; }
+
     }
 }

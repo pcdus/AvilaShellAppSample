@@ -10,6 +10,7 @@ namespace AvilaShellAppSample.Views
         public BookingPage()
         {
             InitializeComponent();
+            webView.Source = "https://booking.wavy.pro/avila";
         }
     }
 }

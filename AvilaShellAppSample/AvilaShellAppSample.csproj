@@ -10,4 +10,17 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\avila_indoor.jpg" />
+    <None Remove="Resources\fa-solid-900.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\avila_indoor.jpg" />
+    <EmbeddedResource Include="Resources\fa-solid-900.ttf" />
+  </ItemGroup>
 </Project>
