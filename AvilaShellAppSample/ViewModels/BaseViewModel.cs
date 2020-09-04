@@ -7,15 +7,13 @@ using Xamarin.Forms;
 
 using AvilaShellAppSample.Models;
 using AvilaShellAppSample.Services;
-using MvvmHelpers;
 
 namespace AvilaShellAppSample.ViewModels
 {
-    public class AvilaViewModelBase : BaseViewModel
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 
-        /*
         bool isBusy = false;
         public bool IsBusy
         {
@@ -54,7 +52,5 @@ namespace AvilaShellAppSample.ViewModels
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
-
-        */
     }
 }

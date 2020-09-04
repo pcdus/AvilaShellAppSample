@@ -10,7 +10,7 @@ using AvilaShellAppSample.Views;
 
 namespace AvilaShellAppSample.ViewModels
 {
-    public class ItemsViewModel : AvilaViewModelBase
+    public class ItemsViewModel : BaseViewModel
     {
         private Item _selectedItem;
 

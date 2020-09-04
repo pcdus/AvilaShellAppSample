@@ -20,7 +20,6 @@ namespace AvilaShellAppSample
         {
             InitializeComponent();
 
-            UseMockDataStore = false;
             if (UseMockDataStore)
                 DependencyService.Register<MockDataStore>();
             else

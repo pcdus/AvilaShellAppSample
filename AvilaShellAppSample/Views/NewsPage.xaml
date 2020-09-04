@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AvilaShellAppSample.Views.NewsPage"
-             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
-             Title="{Binding Title}">
-    <ContentPage.BindingContext>
-        <vm:NewsViewModel />
-    </ContentPage.BindingContext>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AvilaShellAppSample.Views.NewsPage">
     <ContentPage.Content>
-        <Label Text="News" /> 
     </ContentPage.Content>
 </ContentPage>

@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace AvilaShellAppSample.ViewModels
 {
-    public class LoginViewModel : AvilaViewModelBase
+    public class LoginViewModel : BaseViewModel
     {
         public Command LoginCommand { get; }
 

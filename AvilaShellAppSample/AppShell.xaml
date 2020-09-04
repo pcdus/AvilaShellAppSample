@@ -23,11 +23,31 @@
         </ResourceDictionary>
     </Shell.Resources>
     <TabBar>
-        <ShellContent Title="Home" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}"/>
-        <ShellContent Title="Browse" Icon="tab_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
-        <ShellContent Title="News" ContentTemplate="{DataTemplate local:NewsPage}" />
-        <ShellContent Title="Booking" Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}"/>
-        <ShellContent Title="About" Icon="tab_about.png" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
+        <ShellContent Title="Home" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="{StaticResource FasIconHome}" FontFamily="FontAwesomeSolid" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Browse" ContentTemplate="{DataTemplate local:ItemsPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="{StaticResource FasIconNews}" FontFamily="FontAwesomeSolid" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="News" ContentTemplate="{DataTemplate local:NewsPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="{StaticResource FarIconNews}" FontFamily="FontAwesomeRegular" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Booking" Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="{StaticResource FaIconCalendar}" FontFamily="FontAwesomeSolid" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="About" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="{StaticResource FasIconInfo}" FontFamily="FontAwesomeSolid" />
+            </ShellContent.Icon>
+        </ShellContent>
 
     </TabBar>
     <!--

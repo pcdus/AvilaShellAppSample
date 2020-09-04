@@ -7,7 +7,7 @@ using Xamarin.Forms;
 namespace AvilaShellAppSample.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
-    public class ItemDetailViewModel : AvilaViewModelBase
+    public class ItemDetailViewModel : BaseViewModel
     {
         private string itemId;
         private string text;

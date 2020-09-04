@@ -23,6 +23,7 @@
 
                 <!-- Image + menu -->
                 <ctrl:ShadowFrame Padding="0" Margin="0">
+                    <!--
                     <Grid Padding="0" Margin="0">
                      <Image x:Name="avilaImage"
                        Source="{Binding AvilaIndoorImageSource}"
@@ -32,9 +33,30 @@
                        VerticalOptions="Start"/>
                      <Label Text="Welcome to Avila"
                             VerticalOptions="End"
-                            HorizontalOptions="Center">
-                     </Label>
+                            HorizontalOptions="Center"
+                            BackgroundColor="#66000000" />
                     </Grid>
+                    -->
+
+                    <AbsoluteLayout x:Name="ViewLayout">
+                        <Image x:Name="avilaImage"
+                               Source="{Binding AvilaIndoorImageSource}"
+                               Aspect="AspectFill"
+                               HeightRequest="200"
+                               HorizontalOptions="FillAndExpand" VerticalOptions="Start"
+                               AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" />
+                        <AbsoluteLayout x:Name="ViewControls" AbsoluteLayout.LayoutBounds="1,1,1,.20" AbsoluteLayout.LayoutFlags="All"
+                                        BackgroundColor="#66000000" Margin="0">
+                            <StackLayout Orientation="Vertical" Margin="10" BackgroundColor="Transparent" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="1,1,1,1">
+                                <Grid Margin="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="Salted Caramel Mocha Frappuccino" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Grid.Column="0"   />
+                                </Grid>
+                            </StackLayout>
+                        </AbsoluteLayout>
+                    </AbsoluteLayout>
                 </ctrl:ShadowFrame>
 
                 <!-- Phone -->
@@ -49,7 +71,7 @@
                             </Grid.ColumnDefinitions>
                             <Image HorizontalOptions="Center" VerticalOptions="Center">
                                 <Image.Source>
-                                    <FontImageSource Glyph="{StaticResource FaIconPhone}"
+                                    <FontImageSource Glyph="{StaticResource FasIconPhone}"
                                                      Color="{StaticResource HomeDetails}"
                                                      FontFamily="FontAwesomeSolid"
                                                      Size="30" />
@@ -78,7 +100,7 @@
                             </Grid.ColumnDefinitions>
                             <Image HorizontalOptions="Center" VerticalOptions="Center">
                                 <Image.Source>
-                                    <FontImageSource Glyph="{StaticResource FaIconMap}"
+                                    <FontImageSource Glyph="{StaticResource FasIconMap}"
                                                      Color="{StaticResource HomeDetails}"
                                                      FontFamily="FontAwesomeSolid"
                                                      Size="30" />
@@ -118,7 +140,7 @@
                             </Grid.ColumnDefinitions>
                             <Image HorizontalOptions="Center" VerticalOptions="Center">
                                 <Image.Source>
-                                    <FontImageSource Glyph="{StaticResource FaIconClock}"
+                                    <FontImageSource Glyph="{StaticResource FasIconClock}"
                                                      Color="{StaticResource HomeDetails}"
                                                      FontFamily="FontAwesomeSolid"
                                                      Size="30" />
@@ -147,7 +169,7 @@
                             </Grid.ColumnDefinitions>
                             <Image HorizontalOptions="Center" VerticalOptions="Center">
                                 <Image.Source>
-                                    <FontImageSource Glyph="{StaticResource FaIconMail}"
+                                    <FontImageSource Glyph="{StaticResource FasIconMail}"
                                                      Color="{StaticResource HomeDetails}"
                                                      FontFamily="FontAwesomeSolid"
                                                      Size="30" />
