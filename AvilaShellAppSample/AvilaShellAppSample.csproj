@@ -15,6 +15,7 @@
     <Folder Include="Controls\" />
     <Folder Include="Resources\" />
     <Folder Include="Converters\" />
+    <Folder Include="Models\DTO\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\avila_indoor.jpg" />
