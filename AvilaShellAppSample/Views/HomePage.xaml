@@ -22,14 +22,19 @@
                          Padding="0">
 
                 <!-- Image + menu -->
-                <Image x:Name="avilaImage"
+                <ctrl:ShadowFrame Padding="0" Margin="0">
+                    <Grid Padding="0" Margin="0">
+                     <Image x:Name="avilaImage"
                        Source="{Binding AvilaIndoorImageSource}"
-                       Aspect="Fill"/>
-                
-                <ctrl:ShadowFrame>
-                    <StackLayout>
-                    <Label Text="Welcome to Avila" />
-                    </StackLayout>
+                       Aspect="AspectFill"
+                       HeightRequest="200"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="Start"/>
+                     <Label Text="Welcome to Avila"
+                            VerticalOptions="End"
+                            HorizontalOptions="Center">
+                     </Label>
+                    </Grid>
                 </ctrl:ShadowFrame>
 
                 <!-- Phone -->
@@ -149,12 +154,15 @@
                                 </Image.Source>
                             </Image>
                             <Label Grid.Column="1"
-                                   Text="avila.coiffure@voila.fr"
+                                   Text="{Binding AvilaEmail}"
                                    TextColor="{StaticResource HomeDetails}"
                                    VerticalTextAlignment="Center" HorizontalTextAlignment="Start">
                             </Label>
                         </Grid>
                     </StackLayout>
+                    <ctrl:ShadowFrame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SendEmailCommand}"/>
+                    </ctrl:ShadowFrame.GestureRecognizers> 
                 </ctrl:ShadowFrame>
 
             </StackLayout>

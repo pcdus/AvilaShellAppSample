@@ -4,6 +4,9 @@ using AvilaShellAppSample.Models;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using MvvmHelpers;
+using MvvmHelpers.Commands;
+using Command = MvvmHelpers.Commands.Command;
+using System.Collections.Generic;
 
 namespace AvilaShellAppSample.ViewModels
 {
@@ -38,8 +41,16 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref avilaAddress, value); }
         }
 
+        string avilaEmail = "avila.coiffure@voila.fr";
+        public string AvilaEmail
+        {
+            get { return avilaEmail; }
+            set { SetProperty(ref avilaEmail, value); }
+        }
+
         public Command CallCommand => new Command(this.Call);
-        //public Command OpenMapCommand => new Command(this.OpenMapAsync);
+        public AsyncCommand OpenMapCommand => new AsyncCommand(this.OpenMapAsync);
+        public AsyncCommand SendEmailCommand => new AsyncCommand(this.SendEmailAsync);
 
         public HomeViewModel()
         {
@@ -76,11 +87,47 @@ namespace AvilaShellAppSample.ViewModels
 
         }
 
-        /*
         private async Task OpenMapAsync()
         {
+            var placemark = new Placemark
+            {
+                CountryName = AvilaAddress.Country,
+                Thoroughfare = String.Format("{0} {1}", AvilaAddress.StreetNumber, AvilaAddress.StreetName),
+                Locality = AvilaAddress.City
+            };
+            var options = new MapLaunchOptions
+            {
+                Name = "Avila"
+            };
 
+            try
+            {
+                await Map.OpenAsync(placemark, options);
+            }
+            catch (Exception ex)
+            {
+                // No map application available to open or placemark can not be located
+            }
         }
-        */
+
+        private async Task SendEmailAsync()
+        {
+            try
+            {
+                var message = new EmailMessage
+                {
+                    To = new List<string>() { AvilaEmail }
+                };
+                await Email.ComposeAsync(message);
+            }
+            catch (FeatureNotSupportedException fbsEx)
+            {
+                // Email is not supported on this device
+            }
+            catch (Exception ex)
+            {
+                // Some other exception occurred
+            }
+        }
     }
 }
