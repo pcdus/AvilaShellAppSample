@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace AvilaShellAppSample.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class AboutViewModel : AvilaViewModelBase
     {
         public AboutViewModel()
         {

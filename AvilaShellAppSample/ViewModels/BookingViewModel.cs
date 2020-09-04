@@ -1,7 +1,7 @@
 ﻿using System;
 namespace AvilaShellAppSample.ViewModels
 {
-    public class BookingViewModel : BaseViewModel
+    public class BookingViewModel : AvilaViewModelBase
     {
         public BookingViewModel()
         {
