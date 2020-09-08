@@ -1,7 +1,27 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="AvilaShellAppSample.Views.BookingPage" xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels" Title="{Binding Title}">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AvilaShellAppSample.Views.BookingPage"
+             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:BookingViewModel />
     </ContentPage.BindingContext>
-    <WebView x:Name="webView" WidthRequest="1000" HeightRequest="1000" /> 
+    <ContentPage.ToolbarItems>
+    <ToolbarItem Text="Refresh"
+                 Order="Primary"
+                 Priority="0"
+                 Command="{Binding RefreshCommand}"
+                 CommandParameter="{x:Reference webView}">
+                 <!--Clicked="ToolbarItem_Clicked">-->
+                 
+            
+        <ToolbarItem.IconImageSource>
+            <FontImageSource Glyph="{StaticResource FasIconRefresh}"
+                             FontFamily="FontAwesomeSolid" />
+        </ToolbarItem.IconImageSource>
+    </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <WebView x:Name="webView" Source="{Binding AvilaUrlBooking}"
+             WidthRequest="1000" HeightRequest="1000" /> 
 </ContentPage>

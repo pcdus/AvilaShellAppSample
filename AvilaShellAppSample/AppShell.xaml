@@ -40,7 +40,7 @@
         </ShellContent>
         <ShellContent Title="Booking" Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}">
             <ShellContent.Icon>
-                <FontImageSource Glyph="{StaticResource FaIconCalendar}" FontFamily="FontAwesomeSolid" />
+                <FontImageSource Glyph="{StaticResource FasIconCalendar}" FontFamily="FontAwesomeSolid" />
             </ShellContent.Icon>
         </ShellContent>
         <ShellContent Title="About" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}">

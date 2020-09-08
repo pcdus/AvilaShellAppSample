@@ -52,7 +52,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Label Text="Salted Caramel Mocha Frappuccino" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Grid.Column="0"   />
+                                    <Label Text="Bienvenue chez Avila" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="End" Grid.Column="0"   />
                                 </Grid>
                             </StackLayout>
                         </AbsoluteLayout>

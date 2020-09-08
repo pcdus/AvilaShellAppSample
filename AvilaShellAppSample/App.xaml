@@ -16,7 +16,8 @@
             <x:String x:Key="FarIconNews">&#xf1ea;</x:String>
             <x:String x:Key="FasIconNews">&#xf1ea;</x:String>
             <x:String x:Key="FasIconInfo">&#xf05a;</x:String>
-            <x:String x:Key="FaIconCalendar">&#xf073;</x:String>
+            <x:String x:Key="FasIconCalendar">&#xf073;</x:String>
+            <x:String x:Key="FasIconRefresh">&#xf01e;</x:String>
 
             <!-- Colors -->
             <Color x:Key="Primary">#2196F3</Color>
