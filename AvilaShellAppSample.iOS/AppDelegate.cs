@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Syncfusion.SfRotator.XForms.iOS;
 using UIKit;
 
 namespace AvilaShellAppSample.iOS
@@ -27,6 +28,14 @@ namespace AvilaShellAppSample.iOS
 #endif
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
+
+            // Syncfusion controls initizialization
+            new SfRotatorRenderer();
+            Syncfusion.XForms.iOS.Cards.SfCardViewRenderer.Init();
+
+            // FFImageLoading plugin initizialization
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

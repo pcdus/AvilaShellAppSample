@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,8 +18,12 @@ namespace AvilaShellAppSample
 
         public App()
         {
+            //Register Syncfusion license
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzIwNDg5QDMxMzgyZTMyMmUzMGVJL3drbFl3d2kxYlRtWlhEM0hmUGtGdDJmRVVYZFpVL2pEVDFucEFpcm89");
+
             InitializeComponent();
 
+            //UseMockDataStore = false;
             if (UseMockDataStore)
                 DependencyService.Register<MockDataStore>();
             else
