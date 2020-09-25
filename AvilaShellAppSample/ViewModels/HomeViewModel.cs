@@ -29,8 +29,7 @@ namespace AvilaShellAppSample.ViewModels
 
         Address avilaAddress = new Address
         {
-            StreetNumber = 69,
-            StreetName = "rue des Grandes Arcades",
+            Street = "69,rue des Grandes Arcades",
             ZipCode = "67 000",
             City = "STRASBOURG",
             Country = "France"
@@ -92,7 +91,8 @@ namespace AvilaShellAppSample.ViewModels
             var placemark = new Placemark
             {
                 CountryName = AvilaAddress.Country,
-                Thoroughfare = String.Format("{0} {1}", AvilaAddress.StreetNumber, AvilaAddress.StreetName),
+                //Thoroughfare = String.Format("{0} {1}", AvilaAddress.StreetNumber, AvilaAddress.StreetName),
+                Thoroughfare = AvilaAddress.Street,
                 Locality = AvilaAddress.City
             };
             var options = new MapLaunchOptions

@@ -10,10 +10,16 @@ namespace AvilaShellAppSample.Models
         public List<Post> Posts;
 
         [JsonProperty("paging")]
-        public Paging paging;
+        public FPaging Paging;
 
         public class Post
         {
+            [JsonProperty("id")]
+            public string Id;
+
+            [JsonProperty("created_time")]
+            public DateTime CreatedTime;
+
             [JsonProperty("message")]
             public string Message;
 
@@ -26,14 +32,32 @@ namespace AvilaShellAppSample.Models
             [JsonProperty("permalink_url")]
             public string PermalinkUrl;
 
-            [JsonProperty("created_time")]
-            public DateTime CreatedTime;
-
-            [JsonProperty("id")]
-            public string Id;
+            [JsonProperty("icon")]
+            public string Icon;
 
             [JsonProperty("story")]
             public string Story;
+
+            [JsonProperty("story_tags")]
+            public List<StoryTag> StoryTags;
+        }
+
+        public class StoryTag
+        {
+            [JsonProperty("id")]
+            public string Id;
+
+            [JsonProperty("name")]
+            public string Name;
+
+            [JsonProperty("type")]
+            public string Type;
+
+            [JsonProperty("offset")]
+            public int Offset;
+
+            [JsonProperty("length")]
+            public int Length;
         }
 
         public class Cursors
@@ -45,7 +69,7 @@ namespace AvilaShellAppSample.Models
             public string After;
         }
 
-        public class Paging
+        public class FPaging
         {
             [JsonProperty("cursors")]
             public Cursors Cursors;

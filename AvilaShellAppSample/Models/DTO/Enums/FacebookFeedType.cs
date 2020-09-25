@@ -1,10 +1,16 @@
 ﻿using System;
 namespace AvilaShellAppSample.Models.DTO.Enums
 {
-    public class FacebookFeedType
+
+    public enum FacebookFeedType
     {
-        public FacebookFeedType()
-        {
-        }
+        // "https://www.facebook.com/images/icons/photo.gif"
+        Photo,
+        // "https://www.facebook.com/images/icons/video.gif"
+        Video,
+        // "https://www.facebook.com/images/icons/event.gif"
+        Event,
+        Unknown
     }
+
 }
