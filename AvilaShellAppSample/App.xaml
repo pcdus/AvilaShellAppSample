@@ -8,21 +8,43 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- FontIcons -->
-            <x:String x:Key="FasIconPhone">&#xf095;</x:String>
-            <x:String x:Key="FasIconMap">&#xf5a0;</x:String>
-            <x:String x:Key="FasIconClock">&#xf017;</x:String>
-            <x:String x:Key="FasIconMail">&#xf0e0;</x:String>
-            <x:String x:Key="FasIconHome">&#xf015;</x:String>
-            <x:String x:Key="FarIconNews">&#xf1ea;</x:String>
-            <x:String x:Key="FasIconNews">&#xf1ea;</x:String>
-            <x:String x:Key="FasIconInfo">&#xf05a;</x:String>
-            <x:String x:Key="FasIconCalendar">&#xf073;</x:String>
+            <!-- for Tabs -->
+            <x:String x:Key="FalIconHome">&#xf80c;</x:String>
+            <x:String x:Key="FalIconNews">&#xf1ea;</x:String>
+            <x:String x:Key="FalIconRss">&#xf09e;</x:String>
+            <x:String x:Key="FalIconCalendar">&#xf073;</x:String>
+            <x:String x:Key="FalIconInfo">&#xf05a;</x:String>
+            <!-- for HomePage -->
+            <x:String x:Key="FadsIconPhonePart1">&#xf879;</x:String>
+            <x:String x:Key="FadsIconPhonePart2">&#x10f879;</x:String>
+            <x:String x:Key="FadsIconMapPart1">&#xf5a0;</x:String>
+            <x:String x:Key="FadsIconMapPart2">&#x10f5a0;</x:String>
+            <x:String x:Key="FadsIconClockPart1">&#xf017;</x:String>
+            <x:String x:Key="FadsIconClockPart2">&#x10f017;</x:String>
+            <x:String x:Key="FadsIconMailPart1">&#xf0e0;</x:String>
+            <x:String x:Key="FadsIconMailPart2">&#x10f0e0;</x:String>
+
+            <!-- for others -->
             <x:String x:Key="FasIconRefresh">&#xf01e;</x:String>
+            <x:String x:Key="FalIconRefresh">&#xf01e;</x:String>
 
             <!-- Colors -->
-            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Primary">#2196f3</Color>
             <Color x:Key="HomeHeader">#000000</Color>
             <Color x:Key="HomeDetails">#777777</Color>
+            <Color x:Key="AvilaBackgroundColor">#f7bea3</Color>
+
+            <Color x:Key="Gray-100">#f6f7f8</Color>
+            <Color x:Key="Gray-200">#ebecef</Color>
+            <Color x:Key="Gray-300">#ced2d9</Color>
+            <Color x:Key="Gray-400">#b2b8c2</Color>
+            <Color x:Key="Gray-500">#959eac</Color>
+            <Color x:Key="Gray-600">#788396</Color>
+            <Color x:Key="Gray-700">#606a7b</Color>
+            <Color x:Key="Gray-800">#4a515e</Color>
+            <Color x:Key="Gray-900">#333942</Color>
+            <Color x:Key="Gray-Black">#000000</Color>
+            <Color x:Key="Gray-White">#ffffff</Color>
 
             <!-- Controls -->
             <Style TargetType="Button">

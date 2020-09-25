@@ -17,11 +17,16 @@
                  
             
         <ToolbarItem.IconImageSource>
-            <FontImageSource Glyph="{StaticResource FasIconRefresh}"
-                             FontFamily="FontAwesomeSolid" />
+            <FontImageSource Glyph="{StaticResource FalIconRefresh}"
+                             FontFamily="FontAwesomeLight"
+                             Size="Medium"/>
         </ToolbarItem.IconImageSource>
     </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <WebView x:Name="webView" Source="{Binding AvilaUrlBooking}"
-             WidthRequest="1000" HeightRequest="1000" /> 
+    <StackLayout>
+        <Label x:Name="labelLoading" Text="Loading..." IsVisible="false" />
+        <WebView x:Name="webView" Source="{Binding AvilaUrlBooking}"
+                 WidthRequest="1000" HeightRequest="1000"
+                 Navigated="webviewNavigated" Navigating="webviewNavigating"/>
+        </StackLayout>
 </ContentPage>

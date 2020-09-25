@@ -10,21 +10,35 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="18.2.0.59" />
+    <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.2.0.59" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Resources\" />
     <Folder Include="Converters\" />
     <Folder Include="Models\DTO\" />
+    <Folder Include="Models\DTO\Enums\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\avila_indoor.jpg" />
-    <None Remove="Resources\fa-solid-900.ttf" />
-    <None Remove="Resources\fa-regular-400.ttf" />
+    <None Remove="Resources\Montserrat-Bold.ttf" />
+    <None Remove="Resources\Montserrat-Medium.ttf" />
+    <None Remove="Resources\Montserrat-Regular.ttf" />
+    <None Remove="Resources\Montserrat-SemiBold.ttf" />
+    <None Remove="Resources\FontAwesome5Brands-Regular-400.otf" />
+    <None Remove="Resources\FontAwesome5Duotone-Solid-900.otf" />
+    <None Remove="Resources\FontAwesome5Pro-Light-300.otf" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\avila_indoor.jpg" />
-    <EmbeddedResource Include="Resources\fa-solid-900.ttf" />
-    <EmbeddedResource Include="Resources\fa-regular-400.ttf" />
+    <EmbeddedResource Include="Resources\Montserrat-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Montserrat-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Montserrat-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Montserrat-SemiBold.ttf" />
+    <EmbeddedResource Include="Resources\FontAwesome5Brands-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\FontAwesome5Duotone-Solid-900.otf" />
+    <EmbeddedResource Include="Resources\FontAwesome5Pro-Light-300.otf" />
   </ItemGroup>
 </Project>

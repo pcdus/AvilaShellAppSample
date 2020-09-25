@@ -71,9 +71,17 @@
                             </Grid.ColumnDefinitions>
                             <Image HorizontalOptions="Center" VerticalOptions="Center">
                                 <Image.Source>
-                                    <FontImageSource Glyph="{StaticResource FasIconPhone}"
+                                    <FontImageSource Glyph="{StaticResource FadsIconPhonePart1}"
                                                      Color="{StaticResource HomeDetails}"
-                                                     FontFamily="FontAwesomeSolid"
+                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                     Size="30" />
+                                </Image.Source>
+                            </Image>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center" Opacity="0.5">
+                                <Image.Source>
+                                    <FontImageSource Glyph="{StaticResource FadsIconPhonePart2}"
+                                                     Color="{StaticResource HomeDetails}"
+                                                     FontFamily="FontAwesomeDuotoneSolid"
                                                      Size="30" />
                                 </Image.Source>
                             </Image>
@@ -100,9 +108,17 @@
                             </Grid.ColumnDefinitions>
                             <Image HorizontalOptions="Center" VerticalOptions="Center">
                                 <Image.Source>
-                                    <FontImageSource Glyph="{StaticResource FasIconMap}"
+                                    <FontImageSource Glyph="{StaticResource FadsIconMapPart1}"
                                                      Color="{StaticResource HomeDetails}"
-                                                     FontFamily="FontAwesomeSolid"
+                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                     Size="30" />
+                                </Image.Source>
+                            </Image>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center" Opacity="0.5">
+                                <Image.Source>
+                                    <FontImageSource Glyph="{StaticResource FadsIconMapPart2}"
+                                                     Color="{StaticResource HomeDetails}"
+                                                     FontFamily="FontAwesomeDuotoneSolid"
                                                      Size="30" />
                                 </Image.Source>
                             </Image>
@@ -111,9 +127,7 @@
                                    VerticalTextAlignment="Center" HorizontalTextAlignment="Start">
                                 <Label.FormattedText>
                                     <FormattedString>
-                                        <Span Text="{Binding AvilaAddress.StreetNumber}" />
-                                        <Span Text=" " />
-                                        <Span Text="{Binding AvilaAddress.StreetName}" />
+                                        <Span Text="{Binding AvilaAddress.Street}" />
                                         <Span Text="&#10;" />
                                         <Span Text="{Binding AvilaAddress.ZipCode}" />
                                         <Span Text=" " />
@@ -138,11 +152,20 @@
                                 <ColumnDefinition Width="40" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
+
                             <Image HorizontalOptions="Center" VerticalOptions="Center">
                                 <Image.Source>
-                                    <FontImageSource Glyph="{StaticResource FasIconClock}"
+                                    <FontImageSource Glyph="{StaticResource FadsIconClockPart1}"
                                                      Color="{StaticResource HomeDetails}"
-                                                     FontFamily="FontAwesomeSolid"
+                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                     Size="30" />
+                                </Image.Source>
+                            </Image>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center" Opacity="0.5">
+                                <Image.Source>
+                                    <FontImageSource Glyph="{StaticResource FadsIconClockPart2}"
+                                                     Color="{StaticResource HomeDetails}"
+                                                     FontFamily="FontAwesomeDuotoneSolid"
                                                      Size="30" />
                                 </Image.Source>
                             </Image>
@@ -169,9 +192,17 @@
                             </Grid.ColumnDefinitions>
                             <Image HorizontalOptions="Center" VerticalOptions="Center">
                                 <Image.Source>
-                                    <FontImageSource Glyph="{StaticResource FasIconMail}"
+                                    <FontImageSource Glyph="{StaticResource FadsIconMailPart1}"
                                                      Color="{StaticResource HomeDetails}"
-                                                     FontFamily="FontAwesomeSolid"
+                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                     Size="30" />
+                                </Image.Source>
+                            </Image>
+                            <Image HorizontalOptions="Center" VerticalOptions="Center" Opacity="0.5">
+                                <Image.Source>
+                                    <FontImageSource Glyph="{StaticResource FadsIconMailPart2}"
+                                                     Color="{StaticResource HomeDetails}"
+                                                     FontFamily="FontAwesomeDuotoneSolid"
                                                      Size="30" />
                                 </Image.Source>
                             </Image>
