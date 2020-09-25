@@ -20,6 +20,14 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref avilaIndoorImageSource, value); }
         }
 
+        ImageSource avilaLogo = null;
+        public ImageSource AvilaLogo
+        {
+            get { return avilaLogo; }
+            set { SetProperty(ref avilaLogo, value); }
+        }
+
+
         string avilaPhoneNumber = "03 88 23 05 43";
         public string AvilaPhoneNumber
         {
@@ -29,7 +37,7 @@ namespace AvilaShellAppSample.ViewModels
 
         Address avilaAddress = new Address
         {
-            Street = "69,rue des Grandes Arcades",
+            Street = "69 rue des Grandes Arcades",
             ZipCode = "67 000",
             City = "STRASBOURG",
             Country = "France"
@@ -62,7 +70,7 @@ namespace AvilaShellAppSample.ViewModels
             }
 
             AvilaIndoorImageSource = ImageSource.FromResource("AvilaShellAppSample.Resources.avila_indoor.jpg");
-
+            AvilaLogo = ImageSource.FromResource("avila_logo_4colors.svg");
         }
 
         private void Call()

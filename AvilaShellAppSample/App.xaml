@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <!-- FontIcons -->
+            <!-- ========= -->
             <!-- for Tabs -->
             <x:String x:Key="FalIconHome">&#xf80c;</x:String>
             <x:String x:Key="FalIconNews">&#xf1ea;</x:String>
@@ -23,17 +24,20 @@
             <x:String x:Key="FadsIconClockPart2">&#x10f017;</x:String>
             <x:String x:Key="FadsIconMailPart1">&#xf0e0;</x:String>
             <x:String x:Key="FadsIconMailPart2">&#x10f0e0;</x:String>
-
             <!-- for others -->
-            <x:String x:Key="FasIconRefresh">&#xf01e;</x:String>
             <x:String x:Key="FalIconRefresh">&#xf01e;</x:String>
 
             <!-- Colors -->
+            <!-- ====== -->
+            <!-- Main colors -->
             <Color x:Key="Primary">#2196f3</Color>
             <Color x:Key="HomeHeader">#000000</Color>
             <Color x:Key="HomeDetails">#777777</Color>
-            <Color x:Key="AvilaBackgroundColor">#f7bea3</Color>
-
+            <Color x:Key="ApricotAvilaColor">#f7bea3</Color>
+            <Color x:Key="CornsilkAvilaColor">#fcf9de</Color>
+            <Color x:Key="IndigoDyeAvilaColor">#0f3b67</Color>
+            <Color x:Key="MediumChampagneAvilaColor">#f1eab0</Color>
+            <!-- Gray shades -->
             <Color x:Key="Gray-100">#f6f7f8</Color>
             <Color x:Key="Gray-200">#ebecef</Color>
             <Color x:Key="Gray-300">#ced2d9</Color>
@@ -46,7 +50,38 @@
             <Color x:Key="Gray-Black">#000000</Color>
             <Color x:Key="Gray-White">#ffffff</Color>
 
+            <!-- Style -->
+            <!-- ===== -->
+            <!-- Common style for labels -->
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratRegular" />
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="MinimumHeightRequest" Value="24"/>
+                <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
+            </Style>
+            <Style x:Key="HeaderLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratMedium" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-700}"/>
+                <Setter Property="HeightRequest" Value="18"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>
+            </Style>
+            <!-- Common style for images -->
+            <Style x:Key="ImageIconDuotonePart1Style" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">End</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+            </Style>
+            <Style x:Key="ImageIconDuotonePart2Style" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">End</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Opacity">1</Setter>
+            </Style>
+
             <!-- Controls -->
+            <!-- ======== -->
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White">
                 </Setter>

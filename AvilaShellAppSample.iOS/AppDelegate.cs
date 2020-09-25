@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using FFImageLoading.Forms.Platform;
+using FFImageLoading.Svg.Forms;
 using Foundation;
 using Syncfusion.SfRotator.XForms.iOS;
 using UIKit;
@@ -35,6 +36,13 @@ namespace AvilaShellAppSample.iOS
 
             // FFImageLoading plugin initizialization
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+
+            // XF SvgImage initizialization
+            Xamarin.Forms.Svg.iOS.SvgImage.Init();
+
+            // FFImageLoading
+            CachedImageRenderer.Init();
+            var ignore = typeof(SvgCachedImage);
 
             LoadApplication(new App());
 

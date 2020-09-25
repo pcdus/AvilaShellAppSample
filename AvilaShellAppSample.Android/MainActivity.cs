@@ -25,6 +25,9 @@ namespace AvilaShellAppSample.Droid
             // FFImageLoading plugin initizialization
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer:true);
 
+            // XF SvgImage initizialization
+            Xamarin.Forms.Svg.Droid.SvgImage.Init(this);
+
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)

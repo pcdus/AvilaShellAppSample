@@ -13,6 +13,8 @@
     <PackageReference Include="Syncfusion.Xamarin.SfRotator" Version="18.2.0.59" />
     <PackageReference Include="Syncfusion.Xamarin.Cards" Version="18.2.0.59" />
     <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms.Svg" Version="1.0.3" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
@@ -30,6 +32,14 @@
     <None Remove="Resources\FontAwesome5Brands-Regular-400.otf" />
     <None Remove="Resources\FontAwesome5Duotone-Solid-900.otf" />
     <None Remove="Resources\FontAwesome5Pro-Light-300.otf" />
+    <None Remove="Resources\ApricotCircleAvilaLogo.svg" />
+    <None Remove="Resources\4colorsCircleAvilaLogo.svg" />
+    <None Remove="Resources\CornsilkCircleAvilaLogo.svg" />
+    <None Remove="Resources\IndigoDyeCircleAvilaLogo.svg" />
+    <None Remove="Resources\MediumChampagneCircleAvilaLogo.svg" />
+    <None Remove="Resources\4colorsCircleAvilaLogoOmg.svg" />
+    <None Remove="Resources\4colorsCircleAvilaLogoOmg2.svg" />
+    <None Remove="Resources\4colorsCircleAvilaLogoOmg3.svg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\avila_indoor.jpg" />
@@ -40,5 +50,13 @@
     <EmbeddedResource Include="Resources\FontAwesome5Brands-Regular-400.otf" />
     <EmbeddedResource Include="Resources\FontAwesome5Duotone-Solid-900.otf" />
     <EmbeddedResource Include="Resources\FontAwesome5Pro-Light-300.otf" />
+    <EmbeddedResource Include="Resources\ApricotCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\4colorsCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\CornsilkCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\IndigoDyeCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\MediumChampagneCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg.svg" />
+    <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg2.svg" />
+    <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg3.svg" />
   </ItemGroup>
 </Project>

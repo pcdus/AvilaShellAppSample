@@ -4,6 +4,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using AvilaShellAppSample.Services;
 using AvilaShellAppSample.Views;
+using Xamarin.Forms.Svg;
+using FFImageLoading.Forms;
 
 namespace AvilaShellAppSample
 {
@@ -22,6 +24,9 @@ namespace AvilaShellAppSample
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzIwNDg5QDMxMzgyZTMyMmUzMGVJL3drbFl3d2kxYlRtWlhEM0hmUGtGdDJmRVVYZFpVL2pEVDFucEFpcm89");
 
             InitializeComponent();
+
+            // XF SvgImageSource registration
+            SvgImageSource.RegisterAssembly();
 
             //UseMockDataStore = false;
             if (UseMockDataStore)
