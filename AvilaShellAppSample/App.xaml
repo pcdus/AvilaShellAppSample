@@ -33,12 +33,10 @@
             <Color x:Key="Primary">#2196f3</Color>
             <Color x:Key="HomeHeader">#000000</Color>
             <Color x:Key="HomeDetails">#777777</Color>
-            <Color x:Key="ApricotAvilaColor">#facab2</Color>
-            <Color x:Key="CornsilkAvilaColor">#fdf9e4</Color>
-            <Color x:Key="FloralWhiteAvilaColor">#fefcf3</Color>
-            <Color x:Key="IndigoDyeAvilaColor">#004d7b</Color>
-            <Color x:Key="BlondAvilaColor">#f4edbe</Color>
-            <Color x:Key="LincolnGreenAvilaColor">#00571f</Color>
+            <Color x:Key="ApricotAvilaColor">#f7bea3</Color>
+            <Color x:Key="CornsilkAvilaColor">#fcf9de</Color>
+            <Color x:Key="IndigoDyeAvilaColor">#0f3b67</Color>
+            <Color x:Key="MediumChampagneAvilaColor">#f1eab0</Color>
             <!-- Gray shades -->
             <Color x:Key="Gray-100">#f6f7f8</Color>
             <Color x:Key="Gray-200">#ebecef</Color>
