@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
     <color name="launcher_background">#FFFFFF</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    -->
+    <color name="launcher_background">#FFFFFF</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#FF4081</color>
+    <!-- Gray shades -->
+    <color name="Gray-100">#f6f7f8</color>
+    <color name="Gray-200">#ebecef</color>
+    <color name="Gray-300">#ced2d9</color>
+    <color name="Gray-400">#b2b8c2</color>
+    <color name="Gray-500">#959eac</color>
+    <color name="Gray-600">#788396</color>
+    <color name="Gray-700">#606a7b</color>
+    <color name="Gray-800">#4a515e</color>
+    <color name="Gray-900">#333942</color>
+    <color name="Gray-Black">#000000</color>
+    <color name="Gray-White">#ffffff</color>
 </resources>
