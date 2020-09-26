@@ -7,16 +7,32 @@
              xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+    <!--
              Title="{Binding Title}">
+    -->
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
-      <ContentPage.Resources>
-    <ResourceDictionary>
-       <conv:ByteArrayToImageSourceConverter  x:Key="ByteArrayToImageSourceConverter" />
-   </ResourceDictionary>
- </ContentPage.Resources>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+           <conv:ByteArrayToImageSourceConverter  x:Key="ByteArrayToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <!--
+    <NavigationPage.TitleIconImageSource>
+        <svg:SvgImageSource Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg" />
+    </NavigationPage.TitleIconImageSource>
+
+    <NavigationPage.TitleView>
+        <Label Text="PCD" TextColor="Red" />
+    </NavigationPage.TitleView>
+        -->
+    <Shell.TitleView>
+        <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.TitleAvilaLogo.svg"
+                                          DownsampleHeight="6"
+                                          HeightRequest="45"/>
+    </Shell.TitleView>
     <ContentPage.Content>
 
         <Grid RowSpacing="0">
@@ -95,7 +111,7 @@
                                             Style="{StaticResource ImageIconDuotonePart1Style}">
                                         <Image.Source>
                                             <FontImageSource Glyph="{StaticResource FadsIconPhonePart1}"
-                                                             Color="{StaticResource MediumChampagneAvilaColor}"
+                                                             Color="{StaticResource BlondAvilaColor}"
                                                              FontFamily="FontAwesomeDuotoneSolid"
                                                              Size="30" />
                                         </Image.Source>
@@ -140,7 +156,7 @@
                                             Style="{StaticResource ImageIconDuotonePart1Style}">
                                         <Image.Source>
                                             <FontImageSource Glyph="{StaticResource FadsIconMapPart1}"
-                                                             Color="{StaticResource MediumChampagneAvilaColor}"
+                                                             Color="{StaticResource BlondAvilaColor}"
                                                              FontFamily="FontAwesomeDuotoneSolid"
                                                              Size="30" />
                                         </Image.Source>
@@ -186,7 +202,7 @@
                                             Style="{StaticResource ImageIconDuotonePart1Style}">
                                         <Image.Source>
                                             <FontImageSource Glyph="{StaticResource FadsIconClockPart1}"
-                                                             Color="{StaticResource MediumChampagneAvilaColor}"
+                                                             Color="{StaticResource BlondAvilaColor}"
                                                              FontFamily="FontAwesomeDuotoneSolid"
                                                              Size="30" />
                                         </Image.Source>
@@ -219,7 +235,7 @@
                                             Style="{StaticResource ImageIconDuotonePart1Style}">
                                         <Image.Source>
                                             <FontImageSource Glyph="{StaticResource FadsIconMailPart1}"
-                                                             Color="{StaticResource MediumChampagneAvilaColor}"
+                                                             Color="{StaticResource BlondAvilaColor}"
                                                              FontFamily="FontAwesomeDuotoneSolid"
                                                              Size="30" />
                                         </Image.Source>

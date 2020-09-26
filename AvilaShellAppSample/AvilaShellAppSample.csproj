@@ -58,5 +58,6 @@
     <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg.svg" />
     <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg2.svg" />
     <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg3.svg" />
+    <EmbeddedResource Include="Resources\TitleAvilaLogo.svg" />
   </ItemGroup>
 </Project>
