@@ -62,6 +62,13 @@
                                    HorizontalOptions="FillAndExpand"
                                    VerticalOptions="Start"
                                    Source="{Binding AvilaIndoorImageSource}" />
+
+                            <yummy:PancakeView Grid.Row="0"
+                                               HeightRequest="20"
+                                               VerticalOptions="End"
+                                               BackgroundColor="{StaticResource Gray-050}"
+                                               CornerRadius="16,16,0,0"/>
+
                         </Grid>
                     </ContentView>
                 </ScrollView>
@@ -69,7 +76,9 @@
                 <!--  Custom control for parallax scroll view  -->
                 <ctrl:ParallaxScrollView HorizontalOptions="FillAndExpand"
                                          ParallaxHeaderView="{x:Reference headerView}"
-                                         VerticalOptions="FillAndExpand">
+                                         LogoHeaderView="{x:Reference logoHeaderView}"
+                                         VerticalOptions="FillAndExpand"
+                                         >
                     <Grid ColumnSpacing="0"
                           RowSpacing="0"
                           VerticalOptions="FillAndExpand">
@@ -79,8 +88,9 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
+
                         <StackLayout Grid.Row="1"
-                                     Margin="16,-55,16,0"
+                                     Margin="16,-65,16,0"
                                      Spacing="16">
 
 
@@ -93,7 +103,8 @@
                                 </Image.Source>
                             </Image>
                             -->
-                            <ffimageloadingsvg:SvgCachedImage WidthRequest="80" HeightRequest="80"
+                            <ffimageloadingsvg:SvgCachedImage x:Name="logoHeaderView"
+                                                              WidthRequest="90" HeightRequest="90"
                                                               Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg" />
                             <!-- Logos : 4colorsCircleAvilaLogoOmg // ApricotCircleAvilaLogo" -->
 

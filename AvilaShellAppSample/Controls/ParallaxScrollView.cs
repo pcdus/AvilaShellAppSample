@@ -1,6 +1,8 @@
 ﻿using System;
+using FFImageLoading.Svg.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using System.Diagnostics;
 
 namespace AvilaShellAppSample.Controls
 {
@@ -17,6 +19,9 @@ namespace AvilaShellAppSample.Controls
         /// </summary>
         public static readonly BindableProperty ParallaxHeaderViewProperty =
            BindableProperty.Create(nameof(ParallaxScrollView), typeof(View), typeof(ParallaxScrollView), null);
+
+        public static readonly BindableProperty LogoHeaderViewProrperty =
+            BindableProperty.Create(nameof(LogoHeaderView), typeof(View), typeof(SvgCachedImage), null);
 
         #endregion
 
@@ -52,6 +57,12 @@ namespace AvilaShellAppSample.Controls
             set => SetValue(ParallaxHeaderViewProperty, value);
         }
 
+        public View LogoHeaderView
+        {
+            get => (View)GetValue(LogoHeaderViewProrperty);
+            set => SetValue(LogoHeaderViewProrperty, value);
+        }
+
         #endregion
 
         #region Methods
@@ -73,17 +84,45 @@ namespace AvilaShellAppSample.Controls
             {
                 this.ParallaxHeaderView.Scale = 1;
                 this.ParallaxHeaderView.TranslationY = y;
+
+                Debug.WriteLine("y<0 => " +
+                    " - PHV.Scale : 1 " +
+                    " - PHV.TranslationY : " + y.ToString());
             }
             else if (Device.RuntimePlatform == "iOS")
             {
                 var newHeight = height + (ScrollY * -1);
-                this.ParallaxHeaderView.Scale = newHeight / height;
-                this.ParallaxHeaderView.TranslationY = -(ScrollY / 2);
+                var newScale = newHeight / height;
+                var newTranslation = -(ScrollY / 2);
+                this.ParallaxHeaderView.Scale = newScale;
+                this.ParallaxHeaderView.TranslationY = newTranslation;
+
+                Debug.WriteLine("iOS => " +
+                    " - newHeight : " + newHeight.ToString() +
+                    " - PHV.Scale : " + newScale.ToString() +
+                    " - PHV.TranslationY : " + newTranslation.ToString());
+                if (LogoHeaderView != null)
+                {
+                    this.LogoHeaderView.RotateTo(newTranslation);
+                    /*
+                    if (newScale > 1)
+                        //this.LogoHeaderView.Scale = this.ParallaxHeaderView.Scale * 1.25;
+                    this.LogoHeaderView.RotateTo(ScrollY);
+                    //this.LogoHeaderView.TranslationY = this.ParallaxHeaderView.TranslationY;
+                    //this.LogoHeaderView.Margin.Bottom = this.ParallaxHeaderView.TranslationY;
+                    else
+                        this.LogoHeaderView.Scale = 1;
+                    */
+                }
             }
             else
             {
                 this.ParallaxHeaderView.Scale = 1;
                 this.ParallaxHeaderView.TranslationY = 0;
+
+                Debug.WriteLine("else => " +
+                    " - PHV.Scale : 1 " +
+                    " - PHV.TranslationY : 0");
             }
         }
 
