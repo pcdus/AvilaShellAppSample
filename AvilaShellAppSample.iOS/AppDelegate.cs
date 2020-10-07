@@ -4,7 +4,6 @@ using System.Linq;
 using FFImageLoading.Forms.Platform;
 using FFImageLoading.Svg.Forms;
 using Foundation;
-using Syncfusion.SfRotator.XForms.iOS;
 using UIKit;
 
 namespace AvilaShellAppSample.iOS
@@ -28,11 +27,8 @@ namespace AvilaShellAppSample.iOS
             Xamarin.Calabash.Start();
 #endif
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
+            global::Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental" });
             global::Xamarin.Forms.Forms.Init();
-
-            // Syncfusion controls initizialization
-            new SfRotatorRenderer();
-            Syncfusion.XForms.iOS.Cards.SfCardViewRenderer.Init();
 
             // FFImageLoading plugin initizialization
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();

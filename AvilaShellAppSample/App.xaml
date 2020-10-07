@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AvilaShellAppSample.App">
+             x:Class="AvilaShellAppSample.App"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <!--
         Define global resources and styles here, that apply to all pages in your app.
     -->
@@ -24,6 +25,8 @@
             <x:String x:Key="FadsIconClockPart2">&#x10f017;</x:String>
             <x:String x:Key="FadsIconMailPart1">&#xf0e0;</x:String>
             <x:String x:Key="FadsIconMailPart2">&#x10f0e0;</x:String>
+            <!-- for SocialNetworks -->
+            <x:String x:Key="FabIconFacebook">&#xf39e;</x:String>
             <!-- for others -->
             <x:String x:Key="FalIconRefresh">&#xf01e;</x:String>
 
@@ -51,25 +54,59 @@
             <Color x:Key="Gray-900">#333942</Color>
             <Color x:Key="Gray-Black">#000000</Color>
             <Color x:Key="Gray-White">#ffffff</Color>
+            <!-- for background pages -->
+            <Color x:Key="Gray-050">#fafafa</Color>
 
             <!-- Style -->
             <!-- ===== -->
-            <!-- Common style for labels -->
-            <Style x:Key="LabelStyle" TargetType="Label">
+
+            <!-- Labels -->
+            <!-- HomePage style for labels -->
+            <Style x:Key="HomePageLabelStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="MontserratRegular" />
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
                 <Setter Property="MinimumHeightRequest" Value="24"/>
                 <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
             </Style>
-            <Style x:Key="HeaderLabelStyle" TargetType="Label">
+            <Style x:Key="HomePageHeaderLabelStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="MontserratMedium" />
                 <Setter Property="FontSize" Value="12"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-700}"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
                 <Setter Property="HeightRequest" Value="18"/>
                 <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>
             </Style>
-            <!-- Common style for images -->
+            <!-- NewsPage style for labels -->
+            <Style x:Key="NewsPageCategoryLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}"/>
+                <Setter Property="Margin" Value="10,8,0,4" />
+            </Style>
+            <Style x:Key="NewsPageEventDateLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-White}"/>
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="NewsPageTitleLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+            </Style>
+            <Style x:Key="NewsPageSubtitleLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratMedium" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
+            </Style>
+            <Style x:Key="NewsPageDescriptionLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratRegular" />
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+            </Style>
+            <!-- Images -->
+            <!-- HomePage style for images -->
             <Style x:Key="ImageIconDuotonePart1Style" TargetType="Image">
                 <Setter Property="BackgroundColor">Transparent</Setter>
                 <Setter Property="HorizontalOptions">End</Setter>
@@ -80,6 +117,19 @@
                 <Setter Property="HorizontalOptions">End</Setter>
                 <Setter Property="VerticalOptions">Center</Setter>
                 <Setter Property="Opacity">1</Setter>
+            </Style>
+            <!-- PancakeView -->
+            <Style x:Key="YummyFrame" TargetType="yummy:PancakeView">
+                <Setter Property="BackgroundColor" Value="{StaticResource Gray-White}" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <yummy:DropShadow Offset="1,2"
+                                          Color="{StaticResource Gray-Black}"
+                                          BlurRadius="{OnPlatform Android=2, Default=2}"
+                                          Opacity="{OnPlatform Android=1, Default=0.2}" />
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <!-- Controls -->

@@ -7,7 +7,8 @@
              xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <!--
              Title="{Binding Title}">
     -->
@@ -35,7 +36,8 @@
     </Shell.TitleView>
     <ContentPage.Content>
 
-        <Grid RowSpacing="0">
+        <Grid RowSpacing="0"
+              BackgroundColor="{StaticResource Gray-050}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -96,16 +98,17 @@
                             <!-- Logos : 4colorsCircleAvilaLogoOmg // ApricotCircleAvilaLogo" -->
 
                             <!-- Phone -->
-                            <ctrl:ShadowFrame>
+                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                               Padding="16">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource HeaderLabelStyle}"
+                                    <Label Style="{StaticResource HomePageHeaderLabelStyle}"
                                            Text="Téléphone" />
                                     <Label Grid.Row="1"
-                                           Style="{StaticResource LabelStyle}"
+                                           Style="{StaticResource HomePageLabelStyle}"
                                            Text="{Binding AvilaPhoneNumber}"  />
                                     <Image  Grid.RowSpan="2"
                                             Style="{StaticResource ImageIconDuotonePart1Style}">
@@ -126,22 +129,23 @@
                                         </Image.Source>
                                     </Image>
                                 </Grid>
-                                <ctrl:ShadowFrame.GestureRecognizers>
+                                <yummy:PancakeView.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding CallCommand}"/>
-                                </ctrl:ShadowFrame.GestureRecognizers>   
-                            </ctrl:ShadowFrame>
+                                </yummy:PancakeView.GestureRecognizers>
+                            </yummy:PancakeView>
 
                             <!-- Address -->
-                            <ctrl:ShadowFrame>
+                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                               Padding="16">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource HeaderLabelStyle}"
+                                    <Label Style="{StaticResource HomePageHeaderLabelStyle}"
                                            Text="Adresse" />
                                     <Label Grid.Row="1"
-                                           Style="{StaticResource LabelStyle}">
+                                           Style="{StaticResource HomePageLabelStyle}">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="{Binding AvilaAddress.Street}" />
@@ -171,22 +175,23 @@
                                         </Image.Source>
                                     </Image>
                                 </Grid>
-                                <ctrl:ShadowFrame.GestureRecognizers>
+                                <yummy:PancakeView.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding OpenMapCommand}"/>
-                                </ctrl:ShadowFrame.GestureRecognizers>   
-                            </ctrl:ShadowFrame>
+                                </yummy:PancakeView.GestureRecognizers>
+                            </yummy:PancakeView>
 
                             <!-- Schedule -->
-                            <ctrl:ShadowFrame>
+                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                               Padding="16">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource HeaderLabelStyle}"
+                                    <Label Style="{StaticResource HomePageHeaderLabelStyle}"
                                            Text="Horaires" />
                                     <Label Grid.Row="1"
-                                           Style="{StaticResource LabelStyle}">
+                                           Style="{StaticResource HomePageLabelStyle}">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Lundi : 9h - 20h&#10;" />
@@ -217,19 +222,20 @@
                                         </Image.Source>
                                     </Image>
                                 </Grid>
-                            </ctrl:ShadowFrame>
+                            </yummy:PancakeView>
 
                             <!-- Mail -->
-                            <ctrl:ShadowFrame>
+                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                               Padding="16" Margin="0,0,0,16">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource HeaderLabelStyle}"
+                                    <Label Style="{StaticResource HomePageHeaderLabelStyle}"
                                            Text="Mail" />
                                     <Label Grid.Row="1"
-                                           Style="{StaticResource LabelStyle}"
+                                           Style="{StaticResource HomePageLabelStyle}"
                                            Text="{Binding AvilaEmail}"  />
                                     <Image  Grid.RowSpan="2"
                                             Style="{StaticResource ImageIconDuotonePart1Style}">
@@ -250,15 +256,15 @@
                                         </Image.Source>
                                     </Image>
                                 </Grid>
-                                <ctrl:ShadowFrame.GestureRecognizers>
+                                <yummy:PancakeView.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding SendEmailCommand}"/>
-                                </ctrl:ShadowFrame.GestureRecognizers>   
-                            </ctrl:ShadowFrame>
+                                </yummy:PancakeView.GestureRecognizers>   
+                            </yummy:PancakeView>
 
                             </StackLayout>
                         </Grid>
                     </ctrl:ParallaxScrollView>
-                    </Grid>
+                </Grid>
             </Grid>
     </ContentPage.Content>
 </ContentPage>

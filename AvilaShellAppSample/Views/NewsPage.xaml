@@ -5,169 +5,272 @@
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
              xmlns:model="clr-namespace:AvilaShellAppSample.Models"
-             xmlns:sfCards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
-             xmlns:sfRotator="clr-namespace:Syncfusion.SfRotator.XForms;assembly=Syncfusion.SfRotator.XForms"
-             xmlns:sfBorder="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:NewsViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <RefreshView x:DataType="vm:NewsViewModel" 
-                     IsRefreshing="{Binding IsRefreshing}"
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
-            <ScrollView>
-                <StackLayout Padding="0" Spacing="8">
+            <ScrollView BackgroundColor="{StaticResource Gray-050}">
+                <StackLayout Padding="0" Spacing="0" BackgroundColor="Transparent">
 
                     <!-- Events -->
+                    <!-- ====== -->
                     <!-- Events Header label  -->
-                    <!--                          -->
-                    <Label
-                        FontFamily="MontserratSemiBold"
-                        FontSize="12"
-                        LineHeight="{OnPlatform Default=-1,
-                                                Android=1.25}"
-                        Text="AGENDA"
-                        Margin="8"/>
+                    <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
+                           Text="AGENDA" />
+
                     <!-- Events List -->
-                    <sfRotator:SfRotator
-                        x:Name="EventsList"
-                        BackgroundColor="Transparent"
-                        DotsBorderColor="Transparent" 
-                        UnselectedDotColor="{DynamicResource Gray-200}"
-                        SelectedDotColor="{DynamicResource ApricotAvilaColor}" 
-                        DotPlacement="OutSide"
-                        HeightRequest="295"
-                        HorizontalOptions="StartAndExpand"
-                        ItemsSource="{Binding Events}"
-                        NavigationDirection="Horizontal"
-                        NavigationStripMode="Dots"
-                        VerticalOptions="Start"
-                        Margin="8, 0">
-                    <sfRotator:SfRotator.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout x:DataType="model:Event" Spacing="0">
-                                <ctrl:CustomShadowFrame x:Name="Rotator" BackgroundColor="{DynamicResource Gray-White}" 
-                                                        BorderColor="{DynamicResource Gray-White}" BorderWidth="1" 
-                                                        CornerRadius="4" HasShadow="True" Margin="4" Padding="0">
-                                    <Grid RowSpacing="0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
+                    <CarouselView x:Name="EventsList"
+                                  BackgroundColor="Transparent"
+                                  IndicatorView="indicatorView"
+                                  ItemsSource="{Binding Events}"
+                                  HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never"
+                                  HeightRequest="253">
+                        <!--
+                                  HorizontalOptions="StartAndExpand"
+                                  FlowDirection="LeftToRight"
+                                  VerticalOptions="Center"
+                                  Margin="8,0">
+                        -->
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Spacing="0">
+                                    <!-- CustomShadowFrame => KO : image not rounded + wide border effect -->
+                                    <!--
+                                    <ctrl:CustomShadowFrame x:Name="Rotator" BackgroundColor="{DynamicResource Gray-White}" 
+                                                            BorderColor="{DynamicResource Gray-White}" BorderWidth="1" 
+                                                            CornerRadius="4" HasShadow="True" Margin="4" Padding="0">
+                                    -->
+                                    <!-- LightShadowFrame => KO : image not rounded + wide border effect-->
+                                    <!--
+                                    <ctrl:LightShadowFrame Padding="0" x:Name="Rotator" IsClippedToBounds="True" Margin="4">
+                                    -->
+                                    <!-- Pancakeview -->
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                                       Margin="8,0,8,8">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
 
-                                        <!-- Image of the event -->
-                                        <Image Aspect="AspectFill"
-                                               BackgroundColor="{DynamicResource Gray-White}"
-                                               HeightRequest="195">
-                                            <Image.Source>
-                                                <UriImageSource CacheValidity="14"
-                                                                CachingEnabled="true" 
-                                                                Uri="{Binding Image}" />
-                                            </Image.Source>
-                                        </Image>
+                                            <!-- Image of the event -->
+                                            <Image Aspect="AspectFill"
+                                                   BackgroundColor="{DynamicResource Gray-White}"
+                                                   HeightRequest="195">
+                                                <Image.Source>
+                                                    <UriImageSource CacheValidity="14"
+                                                                    CachingEnabled="true" 
+                                                                    Uri="{Binding Image}" />
+                                                </Image.Source>
+                                            </Image>
 
-                                        <Grid Grid.Row="1"
-                                              Padding="8,12" ColumnSpacing="0">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Row="1"
+                                                  Padding="8,8" ColumnSpacing="0"
+                                                  BackgroundColor="{StaticResource Gray-White}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <!-- Date of the event -->
-                                            <sfBorder:SfBorder  CornerRadius="6" Margin="0" HasShadow="False" BorderColor="Transparent"
-                                                                WidthRequest="40" HeightRequest="40"
-                                                                BackgroundColor="{StaticResource ApricotAvilaColor}">
-                                                <sfBorder:SfBorder.Content>
+                                                <!-- Date of the event -->
+                                                <yummy:PancakeView CornerRadius="6" Margin="0" HasShadow="False" BorderColor="Transparent"
+                                                                   WidthRequest="40" HeightRequest="40"
+                                                                   BackgroundColor="{StaticResource ApricotAvilaColor}">
                                                     <Grid>
-                                                        <StackLayout  Spacing="0" Margin="0,4,0,0">
-                                                            <!--  Event month label  -->
-                                                            <Label Text="{Binding StartDate, StringFormat= '{}{0:MMM}'}" TextColor="{StaticResource Gray-White}" 
-                                                                   FontSize="12"  FontFamily="MontserratSemiBold" 
-                                                                   HorizontalOptions="Center" />
-                                                            <!--  Event event label  -->
-                                                            <Label Text="{Binding StartDate, StringFormat= '{}{0:dd}'}"  TextColor="{StaticResource Gray-White}" 
-                                                                   FontSize="12"  FontFamily="MontserratSemiBold" 
-                                                                   HorizontalOptions="Center" />
+                                                        <StackLayout Spacing="0" Margin="0,4,0,0">
+                                                            <Label Text="{Binding StartDate, StringFormat= '{}{0:MMM}'}"
+                                                                    Style="{StaticResource NewsPageEventDateLabelStyle}" />
+                                                            <Label Text="{Binding StartDate, StringFormat= '{}{0:dd}'}"
+                                                                    Style="{StaticResource NewsPageEventDateLabelStyle}" />
                                                         </StackLayout>
                                                     </Grid>
-                                                </sfBorder:SfBorder.Content>
-                                            </sfBorder:SfBorder>
+                                                </yummy:PancakeView>
 
-                                            
-                                            <StackLayout Margin="8,0,0,0" Grid.Column="1" Spacing="4" >
+                                                <StackLayout Margin="8,4,0,0" Grid.Column="1" Spacing="0">
+                                                    <!--  Event name   -->
+                                                    <Label Text="{Binding Name}"
+                                                           Style="{StaticResource NewsPageTitleLabelStyle}"
+                                                           HorizontalOptions="Start" 
+                                                           MaxLines="1" LineBreakMode="TailTruncation"/>
 
-                                                <!--  Event name   -->
-                                                <Label Text="{Binding Name}"
-                                                       FontSize="16" FontFamily="MontserratSemiBold" TextColor="{DynamicResource Gray-900}"
-                                                       HorizontalOptions="Start" 
-                                                       MaxLines="1" LineBreakMode="TailTruncation"/>
+                                                    <!--  Event location -->
+                                                    <Label Text="{Binding Address.Name}"
+                                                           Style="{StaticResource NewsPageSubtitleLabelStyle}"
+                                                           HorizontalOptions="Start" 
+                                                           MaxLines="1" LineBreakMode="TailTruncation"/>
 
-                                                <!--  Event location -->
-                                                <Label Text="{Binding Address.Name}"
-                                                       FontSize="12" FontFamily="MontserratMedium" TextColor="{DynamicResource Gray-700}"
-                                                       HorizontalOptions="Start" 
-                                                       MaxLines="1" LineBreakMode="TailTruncation"/>
-
-                                            </StackLayout>
+                                                </StackLayout>
+                                            </Grid>
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.OpenEventCommand,Source={x:Reference EventsList}}"
+                                                                      CommandParameter="{Binding .}"/>
+                                            </Grid.GestureRecognizers>
                                         </Grid>
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.OpenEventCommand,Source={x:Reference EventsList}}"
-                                                                  CommandParameter="{Binding .}"/>
-                                        </Grid.GestureRecognizers>
-                                    </Grid>
-                                </ctrl:CustomShadowFrame>
-                            </StackLayout>
-                        </DataTemplate>
-                    </sfRotator:SfRotator.ItemTemplate>
-                </sfRotator:SfRotator>
+                                    <!--
+                                    </ctrl:CustomShadowFrame>
+                                    -->
+                                    <!--
+                                    </ctrl:LightShadowFrame>
+                                    -->
+                                    </yummy:PancakeView>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView x:Name="indicatorView"
+                                   SelectedIndicatorColor="{StaticResource ApricotAvilaColor}"
+                                   HideSingle="True"
+                                   IndicatorSize="8"
+                                   IndicatorColor="{StaticResource Gray-300}"
+                                   Margin="0,8,0,0" />
 
                     <!-- News -->
+                    <!-- ==== -->
                     <!-- Events Header label  -->
-                    <Label
-                        FontFamily="MontserratSemiBold"
-                        FontSize="12"
-                        LineHeight="{OnPlatform Default=-1,
-                                                Android=1.25}"
-                        Text="ACTUALITES"
-                        Margin="8"/>
+                    <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
+                           Text="ACTUALITES" />
+
                     <!-- News List-->
                     <StackLayout x:Name="NewsList"
                                  BindableLayout.ItemsSource="{Binding News}"
+                                 BackgroundColor="Transparent"
                                  Spacing="16"
-                                 Margin="8,0">
+                                 Margin="8, 0">
                         <BindableLayout.ItemTemplate>
-                            <DataTemplate>
+                            <DataTemplate x:DataType="model:News">
+                                <!-- for debug image Height -->
+                                <!-- ====================== -->
+                                <!-- Xamarin forum -->
+                                <!--
+                                <Frame Padding="0" Margin="0">
+                                    <Grid Padding="0"  Margin="0"  
+                                          VerticalOptions="FillAndExpand" 
+                                          HorizontalOptions="FillAndExpand"
+                                          BackgroundColor="Red"  >
+                                        <Image Source ="{Binding Image}" 
+                                               HorizontalOptions="Start"
+                                               SizeChanged="Image_SizeChanged"/>
+                                    </Grid>
+                                </Frame>
+                                -->
+                                <!-- StackOverflow -->
+                                <!--
+                                    <StackLayout Orientation="Vertical">
+                                        <Image Source="{Binding Image}" Aspect="AspectFill"/>
+                                        <Label Text="Description" />
+                                    </StackLayout>
+                                -->
+
+                                <!-- Solution implementation -->
+                                <!-- ======================= -->
+                                <!-- Cell container ( CustomShadowFrame //ShadowFrame // NoShadowFrame // Frame )-->
                                 <!--
                                 <ctrl:CustomShadowFrame x:Name="Rotator" BackgroundColor="{DynamicResource Gray-White}" 
                                                         BorderColor="{DynamicResource Gray-White}" BorderWidth="1" 
-                                                        CornerRadius="4" HasShadow="True" Margin="4" Padding="0">-->
+                                                        CornerRadius="4" HasShadow="True" Margin="4" Padding="0">
+                                -->
+                                <!--
                                 <ctrl:ShadowFrame
                                     IsClippedToBounds="True">
-                                    <StackLayout x:DataType="model:News">
-                                        <Grid Padding="0"
+                                -->
+                                <!--
+                                <ctrl:NoShadowFrame>
+                                -->
+                                <!--
+                                <Frame Margin="0" Padding="0">
+                                -->
+                                <yummy:PancakeView Style="{StaticResource YummyFrame}">
+
+                                    <!-- Content container ( StackLayout // Grid )-->
+                                    <StackLayout x:DataType="model:News" Margin="0" Spacing="0">
+                                    <!--
+                                    <Grid Padding="8">
+                                         <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                    -->
+
+                                        <!-- Content (Image // Label) -->
+                                        <Label Text="{Binding Date, StringFormat= '{}{0:dddd dd MMMM yyyy}'}"
+                                               Style="{StaticResource NewsPageSubtitleLabelStyle}"
+                                               Margin="12,16,8,16" />
+
+                                         <Label Text="{Binding Description}"
+                                                Style="{StaticResource NewsPageDescriptionLabelStyle}"
+                                                Margin="12,0,8,12" />
+
+                                        <!-- Image in Grid => red stripes -->
+                                        <!--
+                                        <Grid Padding="0" Margin="0"
+                                              x:DataType="model:News"
+                                              HorizontalOptions="FillAndExpand"
                                               VerticalOptions="FillAndExpand"
-                                              HorizontalOptions="FillAndExpand">
+                                              BackgroundColor="Red">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
                                             <Image Source="{Binding Image}"
                                                    Aspect="AspectFill"/>
                                         </Grid>
-                                        <Label Text="{Binding Description}"
-                                               FontSize="16" FontFamily="MontserratSemiBold" TextColor="{DynamicResource Gray-900}"
-                                               Margin="8,8,8,0" />
-                                        <Label Text="{Binding Date, StringFormat= '{}{0:dd/MM/yyyy}'}"
-                                               FontSize="12" FontFamily="MontserratMedium" TextColor="{DynamicResource Gray-700}"
-                                               Margin="8,0,8,4" />
+                                        -->
+                                        <!-- FFImageLoading => not aspect keeped, but keep this solution -->
+                                        
+                                        <Grid Padding="0" Margin="0"
+                                              Grid.Row="2"
+                                              HorizontalOptions="FillAndExpand"
+                                              VerticalOptions="FillAndExpand"
+                                              BackgroundColor="Orange">
+                                            <ffimageloading:CachedImage Source="{Binding Image}"
+                                                            HorizontalOptions="Fill"
+                                                            VerticalOptions="Fill"
+                                                            Aspect="AspectFill"
+                                                            DownsampleToViewSize="True"/>
+                                        </Grid>
+                                        
+            
+                                        <!--
+                                        <ctrl:ImageRatioContainer ImageToSize="{Binding Image}">
+                                            <Image Source="{Binding Image}" HorizontalOptions="Fill" Aspect="AspectFill" />
+                                        </ctrl:ImageRatioContainer>
+                                        -->
+    
+
+
+                                        <!-- Gesture and Command -->
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding BindingContext.OpenNewsCommand,Source={x:Reference NewsList}}"
                                                                     CommandParameter="{Binding .}"/>
                                         </StackLayout.GestureRecognizers>
-                                    </StackLayout>
+
+                                        <!-- End of content container ( StackLayout // Grid )-->
+                                        </StackLayout>
+                                        <!--
+                                        </Grid>
+                                    -->
+
+                                    <!--
                                     </ctrl:ShadowFrame>
-                               <!--</ctrl:CustomShadowFrame>-->
+                                    -->
+                                    <!--
+                                    </ctrl:CustomShadowFrame>
+                                    -->
+                                    <!--
+                                    </ctrl:NoShadowFrame>
+                                    -->
+                                    </yummy:PancakeView>
+                                    <!--
+                                    </Frame>
+                                    -->
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
-
                 </StackLayout>
             </ScrollView>
         </RefreshView>
