@@ -8,6 +8,8 @@
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <!--
              Title="{Binding Title}">
@@ -54,21 +56,58 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <!--  Article header image  -->
-                            <Image x:Name="headerImage"
+                            <!--
+                            <ffimageloading:CachedImage x:Name="headerImage"
                                    Grid.Row="0"
                                    Aspect="AspectFill"
                                    BackgroundColor="{DynamicResource Gray-200}"
                                    HeightRequest="250"
                                    HorizontalOptions="FillAndExpand"
                                    VerticalOptions="Start"
-                                   Source="{Binding AvilaIndoorImageSource}" />
-
+                                   Source="{Binding AvilaIndoorImageSource}">
+                            </ffimageloading:CachedImage>
                             <yummy:PancakeView Grid.Row="0"
                                                HeightRequest="20"
                                                VerticalOptions="End"
                                                BackgroundColor="{StaticResource Gray-050}"
                                                CornerRadius="16,16,0,0"/>
+                            -->
 
+                            <yummy:PancakeView Grid.Row="0"
+                                               VerticalOptions="End"
+                                               BackgroundColor="{StaticResource Gray-050}"
+                                               CornerRadius="0,0,16,16">
+                                <ffimageloading:CachedImage x:Name="headerImage"
+                                       Grid.Row="0"
+                                       Aspect="AspectFill"
+                                       BackgroundColor="{DynamicResource Gray-200}"
+                                       HeightRequest="240"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="Start"
+                                       Source="{Binding AvilaIndoorImageSource}">
+                                </ffimageloading:CachedImage>
+                                <yummy:PancakeView.Shadow>
+                                          <yummy:DropShadow Offset="2,4"
+                                                            Color="{StaticResource Gray-Black}"
+                                                            BlurRadius="{OnPlatform Android=2, Default=4}"
+                                                            Opacity="{OnPlatform Android=1, Default=0.2}" />
+                                    </yummy:PancakeView.Shadow>
+                            </yummy:PancakeView>
+
+                            <!--
+                            <ffimageloading:CachedImage
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Start"
+                                DownsampleToViewSize="true"
+                                Aspect="AspectFill" HeightRequest="250"  WidthRequest="Auto"
+                                            Source="{Binding AvilaIndoorImageSource}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CornersTransformation
+                                        CornersTransformType="BottomLeftRounded,BottomRightRounded"
+                                        BottomLeftCornerSize="90"
+                                        BottomRightCornerSize="120"/>
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                                        -->
                         </Grid>
                     </ContentView>
                 </ScrollView>
@@ -83,14 +122,14 @@
                           RowSpacing="0"
                           VerticalOptions="FillAndExpand">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="250" />
+                            <RowDefinition Height="240" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
 
                         <StackLayout Grid.Row="1"
-                                     Margin="16,-65,16,0"
+                                     Margin="16,-50,16,0"
                                      Spacing="16">
 
 
@@ -109,7 +148,7 @@
                             <!-- Logos : 4colorsCircleAvilaLogoOmg // ApricotCircleAvilaLogo" -->
 
                             <!-- Phone -->
-                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                            <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
                                                Padding="16">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
@@ -137,6 +176,7 @@
                                                              Color="{StaticResource ApricotAvilaColor}"
                                                              FontFamily="FontAwesomeDuotoneSolid"
                                                              Size="30" />
+  
                                         </Image.Source>
                                     </Image>
                                 </Grid>
@@ -146,7 +186,7 @@
                             </yummy:PancakeView>
 
                             <!-- Address -->
-                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                            <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
                                                Padding="16">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
@@ -192,7 +232,7 @@
                             </yummy:PancakeView>
 
                             <!-- Schedule -->
-                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                            <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
                                                Padding="16">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
@@ -236,7 +276,7 @@
                             </yummy:PancakeView>
 
                             <!-- Mail -->
-                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                            <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
                                                Padding="16" Margin="0,0,0,16">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
