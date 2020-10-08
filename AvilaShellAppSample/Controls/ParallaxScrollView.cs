@@ -72,6 +72,7 @@ namespace AvilaShellAppSample.Controls
         /// </summary>
         public void Parallax()
         {
+
             if (this.ParallaxHeaderView == null)
                 return;
 
@@ -104,15 +105,6 @@ namespace AvilaShellAppSample.Controls
                 if (LogoHeaderView != null)
                 {
                     this.LogoHeaderView.RotateTo(newTranslation);
-                    /*
-                    if (newScale > 1)
-                        //this.LogoHeaderView.Scale = this.ParallaxHeaderView.Scale * 1.25;
-                    this.LogoHeaderView.RotateTo(ScrollY);
-                    //this.LogoHeaderView.TranslationY = this.ParallaxHeaderView.TranslationY;
-                    //this.LogoHeaderView.Margin.Bottom = this.ParallaxHeaderView.TranslationY;
-                    else
-                        this.LogoHeaderView.Scale = 1;
-                    */
                 }
             }
             else
@@ -124,6 +116,7 @@ namespace AvilaShellAppSample.Controls
                     " - PHV.Scale : 1 " +
                     " - PHV.TranslationY : 0");
             }
+
         }
 
         #endregion
