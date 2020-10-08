@@ -37,7 +37,14 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref isRefreshing, value); }
         }
 
-        public AsyncCommand RefreshCommand => new AsyncCommand(this.GetNewsAsync);
+        bool hasEmptyData = true;
+        public bool HasEmptyData
+        {
+            get { return hasEmptyData; }
+            set { SetProperty(ref hasEmptyData, value); }
+        }
+
+        public AsyncCommand RefreshCommand => new AsyncCommand(this.RefreshAsync);
         public AsyncCommand<News> OpenNewsCommand => new AsyncCommand<News>(this.OpenNewsAsync);
         public AsyncCommand<Event> OpenEventCommand => new AsyncCommand<Event>(this.OpenEventAsync);
 
@@ -53,11 +60,24 @@ namespace AvilaShellAppSample.ViewModels
 
         private async Task GetNewsAsync()
         {
-            IsRefreshing = true;
+            IsBusy = true;
+            //await Task.Delay(750);
+            await Task.Delay(2500);
             var _news = await _dataService.GetNews();
             News = new ObservableCollection<News>(_news);
             var _events = await _dataService.GetEvents();
             Events = new ObservableCollection<Event>(_events);
+
+            if (News.Count > 0 || Events.Count > 0)
+                HasEmptyData = false;
+
+            IsBusy = false;
+        }
+
+        private async Task RefreshAsync()
+        {
+            IsRefreshing = true;
+            await GetNewsAsync();
             IsRefreshing = false;
         }
 

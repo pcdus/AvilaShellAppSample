@@ -14,6 +14,7 @@
     <PackageReference Include="Xamarin.Forms.Svg" Version="1.0.3" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.1.0.714" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="18.3.0.38" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />

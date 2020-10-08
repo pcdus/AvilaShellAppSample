@@ -4,6 +4,7 @@ using System.Linq;
 using FFImageLoading.Forms.Platform;
 using FFImageLoading.Svg.Forms;
 using Foundation;
+using Syncfusion.XForms.iOS.Shimmer;
 using UIKit;
 
 namespace AvilaShellAppSample.iOS
@@ -35,10 +36,10 @@ namespace AvilaShellAppSample.iOS
 
             // XF SvgImage initizialization
             Xamarin.Forms.Svg.iOS.SvgImage.Init();
-
-            // FFImageLoading
-            CachedImageRenderer.Init();
             var ignore = typeof(SvgCachedImage);
+
+            // Syncfusion initialization
+            SfShimmerRenderer.Init();
 
             LoadApplication(new App());
 

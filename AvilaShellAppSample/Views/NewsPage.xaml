@@ -3,18 +3,66 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AvilaShellAppSample.Views.NewsPage"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
              xmlns:model="clr-namespace:AvilaShellAppSample.Models"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:NewsViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <conv:AllTrueConverter x:Key="AllTrueConverter" /> 
+    </ContentPage.Resources>
     <ContentPage.Content>
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}">
             <ScrollView BackgroundColor="{StaticResource Gray-050}">
+
+                <shimmer:SfShimmer x:Name="shimmer" VerticalOptions="Fill">
+                    <shimmer:SfShimmer.IsActive>
+                        <MultiBinding Converter="{StaticResource AllTrueConverter}">
+                            <Binding Path="IsBusy" />
+                            <Binding Path="HasEmptyData" />
+                        </MultiBinding>
+                    </shimmer:SfShimmer.IsActive>
+                    <!--
+                                   IsActive="{Binding IsBusy}">
+                    -->
+                    <shimmer:SfShimmer.CustomView>
+                        <Grid RowSpacing="16" Margin="16">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="253" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="20" />
+                                <RowDefinition Height="150" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <BoxView Grid.Row="0"
+                                     WidthRequest="150"
+                                     HorizontalOptions="Start"
+                                     BackgroundColor="{StaticResource Gray-300}" />
+                            <yummy:PancakeView Grid.Row="1"
+                                               Style="{StaticResource YummyFrame}"
+                                               BackgroundColor="{StaticResource Gray-200}" />
+                            <BoxView Grid.Row="2"
+                                     WidthRequest="75"
+                                     HorizontalOptions="Center"
+                                     BackgroundColor="{StaticResource Gray-300}"/>
+                            <BoxView Grid.Row="3"
+                                     WidthRequest="150"
+                                     HorizontalOptions="Start"
+                                     BackgroundColor="{StaticResource Gray-300}" />
+                            <yummy:PancakeView Grid.Row="4"
+                                               Style="{StaticResource YummyFrame}"
+                                               BackgroundColor="{StaticResource Gray-200}" />
+
+                        </Grid>
+                    </shimmer:SfShimmer.CustomView>
+                    <shimmer:SfShimmer.Content>
                 <StackLayout Padding="0" Spacing="0" BackgroundColor="Transparent">
 
                     <!-- Events -->
@@ -22,6 +70,7 @@
                     <!-- Events Header label  -->
                     <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
                            Text="AGENDA" />
+
 
                     <!-- Events List -->
                     <CarouselView x:Name="EventsList"
@@ -280,6 +329,8 @@
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
                 </StackLayout>
+                </shimmer:SfShimmer.Content>
+                </shimmer:SfShimmer>
             </ScrollView>
         </RefreshView>
     </ContentPage.Content>
