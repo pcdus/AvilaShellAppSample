@@ -16,11 +16,6 @@
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
-    <ContentPage.Resources>
-        <ResourceDictionary>
-           <conv:ByteArrayToImageSourceConverter  x:Key="ByteArrayToImageSourceConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <!--
     <NavigationPage.TitleIconImageSource>
         <svg:SvgImageSource Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg" />

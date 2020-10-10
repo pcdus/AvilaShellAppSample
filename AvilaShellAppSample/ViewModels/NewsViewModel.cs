@@ -61,12 +61,14 @@ namespace AvilaShellAppSample.ViewModels
         private async Task GetNewsAsync()
         {
             IsBusy = true;
-            //await Task.Delay(750);
-            await Task.Delay(2500);
-            var _news = await _dataService.GetNews();
-            News = new ObservableCollection<News>(_news);
+            await Task.Delay(750);
+            //await Task.Delay(2500);
+
             var _events = await _dataService.GetEvents();
             Events = new ObservableCollection<Event>(_events);
+            var _news = await _dataService.GetNews();
+            News = new ObservableCollection<News>(_news);
+
 
             if (News.Count > 0 || Events.Count > 0)
                 HasEmptyData = false;

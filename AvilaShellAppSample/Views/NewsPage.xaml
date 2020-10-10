@@ -9,6 +9,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
+             xmlns:local="clr-namespace:AvilaShellAppSample;assembly=AvilaShellAppSample"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:NewsViewModel />
@@ -21,6 +22,8 @@
                      Command="{Binding RefreshCommand}">
             <ScrollView BackgroundColor="{StaticResource Gray-050}">
 
+                <!-- Syncfusion Shimmer => use a skeletton -->
+
                 <shimmer:SfShimmer x:Name="shimmer" VerticalOptions="Fill">
                     <shimmer:SfShimmer.IsActive>
                         <MultiBinding Converter="{StaticResource AllTrueConverter}">
@@ -28,41 +31,42 @@
                             <Binding Path="HasEmptyData" />
                         </MultiBinding>
                     </shimmer:SfShimmer.IsActive>
-                    <!--
-                                   IsActive="{Binding IsBusy}">
-                    -->
+
+                    <!-- Skeletton structure -->
+  
                     <shimmer:SfShimmer.CustomView>
                         <Grid RowSpacing="16" Margin="16">
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="20" />
+                                <RowDefinition Height="15" />
                                 <RowDefinition Height="253" />
                                 <RowDefinition Height="10" />
-                                <RowDefinition Height="20" />
+                                <RowDefinition Height="15" />
                                 <RowDefinition Height="150" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <BoxView Grid.Row="0"
-                                     WidthRequest="150"
+                                     WidthRequest="100"
                                      HorizontalOptions="Start"
-                                     BackgroundColor="{StaticResource Gray-300}" />
+                                     BackgroundColor="{StaticResource Gray-400}" />
                             <yummy:PancakeView Grid.Row="1"
                                                Style="{StaticResource YummyFrame}"
-                                               BackgroundColor="{StaticResource Gray-200}" />
+                                               BackgroundColor="{StaticResource Gray-300}" />
                             <BoxView Grid.Row="2"
                                      WidthRequest="75"
                                      HorizontalOptions="Center"
-                                     BackgroundColor="{StaticResource Gray-300}"/>
+                                     BackgroundColor="{StaticResource Gray-200}"/>
                             <BoxView Grid.Row="3"
                                      WidthRequest="150"
                                      HorizontalOptions="Start"
-                                     BackgroundColor="{StaticResource Gray-300}" />
+                                     BackgroundColor="{StaticResource Gray-400}" />
                             <yummy:PancakeView Grid.Row="4"
                                                Style="{StaticResource YummyFrame}"
-                                               BackgroundColor="{StaticResource Gray-200}" />
+                                               BackgroundColor="{StaticResource Gray-300}" />
 
                         </Grid>
                     </shimmer:SfShimmer.CustomView>
                     <shimmer:SfShimmer.Content>
+  
                 <StackLayout Padding="0" Spacing="0" BackgroundColor="Transparent">
 
                     <!-- Events -->
@@ -108,6 +112,7 @@
                                             </Grid.RowDefinitions>
 
                                             <!-- Image of the event -->
+                                            <!--
                                             <Image Aspect="AspectFill"
                                                    BackgroundColor="{DynamicResource Gray-White}"
                                                    HeightRequest="195">
@@ -117,6 +122,13 @@
                                                                     Uri="{Binding Image}" />
                                                 </Image.Source>
                                             </Image>
+                                            -->
+                                            <ffimageloading:CachedImage Aspect="AspectFill"
+                                                                        BackgroundColor="{DynamicResource Gray-White}"
+                                                                        HeightRequest="195" DownsampleHeight="195"
+                                                                        DownsampleToViewSize = "true"
+                                                                        Source="{Binding Image}">
+                                            </ffimageloading:CachedImage>
 
                                             <Grid Grid.Row="1"
                                                   Padding="8,8" ColumnSpacing="0"
@@ -236,7 +248,11 @@
                                 <yummy:PancakeView Style="{StaticResource YummyFrame}">
 
                                     <!-- Content container ( StackLayout // Grid )-->
+                                    <!-- StackLayout => issue on PullToRefresh : latest image not displayed -->
+                                    
                                     <StackLayout x:DataType="model:News" Margin="0" Spacing="0">
+                                    
+                                    <!-- Grid -->
                                     <!--
                                     <Grid Padding="8">
                                          <Grid.RowDefinitions>
@@ -248,7 +264,8 @@
 
                                         <!-- Content (Image // Label) -->
                                         <!-- Text="{Binding Date, StringFormat= '{}{0:dddd dd MMMM yyyy}'}" -->
-                                        <Label Style="{StaticResource NewsPageSubtitleLabelStyle}"
+                                        <Label Grid.Row="0"
+                                               Style="{StaticResource NewsPageSubtitleLabelStyle}"
                                                Margin="12,16,8,16">
                                             <Label.FormattedText>
                                                 <FormattedString>
@@ -258,7 +275,8 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                         <Label Text="{Binding Description}"
+                                         <Label Grid.Row="1"
+                                                Text="{Binding Description}"
                                                 Style="{StaticResource NewsPageDescriptionLabelStyle}"
                                                 MaxLines="3" LineBreakMode="TailTruncation"
                                                 Margin="12,0,8,12" />
@@ -278,37 +296,40 @@
                                         </Grid>
                                         -->
                                         <!-- FFImageLoading => not aspect keeped, but keep this solution -->
-                                        
+                                        <!--
                                         <Grid Padding="0" Margin="0"
                                               Grid.Row="2"
                                               HorizontalOptions="FillAndExpand"
                                               VerticalOptions="FillAndExpand"
+                                              MinimumHeightRequest="200"
                                               BackgroundColor="Orange">
-                                            <ffimageloading:CachedImage Source="{Binding Image}"
-                                                            HorizontalOptions="Fill"
-                                                            VerticalOptions="Fill"
-                                                            Aspect="AspectFill"
-                                                            DownsampleToViewSize="True"/>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <ffimageloading:CachedImage Source="resource://AvilaShellAppSample.Resources.avila_indoor.jpg"
+                                                                        LoadingPlaceholder="avila-indoor.jpg"
+                                                                        HorizontalOptions="Fill"
+                                                                        VerticalOptions="Fill"
+                                                                        MinimumHeightRequest="200"
+                                                                        Aspect="AspectFill"
+                                                                        DownsampleToViewSize="True" />
                                         </Grid>
-                                        
-            
-                                        <!--
-                                        <ctrl:ImageRatioContainer ImageToSize="{Binding Image}">
-                                            <Image Source="{Binding Image}" HorizontalOptions="Fill" Aspect="AspectFill" />
-                                        </ctrl:ImageRatioContainer>
                                         -->
-    
 
+                                        <ctrl:ImageFit Grid.Row="2"
+                                                       Source="{Binding Image}" />
+            
 
                                         <!-- Gesture and Command -->
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding BindingContext.OpenNewsCommand,Source={x:Reference NewsList}}"
                                                                     CommandParameter="{Binding .}"/>
                                         </StackLayout.GestureRecognizers>
-
                                         <!-- End of content container ( StackLayout // Grid )-->
+                                        
                                         </StackLayout>
-                                        <!--
+                                        
+                                    <!--
                                         </Grid>
                                     -->
 
@@ -329,8 +350,10 @@
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
                 </StackLayout>
+                
                 </shimmer:SfShimmer.Content>
                 </shimmer:SfShimmer>
+                
             </ScrollView>
         </RefreshView>
     </ContentPage.Content>

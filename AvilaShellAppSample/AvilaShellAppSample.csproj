@@ -41,10 +41,6 @@
     <None Remove="Resources\4colorsCircleAvilaLogoOmg.svg" />
     <None Remove="Resources\4colorsCircleAvilaLogoOmg2.svg" />
     <None Remove="Resources\4colorsCircleAvilaLogoOmg3.svg" />
-    <None Remove="Resources\fbImg1.jpg" />
-    <None Remove="Resources\fbImg2.jpg" />
-    <None Remove="Resources\fbImg3.jpg" />
-    <None Remove="Resources\fbImg4.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\avila_indoor.jpg" />
@@ -64,9 +60,5 @@
     <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg2.svg" />
     <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg3.svg" />
     <EmbeddedResource Include="Resources\TitleAvilaLogo.svg" />
-    <EmbeddedResource Include="Resources\fbImg1.jpg" />
-    <EmbeddedResource Include="Resources\fbImg2.jpg" />
-    <EmbeddedResource Include="Resources\fbImg3.jpg" />
-    <EmbeddedResource Include="Resources\fbImg4.jpg" />
   </ItemGroup>
 </Project>
