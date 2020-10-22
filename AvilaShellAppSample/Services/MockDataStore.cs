@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AvilaShellAppSample.Models;
+using AvilaShellAppSample.Services.Abstractions;
 
 namespace AvilaShellAppSample.Services
 {

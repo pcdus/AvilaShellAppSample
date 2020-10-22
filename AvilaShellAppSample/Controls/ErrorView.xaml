@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AvilaShellAppSample.Controls.ErrorView"
+             xmlns:specialized="clr-namespace:System.Collections.Specialized;assembly=System"
+             xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
+             x:Name="ServiceErrorControl">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <conv:ErrorKindToVisibilityConverter x:Key="ErrorKindToVisibilityConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <StackLayout BackgroundColor="Transparent"
+                         Spacing="0"
+                         VerticalOptions="Center">
+
+                <!-- Case : NoInternetAccess -->
+                <Grid>
+                    <Grid.IsVisible>
+                        <Binding Path="ErrorKind"
+                                 Converter="{StaticResource ErrorKindToVisibilityConverter}"
+                                 Source="{x:Reference ServiceErrorControl}">
+                            <Binding.ConverterParameter>
+                                <specialized:StringCollection>
+                                    <x:String>NoInternetAccess</x:String>
+                                </specialized:StringCollection>
+                            </Binding.ConverterParameter>
+                        </Binding>
+                    </Grid.IsVisible>
+                    <Image Style="{StaticResource ErrorImageIconDuotonePart1Style}">
+                        <Image.Source>
+                            <FontImageSource x:Name="fisPart1"
+                                             Glyph="{StaticResource FadsIconNoInternetPart1}"
+                                             Color="{StaticResource BlondAvilaColor}"
+                                             FontFamily="FontAwesomeDuotoneSolid" 
+                                             Size="90">
+                            </FontImageSource>
+                        </Image.Source>
+                    </Image>
+                    <Image Style="{StaticResource ErrorImageIconDuotonePart2Style}">
+                        <Image.Source>
+                            <FontImageSource x:Name="fisPart2"
+                                             Glyph="{StaticResource FadsIconNoInternetPart2}"
+                                             Color="{StaticResource ApricotAvilaColor}"
+                                             FontFamily="FontAwesomeDuotoneSolid"
+                                             Size="90" />
+                        </Image.Source>
+                    </Image>
+                </Grid>
+
+                <!-- Case : NoSuccessStatusCode / Timeout / Other -->
+                <Grid>
+                    <Grid.IsVisible>
+                        <Binding Path="ErrorKind"
+                                 Converter="{StaticResource ErrorKindToVisibilityConverter}"
+                                 Source="{x:Reference ServiceErrorControl}">
+                            <Binding.ConverterParameter>
+                                <specialized:StringCollection>
+                                    <x:String>NoSuccessStatusCode</x:String>
+                                    <x:String>Timeout</x:String>
+                                    <x:String>Other</x:String>
+                                </specialized:StringCollection>
+                            </Binding.ConverterParameter>
+                        </Binding>
+                    </Grid.IsVisible>
+                    <Image Style="{StaticResource ErrorImageIconDuotonePart1Style}">
+                        <Image.Source>
+                            <FontImageSource Glyph="{StaticResource FadsIconWarningTrianglePart1}"
+                                                Color="{StaticResource BlondAvilaColor}"
+                                                FontFamily="FontAwesomeDuotoneSolid"
+                                                Size="90" />
+                        </Image.Source>
+                    </Image>
+                    <Image Style="{StaticResource ErrorImageIconDuotonePart2Style}">
+                        <Image.Source>
+                            <FontImageSource Glyph="{StaticResource FadsIconWarningTrianglePart2}"
+                                                Color="{StaticResource ApricotAvilaColor}"
+                                                FontFamily="FontAwesomeDuotoneSolid"
+                                                Size="90" />
+  
+                        </Image.Source>
+                    </Image>
+                </Grid>
+
+                <!-- Other informations -->
+                <Label Text="{Binding Title, Source={x:Reference ServiceErrorControl}}"
+                       Style="{StaticResource ErrorPageHaderLabelStyle}"/>
+                <Label Text="{Binding Description, Source={x:Reference ServiceErrorControl}}"
+                       Style="{StaticResource ErrorPageDescriptionLabelStyle}"/>
+                <Label Text="{Binding ErrorKind, Source={x:Reference ServiceErrorControl}}" />
+            </StackLayout>
+
+            <!-- Retry button -->
+            <Button Grid.Row="1"
+                    Text="Retry"
+                    Style="{StaticResource GradientButtonStyle}"
+                    Command="{Binding RetryButtonCommand, Source={x:Reference ServiceErrorControl}}">
+            </Button>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

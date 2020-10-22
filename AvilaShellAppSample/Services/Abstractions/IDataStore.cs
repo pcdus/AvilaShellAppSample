@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AvilaShellAppSample.Services
+namespace AvilaShellAppSample.Services.Abstractions
 {
     public interface IDataStore<T>
     {

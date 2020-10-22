@@ -28,7 +28,7 @@ namespace AvilaShellAppSample.iOS
             Xamarin.Calabash.Start();
 #endif
             global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
-            global::Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental" });
+            global::Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental", "Brush_Experimental" });
             global::Xamarin.Forms.Forms.Init();
 
             // FFImageLoading plugin initizialization

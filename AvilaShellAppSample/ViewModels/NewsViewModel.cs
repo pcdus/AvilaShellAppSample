@@ -7,6 +7,12 @@ using System.Diagnostics;
 using MvvmHelpers.Commands;
 using System.Collections.ObjectModel;
 using Xamarin.Essentials;
+using AvilaShellAppSample.Services.Abstractions;
+using System.IO;
+using System.Net;
+using Polly.Timeout;
+using Acr.UserDialogs;
+using System.Windows.Input;
 
 namespace AvilaShellAppSample.ViewModels
 {
@@ -44,12 +50,44 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref hasEmptyData, value); }
         }
 
+        bool hasServiceError = false;
+        public bool HasServiceError
+        {
+            get { return hasServiceError; }
+            set { SetProperty(ref hasServiceError, value); }
+        }
+
+        ServiceErrorKind serviceErrorKind = ServiceErrorKind.None;
+        public ServiceErrorKind ServiceErrorKind
+        {
+            get { return serviceErrorKind; }
+            set { SetProperty(ref serviceErrorKind, value); }
+        }
+
+        string serviceErrorDescription;
+        public string ServiceErrorDescription
+        {
+            get { return serviceErrorDescription; }
+            set { SetProperty(ref serviceErrorDescription, value); }
+        }
+
+        bool showErrorView = false;
+        public bool ShowErrorView
+        {
+            get { return showErrorView; }
+            set { SetProperty(ref showErrorView, value); }
+        }
+
+
         public AsyncCommand RefreshCommand => new AsyncCommand(this.RefreshAsync);
         public AsyncCommand<News> OpenNewsCommand => new AsyncCommand<News>(this.OpenNewsAsync);
         public AsyncCommand<Event> OpenEventCommand => new AsyncCommand<Event>(this.OpenEventAsync);
+        public ICommand RetryCommand => new Xamarin.Forms.Command(async () => await RetryAsync());
 
         public NewsViewModel()
         {
+            Debug.WriteLine("NewsViewModel - Ctor()");
+
             Title = "News";
             News = new ObservableCollection<News>();
 
@@ -58,29 +96,114 @@ namespace AvilaShellAppSample.ViewModels
             Task.Run(async () => await GetNewsAsync());
         }
 
-        private async Task GetNewsAsync()
+        private async Task GetNewsAsync(bool forceRefresh = false)
         {
-            IsBusy = true;
-            await Task.Delay(750);
-            //await Task.Delay(2500);
+            Debug.WriteLine("NewsViewModel - GetNewsAsync()");
+            try
+            {
+                ShowErrorView = false;
+                IsBusy = true;
 
-            var _events = await _dataService.GetEvents();
-            Events = new ObservableCollection<Event>(_events);
-            var _news = await _dataService.GetNews();
-            News = new ObservableCollection<News>(_news);
+                /*
+                var _events = await _dataService.GetEvents(forceRefresh);
+                Events = new ObservableCollection<Event>(_events);
+                var _news = await _dataService.GetNews(forceRefresh);
+                News = new ObservableCollection<News>(_news);
+                */
 
+                var newsAndEvents = await _dataService.GetNewsAndEvents(forceRefresh);
+                News = new ObservableCollection<News>(newsAndEvents.news);
+                Events = new ObservableCollection<Event>(newsAndEvents.events);
+            }
+            catch (IOException ioEx)
+            {
+                Debug.WriteLine($"NewsViewModel - GetNewsAsync() - IOException : {ioEx.Message}");
+                ServiceErrorKind = ServiceErrorKind.NoInternetAccess;
+                await SetServiceError();
+            }
+            catch (WebException wEx)
+            {
+                Debug.WriteLine($"NewsViewModel - GetNewsAsync() - WebException : {wEx.Message}");
+                ServiceErrorKind = ServiceErrorKind.NoSuccessStatusCode;
+                await SetServiceError();
+            }
+            catch (TimeoutRejectedException trEx)
+            {
+                Debug.WriteLine($"NewsViewModel - GetNewsAsync() - TimeoutRejectedException : {trEx.Message}");
+                ServiceErrorKind = ServiceErrorKind.Timeout;
+                await SetServiceError();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"NewsViewModel - GetNewsAsync() - Exception : {ex.Message}");
+                ServiceErrorKind = ServiceErrorKind.Other;
+                await SetServiceError();
+            }
+            finally
+            {
+                Debug.WriteLine("NewsViewModel - GetNewsAsync() - Finally");
+                if (News.Count > 0 || Events.Count > 0)
+                    HasEmptyData = false;
 
-            if (News.Count > 0 || Events.Count > 0)
-                HasEmptyData = false;
+                IsBusy = false;
+            }
+        }
 
-            IsBusy = false;
+        private async Task SetServiceError()
+        {
+            Debug.WriteLine("NewsViewModel - SetServiceError()");
+            switch (ServiceErrorKind)
+            {
+                case ServiceErrorKind.NoInternetAccess:
+                    ServiceErrorDescription = "Aucune connexion internet n'est disponible.";
+                    break;
+                case ServiceErrorKind.NoSuccessStatusCode:
+                case ServiceErrorKind.Timeout:
+                case ServiceErrorKind.Other:
+                default:
+                    ServiceErrorDescription = "Le service ne réponds pas : rééssayez plus tard.";
+                    break;
+            }
+
+            if (IsRefreshing)
+                IsRefreshing = false;
+
+            if (HasEmptyData)
+            {
+                ShowErrorView = true;
+            }
+            else
+            {
+                await UserDialogs.Instance.AlertAsync(ServiceErrorDescription, "Attention", "OK");
+            }
         }
 
         private async Task RefreshAsync()
         {
+            Debug.WriteLine("NewsViewModel - RefreshAsync()");
             IsRefreshing = true;
-            await GetNewsAsync();
+            try
+            {
+                await GetNewsAsync(true);
+            }
+            catch (Exception ex)
+            {
+
+            }
             IsRefreshing = false;
+        }
+
+        private async Task RetryAsync()
+        {
+            Debug.WriteLine("NewsViewModel - RetryAsync()");
+            try
+            {
+                await GetNewsAsync(false);
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private async Task OpenNewsAsync(News selectedNews)

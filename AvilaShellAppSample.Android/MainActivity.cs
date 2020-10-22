@@ -6,6 +6,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Acr.UserDialogs;
 
 namespace AvilaShellAppSample.Droid
 {
@@ -23,7 +24,7 @@ namespace AvilaShellAppSample.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental" });
+            Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental", "Brush_Experimental" });
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
@@ -32,6 +33,9 @@ namespace AvilaShellAppSample.Droid
 
             // XF SvgImage initizialization
             Xamarin.Forms.Svg.Droid.SvgImage.Init(this);
+
+            // Acr.UserDialogs initizialization
+            UserDialogs.Init(this);
 
             LoadApplication(new App());
         }

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!-- You should remove this for store builds -->
+     <base-config>
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+   </base-config>
+    <debug-overrides>
+        <trust-anchors>
+            <!-- Trust user added CAs while debuggable only -->
+            <certificates src="user" />
+            <!-- Trust preinstalled CAs -->
+            <certificates src="system" />
+        </trust-anchors>
+    </debug-overrides>
+</network-security-config>

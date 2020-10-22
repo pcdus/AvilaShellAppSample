@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Xamarin.Essentials;
 using AvilaShellAppSample.Models;
+using AvilaShellAppSample.Services.Abstractions;
 
 namespace AvilaShellAppSample.Services
 {

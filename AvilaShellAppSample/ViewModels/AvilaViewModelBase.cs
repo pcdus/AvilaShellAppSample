@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using AvilaShellAppSample.Models;
 using AvilaShellAppSample.Services;
 using MvvmHelpers;
+using AvilaShellAppSample.Services.Abstractions;
 
 namespace AvilaShellAppSample.ViewModels
 {

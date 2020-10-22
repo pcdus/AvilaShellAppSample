@@ -25,6 +25,11 @@
             <x:String x:Key="FadsIconClockPart2">&#x10f017;</x:String>
             <x:String x:Key="FadsIconMailPart1">&#xf0e0;</x:String>
             <x:String x:Key="FadsIconMailPart2">&#x10f0e0;</x:String>
+            <!-- for ErrorControl -->
+            <x:String x:Key="FadsIconNoInternetPart1">&#xf6ac;</x:String>
+            <x:String x:Key="FadsIconNoInternetPart2">&#x10f6ac;</x:String>
+            <x:String x:Key="FadsIconWarningTrianglePart1">&#xf071;</x:String>
+            <x:String x:Key="FadsIconWarningTrianglePart2">&#x10f071;</x:String>
             <!-- for SocialNetworks -->
             <x:String x:Key="FabIconFacebook">&#xf39e;</x:String>
             <!-- for others -->
@@ -63,6 +68,7 @@
             <!-- ===== -->
 
             <!-- Labels -->
+            <!-- ...... -->
             <!-- HomePage style for labels -->
             <Style x:Key="HomePageLabelStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="MontserratRegular" />
@@ -107,7 +113,29 @@
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
             </Style>
+            <!-- ErrorControl style for labels -->
+            <Style x:Key="ErrorPageHaderLabelStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}" />
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+                <Setter Property="Margin" Value="0,32,0,8" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="20" />     
+            </Style>
+            <Style x:Key="ErrorPageDescriptionLabelStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}" />
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+                <Setter Property="Margin" Value="8,0,8,0" />
+                <Setter Property="FontFamily" Value="MontserratMedium" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
             <!-- Images -->
+            <!-- ...... -->
             <!-- HomePage style for images -->
             <Style x:Key="ImageIconDuotonePart1Style" TargetType="Image">
                 <Setter Property="BackgroundColor">Transparent</Setter>
@@ -135,7 +163,35 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!-- ErrorControl style for images -->
+            <Style x:Key="ErrorImageIconDuotonePart1Style" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">Center</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Opacity">1</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
+                                         FontFamily="FontAwesomeDuotoneSolid"
+                                         Size="90" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ErrorImageIconDuotonePart2Style" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">Center</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Opacity">1</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
+                                         FontFamily="FontAwesomeDuotoneSolid"
+                                         Size="90" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <!-- PancakeView -->
+            <!-- ........... -->
             <Style x:Key="YummyFrame" TargetType="yummy:PancakeView">
                 <Setter Property="BackgroundColor" Value="{StaticResource Gray-White}" />
                 <Setter Property="CornerRadius" Value="8" />
@@ -179,6 +235,33 @@
                     </Setter.Value>
                 </Setter>
                 -->
+            </Style>
+
+            <!-- Button -->
+            <!-- ...... -->
+            <Style x:Key="GradientButtonStyle" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand" />
+                <Setter Property="Margin" Value="0,10,0,24" />
+                <Setter Property="TextColor" Value="{StaticResource Gray-White}" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="CornerRadius" Value="20" />
+                <Setter Property="WidthRequest" Value="245" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="BorderWidth" Value="0" />
+                <!--
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                -->
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
+                                <GradientStop Offset="0" Color="{StaticResource ApricotAvilaColor}" />
+                                <GradientStop Offset="1" Color="{StaticResource BlondAvilaColor}" />
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
             </Style>
 
             <!-- Controls -->

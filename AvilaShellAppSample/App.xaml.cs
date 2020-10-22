@@ -6,6 +6,9 @@ using AvilaShellAppSample.Services;
 using AvilaShellAppSample.Views;
 using Xamarin.Forms.Svg;
 using FFImageLoading.Forms;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 namespace AvilaShellAppSample
 {
@@ -38,6 +41,10 @@ namespace AvilaShellAppSample
 
         protected override void OnStart()
         {
+            // AppCenter
+            AppCenter.Start("ios=9badc09d-7c2a-46d1-9a38-7698f5ad85c4;" +
+                  "android=e1bfa407-e1e4-4cb1-bb70-698343265c67;",
+                  typeof(Analytics), typeof(Crashes));
         }
 
         protected override void OnSleep()

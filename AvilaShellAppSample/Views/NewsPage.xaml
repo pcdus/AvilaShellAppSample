@@ -9,16 +9,19 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
-             xmlns:local="clr-namespace:AvilaShellAppSample;assembly=AvilaShellAppSample"
+             x:Name="AppNewsPage"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:NewsViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
-        <conv:AllTrueConverter x:Key="AllTrueConverter" /> 
+        <conv:AllTrueConverter x:Key="AllTrueConverter" />
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </ContentPage.Resources>
     <ContentPage.Content>
+        <Grid>
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}"
                      Command="{Binding RefreshCommand}">
             <ScrollView BackgroundColor="{StaticResource Gray-050}">
 
@@ -204,28 +207,6 @@
                                  Margin="8, 0">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="model:News">
-                                <!-- for debug image Height -->
-                                <!-- ====================== -->
-                                <!-- Xamarin forum -->
-                                <!--
-                                <Frame Padding="0" Margin="0">
-                                    <Grid Padding="0"  Margin="0"  
-                                          VerticalOptions="FillAndExpand" 
-                                          HorizontalOptions="FillAndExpand"
-                                          BackgroundColor="Red"  >
-                                        <Image Source ="{Binding Image}" 
-                                               HorizontalOptions="Start"
-                                               SizeChanged="Image_SizeChanged"/>
-                                    </Grid>
-                                </Frame>
-                                -->
-                                <!-- StackOverflow -->
-                                <!--
-                                    <StackLayout Orientation="Vertical">
-                                        <Image Source="{Binding Image}" Aspect="AspectFill"/>
-                                        <Label Text="Description" />
-                                    </StackLayout>
-                                -->
 
                                 <!-- Solution implementation -->
                                 <!-- ======================= -->
@@ -356,5 +337,16 @@
                 
             </ScrollView>
         </RefreshView>
+
+        <ctrl:ErrorView IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}}"
+                        Title="Title Test"
+                        Description="{Binding ServiceErrorDescription}"
+                        ErrorKind="{Binding ServiceErrorKind}"
+                        RetryButtonCommand="{Binding RetryCommand}" 
+                        />
+            <!--
+                RetryButtonCommand="{Binding RefreshCommand, Source={x:Reference NewsPage}}"                    
+            -->
+    </Grid>
     </ContentPage.Content>
 </ContentPage>

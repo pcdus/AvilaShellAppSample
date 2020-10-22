@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AvilaShellAppSample.Models;
 
-namespace AvilaShellAppSample.Services
+namespace AvilaShellAppSample.Services.Abstractions
 {
     public interface IFacebookGraphApiService
     {

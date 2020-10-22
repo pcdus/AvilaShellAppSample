@@ -130,6 +130,21 @@
     <PackageReference Include="Syncfusion.Xamarin.Core">
       <Version>18.3.0.38</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Crashes">
+      <Version>3.4.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter">
+      <Version>3.4.3</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Analytics">
+      <Version>3.4.3</Version>
+    </PackageReference>
+    <PackageReference Include="Polly">
+      <Version>7.2.1</Version>
+    </PackageReference>
+    <PackageReference Include="Acr.UserDialogs">
+      <Version>7.1.0.454</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
