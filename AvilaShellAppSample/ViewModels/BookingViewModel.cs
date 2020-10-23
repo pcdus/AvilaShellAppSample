@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Threading.Tasks;
+using AvilaShellAppSample.Monitoring;
 using MvvmHelpers.Commands;
 
 namespace AvilaShellAppSample.ViewModels
 {
     public class BookingViewModel : AvilaViewModelBase
     {
+        private readonly IEventTracker _eventTracker;
+
         string avilaUrlBooking = "https://booking.wavy.pro/avila";
         public string AvilaUrlBooking
         {
@@ -17,6 +20,8 @@ namespace AvilaShellAppSample.ViewModels
 
         public BookingViewModel()
         {
+            _eventTracker = new AppCenterEventTracker();
+
             Title = "Booking";
         }
 
@@ -24,6 +29,7 @@ namespace AvilaShellAppSample.ViewModels
         {
             try
             {
+                _eventTracker?.Click(EventName.RefreshBookingWebview, EventPage.BookingPage, EventPage.BookingPage);
                 var view = sender as Xamarin.Forms.WebView;
                 view.Reload();
             }

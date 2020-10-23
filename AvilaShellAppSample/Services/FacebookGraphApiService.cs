@@ -36,9 +36,12 @@ namespace AvilaShellAppSample.Services
             try
             {
                 var eventsUri = new Uri($"{ApiConfig.FbApiPath}{ApiConfig.FbApiEventsParams}&access_token={ApiConfig.FbAccessToken}");
-                var res = await _apiService.GetAndRetryWithTimeout<FacebookEventDTO>(eventsUri, 15, 3);
-                return res;
-
+                //var res = await _apiService.GetAndRetryWithTimeout<FacebookEventDTO>(eventsUri, 15, 3);
+                //return res;
+                using (new DisposableStopwatch(duration => _eventTracker.Api(ApiType.FacebookEvents, (long)duration.TotalMilliseconds)))
+                {
+                    return await _apiService.GetAndRetryWithTimeout<FacebookEventDTO>(eventsUri, 15, 3);
+                }
             }
             catch (Exception ex)
             {
@@ -53,9 +56,13 @@ namespace AvilaShellAppSample.Services
             try
             {
                 var feedUri = new Uri($"{ApiConfig.FbApiPath}{ApiConfig.FbApiPostsParams}&access_token={ApiConfig.FbAccessToken}");
-                var res = await _apiService.GetAndRetryWithTimeout<FacebookFeedDTO>(feedUri, 15, 3);
-                return res;
-                    
+                //var res = await _apiService.GetAndRetryWithTimeout<FacebookFeedDTO>(feedUri, 15, 3);
+                //return res;
+                using (new DisposableStopwatch(duration => _eventTracker.Api(ApiType.FacebookPosts, (long)duration.TotalMilliseconds)))
+                {
+                    return await _apiService.GetAndRetryWithTimeout<FacebookFeedDTO>(feedUri, 15, 3);
+                }
+
             }
             catch (Exception ex)
             {

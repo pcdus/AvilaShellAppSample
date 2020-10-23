@@ -1,10 +1,9 @@
 ﻿using System;
 namespace AvilaShellAppSample.Monitoring
 {
-    public class ApiType
+    public static class ApiType
     {
-        public ApiType()
-        {
-        }
+        public const string FacebookEvents = nameof(FacebookEvents);
+        public const string FacebookPosts = nameof(FacebookPosts);
     }
 }

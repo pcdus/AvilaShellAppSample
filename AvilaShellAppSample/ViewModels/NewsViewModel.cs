@@ -13,12 +13,16 @@ using System.Net;
 using Polly.Timeout;
 using Acr.UserDialogs;
 using System.Windows.Input;
+using AvilaShellAppSample.Monitoring;
+using AvilaShellAppSample.Helpers;
+using System.Collections.Generic;
 
 namespace AvilaShellAppSample.ViewModels
 {
     public class NewsViewModel : AvilaViewModelBase
     {
         private readonly IDataService _dataService;
+        private readonly IEventTracker _eventTracker;
 
         private static readonly string _avilaFacebookPageId = "115592608462989";
 
@@ -88,12 +92,14 @@ namespace AvilaShellAppSample.ViewModels
         {
             Debug.WriteLine("NewsViewModel - Ctor()");
 
+            _dataService = new DataService();
+            _eventTracker = new AppCenterEventTracker();
+
             Title = "News";
             News = new ObservableCollection<News>();
 
-            _dataService = new DataService();
-
             Task.Run(async () => await GetNewsAsync());
+            _eventTracker.Display(EventPage.NewsPage);
         }
 
         private async Task GetNewsAsync(bool forceRefresh = false)
@@ -118,23 +124,27 @@ namespace AvilaShellAppSample.ViewModels
             catch (IOException ioEx)
             {
                 Debug.WriteLine($"NewsViewModel - GetNewsAsync() - IOException : {ioEx.Message}");
+                _eventTracker.Error(ioEx);
                 ServiceErrorKind = ServiceErrorKind.NoInternetAccess;
                 await SetServiceError();
             }
             catch (WebException wEx)
             {
                 Debug.WriteLine($"NewsViewModel - GetNewsAsync() - WebException : {wEx.Message}");
+                _eventTracker.Error(wEx);
                 ServiceErrorKind = ServiceErrorKind.NoSuccessStatusCode;
                 await SetServiceError();
             }
             catch (TimeoutRejectedException trEx)
             {
                 Debug.WriteLine($"NewsViewModel - GetNewsAsync() - TimeoutRejectedException : {trEx.Message}");
+                _eventTracker.Error(trEx);
                 ServiceErrorKind = ServiceErrorKind.Timeout;
                 await SetServiceError();
             }
             catch (Exception ex)
             {
+                _eventTracker.Error(ex);
                 Debug.WriteLine($"NewsViewModel - GetNewsAsync() - Exception : {ex.Message}");
                 ServiceErrorKind = ServiceErrorKind.Other;
                 await SetServiceError();
@@ -152,6 +162,7 @@ namespace AvilaShellAppSample.ViewModels
         private async Task SetServiceError()
         {
             Debug.WriteLine("NewsViewModel - SetServiceError()");
+            /*
             switch (ServiceErrorKind)
             {
                 case ServiceErrorKind.NoInternetAccess:
@@ -164,9 +175,15 @@ namespace AvilaShellAppSample.ViewModels
                     ServiceErrorDescription = "Le service ne réponds pas : rééssayez plus tard.";
                     break;
             }
+            */
+
+            ServiceErrorDescription = ServiceErrorKind.ToMessage();
 
             if (IsRefreshing)
                 IsRefreshing = false;
+
+            var eventPage = ServiceErrorKind.ToNewsServiceErrorPage();
+            _eventTracker.Display(eventPage);
 
             if (HasEmptyData)
             {
@@ -181,6 +198,7 @@ namespace AvilaShellAppSample.ViewModels
         private async Task RefreshAsync()
         {
             Debug.WriteLine("NewsViewModel - RefreshAsync()");
+            _eventTracker.PullToRefresh(EventPage.NewsPage);
             IsRefreshing = true;
             try
             {
@@ -188,7 +206,7 @@ namespace AvilaShellAppSample.ViewModels
             }
             catch (Exception ex)
             {
-
+                _eventTracker.Error(ex);
             }
             IsRefreshing = false;
         }
@@ -196,13 +214,15 @@ namespace AvilaShellAppSample.ViewModels
         private async Task RetryAsync()
         {
             Debug.WriteLine("NewsViewModel - RetryAsync()");
+            var eventName = ServiceErrorKind.ToEventName();
+            _eventTracker?.Click(eventName, EventPage.NewsPage, EventPage.NewsPage);
             try
             {
                 await GetNewsAsync(false);
             }
             catch (Exception ex)
             {
-
+                _eventTracker.Error(ex);
             }
         }
 
@@ -229,6 +249,12 @@ namespace AvilaShellAppSample.ViewModels
 
             if (selectedNews == null)
                 return;
+
+            _eventTracker.Click(EventName.OpenNews, EventPage.NewsPage, EventPage.Uri,
+                new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>(EventProperty.Uri, selectedNews.Url)
+                });
 
             try
             {
@@ -269,6 +295,12 @@ namespace AvilaShellAppSample.ViewModels
             if (selectedEvent == null)
                 return;
 
+            _eventTracker.Click(EventName.OpenEvent, EventPage.NewsPage, EventPage.Uri,
+                new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>(EventProperty.Uri, selectedEvent.Url)
+                });
+                
             try
             {
                 var supportsUri = await Xamarin.Essentials.Launcher.CanOpenAsync("fb://");
