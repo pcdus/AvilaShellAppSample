@@ -17,5 +17,10 @@ namespace AvilaShellAppSample.Monitoring
         public const string AvilaMap = "AvilaMap";
         // BookingPage events
         public const string RefreshBookingWebview = "RefreshBookingWebview";
+        // AboutPage events
+        public const string HourrappsCall = "HourrappsCall";
+        public const string HourrappsMail = "HourrappsMail";
+        public const string HourrappsWebsite = "HourrappsWebsite";
+        public const string HourrappsFacebookPage = "HourrappsFacebookPage";
     }
 }

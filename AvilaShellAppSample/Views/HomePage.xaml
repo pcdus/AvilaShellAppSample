@@ -26,7 +26,7 @@
     </NavigationPage.TitleView>
         -->
     <Shell.TitleView>
-        <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.TitleAvilaLogo.svg"
+        <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg"
                                           DownsampleHeight="6"
                                           HeightRequest="45"/>
     </Shell.TitleView>
@@ -243,7 +243,7 @@
                                                 <Span Text="Mardi : 9h - 20h&#10;" />
                                                 <Span Text="Mercredi : 9h - 20h&#10;" />
                                                 <Span Text="Jeudi : 9h - 20h&#10;" />
-                                                <Span Text="Vendredi : 9h -17h&#10;" />
+                                                <Span Text="Vendredi : 9h - 17h&#10;" />
                                                 <Span Text="Dimanche : fermé" />
                                             </FormattedString>
                                         </Label.FormattedText>

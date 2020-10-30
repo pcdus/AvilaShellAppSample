@@ -4,6 +4,9 @@
              x:Class="AvilaShellAppSample.Views.AboutPage"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
@@ -13,34 +16,221 @@
             <Color x:Key="Accent">#96d1ff</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
-                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
-                </ContentView>
+    <ScrollView>
+        <StackLayout>
+
+            <!-- Avila logo -->
+            <!-- with bakground -->
+            <!--
+            <StackLayout  BackgroundColor="{StaticResource ApricotAvilaColor}"
+                          HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                <ffimageloadingsvg:SvgCachedImage HeightRequest="180"
+                                                  Source="resource://AvilaShellAppSample.Resources.whiteAvilaLogoTitle.svg" />
+
             </StackLayout>
-        </StackLayout>
-        <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Start developing now" FontSize="Title" />
-                <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0" />
-                <Label FontSize="16" Padding="0,24,0,0">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <FormattedString.Spans>
-                                <Span Text="Learn more at " />
-                                <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold" />
-                            </FormattedString.Spans>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Button Margin="0,10,0,0" Text="Learn more" Command="{Binding OpenWebCommand}" BackgroundColor="{StaticResource Primary}" TextColor="White" />
+            -->
+            <!-- transparent -->
+            <StackLayout  BackgroundColor="Transparent"
+                          HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                <ffimageloadingsvg:SvgCachedImage HeightRequest="120"
+                                                  Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg" />
+
             </StackLayout>
-        </ScrollView>
-    </Grid>
+
+            <!-- Avila details -->
+            <StackLayout Margin="16"
+                         Spacing="16">
+
+                <!-- About us -->
+                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                   Padding="16">
+                    <Expander>
+                        <Expander.Header>
+                            <Grid>
+                                <Label Text="Qui sommes nous?"
+                                       Style="{StaticResource AboutPageCategoryLabelStyle}" />
+                                <Image Style="{StaticResource ChevronImageForExpander}" />
+                                </Grid>
+                        </Expander.Header>
+                        <Expander.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="0,8,0,0">
+                                    <Label Text="Avila est un havre de création regroupant des coiffeurs tous attachés à leur indépendance, comme autant de personnalités différentes."
+                                           Style="{StaticResource NewsPageDescriptionLabelStyle}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </Expander.ContentTemplate>
+                    </Expander>
+                </yummy:PancakeView>
+
+                <!-- Our mobile app -->
+                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                   Padding="16">
+                    <Expander>
+                        <Expander.Header>
+                            <Grid>
+                                <Label Text="L'application mobile Avila"
+                                       Style="{StaticResource AboutPageCategoryLabelStyle}" />
+                                <Image Style="{StaticResource ChevronImageForExpander}" />
+                            </Grid>
+                        </Expander.Header>
+                        <Expander.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="0,8,0,0">
+                                    <Label Text="L'application mobile Avila vous permets de prendre facilement vos rendez-vous et de nous suivre sur les réseaux sociaux."
+                                           Style="{StaticResource NewsPageDescriptionLabelStyle}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </Expander.ContentTemplate>
+                    </Expander>
+                </yummy:PancakeView>
+
+                <!-- App version -->
+                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                   Padding="16">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center"
+                                 HorizontalOptions="FillAndExpand">
+                        <Label Style="{StaticResource AboutPageCategoryLabelStyle}"
+                               VerticalTextAlignment="Center"
+                               Text="Version de l'application" />
+                        <Label Style="{StaticResource AboutPageLabelStyle}"
+                               HorizontalOptions="FillAndExpand"
+                               VerticalTextAlignment="Center" HorizontalTextAlignment="End"
+                               Text="{Binding AvilaAppVersion}"  />
+                    </StackLayout>
+                </yummy:PancakeView>
+
+            </StackLayout>
+
+            <!-- Hourrapps logo -->
+            <!-- with bakground -->
+            <!--
+            <StackLayout  BackgroundColor="{StaticResource GreenBlueCrayoloHourrappsColor}"
+                          HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                          Margin="0,20"
+                          Padding="0,20">
+                <ffimageloading:CachedImage Source="resource://AvilaShellAppSample.Resources.Hourrapps_White.png"
+                                            HeightRequest="140"/>
+            </StackLayout>
+            -->
+            <!-- transparent -->
+            <StackLayout  BackgroundColor="Transparent"
+                          HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                          Margin="0,20"
+                          Padding="0,10">
+                <ffimageloading:CachedImage Source="resource://AvilaShellAppSample.Resources.Hourrapps_Colored.png"
+                                            HeightRequest="100"/>
+            </StackLayout>
+
+            <!-- Hourrapps details -->
+            <StackLayout Margin="16"
+                         Spacing="16">
+
+                <!-- About Hourrapps -->
+                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                   Padding="16">
+                    <Expander>
+                        <Expander.Header>
+                            <Grid>
+                                <Label Text="Qui est Hourrapps?"
+                                       Style="{StaticResource AboutPageCategoryLabelStyle}" />
+                                <Image Style="{StaticResource ChevronImageForExpander}" />
+                                </Grid>
+                        </Expander.Header>
+                        <Expander.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="0,8,0,0">
+                                    <Label Text="Hourrapps est un cabinet de conseil en systèmes et logiciels informatiques, spécialisé dans le développement d’applications mobiles, de logiciels et de sites web."
+                                           Style="{StaticResource NewsPageDescriptionLabelStyle}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </Expander.ContentTemplate>
+                    </Expander>
+                </yummy:PancakeView>
+
+                <!-- Contact Hourrapps -->
+                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                   Padding="16">
+                    <Expander>
+                        <Expander.Header>
+                            <Grid>
+                                <Label Text="Contacter Hourrapps"
+                                       Style="{StaticResource AboutPageCategoryLabelStyle}" />
+                                <Image Style="{StaticResource ChevronImageForExpander}" />
+                                </Grid>
+                        </Expander.Header>
+                        <Expander.ContentTemplate>
+                            <DataTemplate>
+                                <StackLayout Margin="0,8,0,0">
+                                    <Label Style="{StaticResource NewsPageDescriptionLabelStyle}" >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Vous pouvez contacter Hourrapps " />
+                                                <Span Text="depuis son site internet, " />
+                                                <Span Text="par téléphone, " />
+                                                <Span Text="par mail, " />
+                                                <Span Text="ou depuis Facebbok, " />
+                                                <Span Text="à l'aide des icones suivantes." />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <StackLayout Orientation="Horizontal"
+                                                 HorizontalOptions="CenterAndExpand"
+                                                 VerticalOptions="Center"
+                                                 Margin="0,8,0,8"
+                                                 Spacing="16">
+                                        <Image Style="{StaticResource ImageIconContactHourrapps}">
+                                            <Image.Source>
+                                                <FontImageSource Glyph="{StaticResource FalIconGlobe}"
+                                                                 Color="{StaticResource GreenBlueCrayoloHourrappsColor}"
+                                                                 FontFamily="FontAwesomeLight"
+                                                                 Size="20" />
+                                            </Image.Source>
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenHourrappsWebsiteCommand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Image Style="{StaticResource ImageIconContactHourrapps}">
+                                            <Image.Source>
+                                                <FontImageSource Glyph="{StaticResource FalIconMail}"
+                                                                 Color="{StaticResource GreenBlueCrayoloHourrappsColor}"
+                                                                 FontFamily="FontAwesomeLight"
+                                                                 Size="20" />
+                                            </Image.Source>
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SendHourrappsEmailCommand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Image Style="{StaticResource ImageIconContactHourrapps}">
+                                            <Image.Source>
+                                                <FontImageSource Glyph="{StaticResource FalIconPhone}"
+                                                                 Color="{StaticResource GreenBlueCrayoloHourrappsColor}"
+                                                                 FontFamily="FontAwesomeLight"
+                                                                 Size="20" />
+                                            </Image.Source>
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding CallHourrappsCommand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                        <Image Style="{StaticResource ImageIconContactHourrapps}">
+                                            <Image.Source>
+                                                <FontImageSource Glyph="{StaticResource FabIconFacebook}"
+                                                                 Color="{StaticResource GreenBlueCrayoloHourrappsColor}"
+                                                                 FontFamily="FontAwesomeBrandsRegular"
+                                                                 Size="20" />
+                                            </Image.Source>
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding OpenHourrappsFacebookPageCommand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </Expander.ContentTemplate>
+                    </Expander>
+                </yummy:PancakeView>
+
+            </StackLayout>
+        </StackLayout> 
+    </ScrollView>
 </ContentPage>

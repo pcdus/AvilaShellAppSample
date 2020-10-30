@@ -34,6 +34,12 @@
             <x:String x:Key="FabIconFacebook">&#xf39e;</x:String>
             <!-- for others -->
             <x:String x:Key="FalIconRefresh">&#xf01e;</x:String>
+            <x:String x:Key="FalIconChevronUp">&#xf077;</x:String>
+            <x:String x:Key="FalIconChevronDown">&#xf078;</x:String>
+            <x:String x:Key="FalIconGlobe">&#xf0ac;</x:String>
+            <x:String x:Key="FalIconMail">&#xf0e0;</x:String>
+            <x:String x:Key="FalIconPhone">&#xf879;</x:String>
+
 
             <!-- Colors -->
             <!-- ====== -->
@@ -48,6 +54,7 @@
             <Color x:Key="BlondAvilaColor">#f4edbe</Color>
             <Color x:Key="LincolnGreenAvilaColor">#00571f</Color>
             <Color x:Key="FlorralWhiteAvilaColor">#fefbf2</Color>
+            <Color x:Key="GreenBlueCrayoloHourrappsColor">#008ace</Color>
             <!-- Gray shades -->
             <Color x:Key="Gray-100">#f6f7f8</Color>
             <Color x:Key="Gray-200">#ebecef</Color>
@@ -73,6 +80,7 @@
             <Style x:Key="HomePageLabelStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="MontserratRegular" />
                 <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Margin" Value="50,0,0,0"/>
                 <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
                 <Setter Property="MinimumHeightRequest" Value="24"/>
                 <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
@@ -80,6 +88,7 @@
             <Style x:Key="HomePageHeaderLabelStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="MontserratMedium" />
                 <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Margin" Value="50,0,0,0"/>
                 <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
                 <Setter Property="HeightRequest" Value="18"/>
                 <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>
@@ -134,12 +143,34 @@
                 <Setter Property="FontFamily" Value="MontserratMedium" />
                 <Setter Property="FontSize" Value="16" />
             </Style>
+            <!-- AboutPage style for labels -->
+            <Style x:Key="AboutPageLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratRegular" />
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="MinimumHeightRequest" Value="24"/>
+                <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
+            </Style>
+            <Style x:Key="AboutPageHeaderLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratMedium" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
+                <Setter Property="HeightRequest" Value="18"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>
+            </Style>
+            <Style x:Key="AboutPageCategoryLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}"/>
+                <Setter Property="Margin" Value="0,4,0,4" />
+            </Style>
             <!-- Images -->
             <!-- ...... -->
             <!-- HomePage style for images -->
             <Style x:Key="ImageIconDuotonePart1Style" TargetType="Image">
                 <Setter Property="BackgroundColor">Transparent</Setter>
-                <Setter Property="HorizontalOptions">End</Setter>
+                <Setter Property="HorizontalOptions">Start</Setter>
                 <Setter Property="VerticalOptions">Center</Setter>
                 <Setter Property="Opacity">1</Setter>
                 <Setter Property="Source">
@@ -152,7 +183,7 @@
             </Style>
             <Style x:Key="ImageIconDuotonePart2Style" TargetType="Image">
                 <Setter Property="BackgroundColor">Transparent</Setter>
-                <Setter Property="HorizontalOptions">End</Setter>
+                <Setter Property="HorizontalOptions">Start</Setter>
                 <Setter Property="VerticalOptions">Center</Setter>
                 <Setter Property="Opacity">1</Setter>
                 <Setter Property="Source">
@@ -163,6 +194,20 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <!-- AboutPage style for images -->
+            <Style x:Key="ImageIconContactHourrapps" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">Center</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Color="{StaticResource GreenBlueCrayoloHourrappsColor}"
+                                         FontFamily="FontAwesomeLight"
+                                         Size="15" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <!-- ErrorControl style for images -->
             <Style x:Key="ErrorImageIconDuotonePart1Style" TargetType="Image">
                 <Setter Property="BackgroundColor">Transparent</Setter>
@@ -189,6 +234,47 @@
                                          Size="90" />
                     </Setter.Value>
                 </Setter>
+            </Style>
+            <!-- Expander style for chevron images -->
+            <Style x:Key="ChevronImageForExpander" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">End</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="HeightRequest">20</Setter>
+                <Setter Property="WidthRequest">20</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Glyph="{StaticResource FalIconChevronDown}"
+                                            FontFamily="FontAwesomeLight"
+                                            Size="20"
+                                            Color="{StaticResource Gray-600}"/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                    TargetType="Image"
+                                    Value="True">
+                        <Setter Property="Source">
+                            <Setter.Value>
+                                <FontImageSource
+                                    FontFamily="FontAwesomeLight"
+                                    Glyph="{StaticResource FalIconChevronUp}"
+                                    Size="20"
+                                    Color="{StaticResource Gray-600}" />
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style TargetType="Entry">
+                <Style.Triggers>
+                    <Trigger TargetType="Entry"
+                             Property="IsFocused" Value="True">
+                        <Setter Property="BackgroundColor" Value="Yellow" />
+                        <!-- multiple Setters elements are allowed -->
+                    </Trigger>
+                </Style.Triggers>
             </Style>
             <!-- PancakeView -->
             <!-- ........... -->
@@ -260,6 +346,24 @@
                                 <GradientStop Offset="0" Color="{StaticResource ApricotAvilaColor}" />
                                 <GradientStop Offset="1" Color="{StaticResource BlondAvilaColor}" />
                         </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- Expander -->
+            <!-- ........ -->
+            <Style x:Key="AboutPageExpander" TargetType="Expander">
+                <Setter Property="Header">
+                    <Setter.Value>
+                        <Image HeightRequest="20" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="20">
+                            <Image.Source>
+                                <FontImageSource FontFamily="FontAwesomeLight"
+                                                   Glyph="{StaticResource FalIconChevronDown}"
+                                                   Size="20"
+                                                   Color="{StaticResource Gray-600}" />
+                            </Image.Source>
+
+                        </Image>
                     </Setter.Value>
                 </Setter>
             </Style>

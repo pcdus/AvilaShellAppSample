@@ -27,7 +27,9 @@
 
                 <!-- Syncfusion Shimmer => use a skeletton -->
 
-                <shimmer:SfShimmer x:Name="shimmer" VerticalOptions="Fill">
+                <shimmer:SfShimmer x:Name="shimmer" VerticalOptions="Fill"
+                                   WaveColor="{StaticResource Gray-600}" WaveWidth ="50"
+                                   WaveDirection="LeftToRight">
                     <shimmer:SfShimmer.IsActive>
                         <MultiBinding Converter="{StaticResource AllTrueConverter}">
                             <Binding Path="IsBusy" />

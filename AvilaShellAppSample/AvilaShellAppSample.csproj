@@ -30,6 +30,7 @@
     <Folder Include="Helpers\" />
     <Folder Include="Monitoring\" />
     <Folder Include="Services\Abstractions\" />
+    <Folder Include="Infrastructure\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\avila_indoor.jpg" />
@@ -48,6 +49,17 @@
     <None Remove="Resources\4colorsCircleAvilaLogoOmg.svg" />
     <None Remove="Resources\4colorsCircleAvilaLogoOmg2.svg" />
     <None Remove="Resources\4colorsCircleAvilaLogoOmg3.svg" />
+    <None Remove="Resources\blackAvilaLogoTitle.svg" />
+    <None Remove="Resources\whiteAvilaLogoTitle.svg" />
+    <None Remove="Resources\whiteHourrappsLogo.svg" />
+    <None Remove="Resources\blueHourrappsLogo.svg" />
+    <None Remove="Resources\hourrappsLogo.svg" />
+    <None Remove="Resources\Fichier_1.svg" />
+    <None Remove="Resources\Hourrapps_White.png" />
+    <None Remove="Resources\Hourrapps_Colored.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\TitleAvilaLogo.svg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\avila_indoor.jpg" />
@@ -66,6 +78,9 @@
     <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg.svg" />
     <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg2.svg" />
     <EmbeddedResource Include="Resources\4colorsCircleAvilaLogoOmg3.svg" />
-    <EmbeddedResource Include="Resources\TitleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\blackAvilaLogoTitle.svg" />
+    <EmbeddedResource Include="Resources\whiteAvilaLogoTitle.svg" />
+    <EmbeddedResource Include="Resources\Hourrapps_White.png" />
+    <EmbeddedResource Include="Resources\Hourrapps_Colored.png" />
   </ItemGroup>
 </Project>

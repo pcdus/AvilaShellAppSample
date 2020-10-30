@@ -16,6 +16,7 @@ using System.Windows.Input;
 using AvilaShellAppSample.Monitoring;
 using AvilaShellAppSample.Helpers;
 using System.Collections.Generic;
+using AvilaShellAppSample.Infrastructure;
 
 namespace AvilaShellAppSample.ViewModels
 {
@@ -23,6 +24,7 @@ namespace AvilaShellAppSample.ViewModels
     {
         private readonly IDataService _dataService;
         private readonly IEventTracker _eventTracker;
+        private readonly IDeepLinkingLauncher _deepLinkingLauncher;
 
         private static readonly string _avilaFacebookPageId = "115592608462989";
 
@@ -82,7 +84,6 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref showErrorView, value); }
         }
 
-
         public AsyncCommand RefreshCommand => new AsyncCommand(this.RefreshAsync);
         public AsyncCommand<News> OpenNewsCommand => new AsyncCommand<News>(this.OpenNewsAsync);
         public AsyncCommand<Event> OpenEventCommand => new AsyncCommand<Event>(this.OpenEventAsync);
@@ -94,6 +95,7 @@ namespace AvilaShellAppSample.ViewModels
 
             _dataService = new DataService();
             _eventTracker = new AppCenterEventTracker();
+            _deepLinkingLauncher = new DeepLinkingLauncher();
 
             Title = "News";
             News = new ObservableCollection<News>();
@@ -228,25 +230,6 @@ namespace AvilaShellAppSample.ViewModels
 
         private async Task OpenNewsAsync(News selectedNews)
         {
-            // page => OK / Android 
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://page/115592608462989");
-            // page => OK / iOS
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://profile/115592608462989");
-
-            // post => KO / Android
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://115592608462989_3623831304305751");
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://page/115592608462989/posts/3623831304305751");
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://page/115592608462989/posts?id=3623831304305751");
-            //await Xamarin.Essentials.Launcher.OpenAsync("intent://www.facebook.com/115592608462989/posts/3623831304305751#Intent;package=com.facebook.katana;scheme=https;end");
-            // post => OK but / Android (popin "Web / Other")
-            //var debugPostUrl = "https://www.facebook.com/115592608462989/posts/3623831304305751/?extid=HepgIsLt5x4Rhgim&d=n";
-            //await Xamarin.Essentials.Browser.OpenAsync(debugPostUrl);
-            // post => OK / Android (alternative way)
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://facewebmodal/f?href=" + selectedNews.Url);
-
-            // post => OK / iOS
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://profile/115592608462989/posts?id=3623831304305751");
-
             if (selectedNews == null)
                 return;
 
@@ -256,42 +239,12 @@ namespace AvilaShellAppSample.ViewModels
                     new KeyValuePair<string, string>(EventProperty.Uri, selectedNews.Url)
                 });
 
-            try
-            {
-                var supportsUri = await Xamarin.Essentials.Launcher.CanOpenAsync("fb://");
-                if (supportsUri)
-                {
-                    var newsId = selectedNews.Id.Remove(0, _avilaFacebookPageId.Length + 1);
-                    if (Device.RuntimePlatform == Device.iOS)
-                    {
-                        var fbUrl = string.Format("fb://profile/{0}/posts?id={1}", _avilaFacebookPageId, newsId);
-                        //await Launcher.OpenAsync("fb://profile/115592608462989/posts?id=" + selectedNews.Id);
-                        await Launcher.OpenAsync(fbUrl);
-                    }
-                    else if (Device.RuntimePlatform == Device.Android)
-                    {
-                        await Launcher.OpenAsync("fb://facewebmodal/f?href=" + selectedNews.Url);
-                    }
-                }
-                else
-                {
-                    await Browser.OpenAsync(selectedNews.Url);
-                }
-            }
-            catch (Exception)
-            {
-                await Browser.OpenAsync(selectedNews.Url);
-            }
-
+            var fbPostId = selectedNews.Id.Remove(0, _avilaFacebookPageId.Length + 1);
+            await _deepLinkingLauncher.OpenFacebookPostAsync(selectedNews.Url, _avilaFacebookPageId, fbPostId);
         }
 
         private async Task OpenEventAsync(Event selectedEvent)
         {
-            // event => OK / Android
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://event/2720519278225723");
-            // event => OK / iOS
-            //await Xamarin.Essentials.Launcher.OpenAsync("fb://event?id=2720519278225723");
-
             if (selectedEvent == null)
                 return;
 
@@ -300,30 +253,8 @@ namespace AvilaShellAppSample.ViewModels
                 {
                     new KeyValuePair<string, string>(EventProperty.Uri, selectedEvent.Url)
                 });
-                
-            try
-            {
-                var supportsUri = await Xamarin.Essentials.Launcher.CanOpenAsync("fb://");
-                if (supportsUri)
-                {
-                    if (Device.RuntimePlatform == Device.iOS)
-                    {
-                        await Launcher.OpenAsync("fb://event?id=" + selectedEvent.Id);
-                    }
-                    else if (Device.RuntimePlatform == Device.Android)
-                    {
-                        await Launcher.OpenAsync("fb://event/" + selectedEvent.Id);
-                    }
-                }
-                else
-                {
-                    await Browser.OpenAsync(selectedEvent.Url);
-                }
-            }
-            catch (Exception)
-            {
-                await Browser.OpenAsync(selectedEvent.Url);
-            }
+
+            await _deepLinkingLauncher.OpenFacebookEventAsync(selectedEvent.Url, selectedEvent.Id);
         }
     }
 }

@@ -8,12 +8,16 @@ using MvvmHelpers.Commands;
 using Command = MvvmHelpers.Commands.Command;
 using System.Collections.Generic;
 using AvilaShellAppSample.Monitoring;
+using AvilaShellAppSample.Infrastructure;
+using Map = AvilaShellAppSample.Infrastructure.Map;
 
 namespace AvilaShellAppSample.ViewModels
 {
     public class HomeViewModel : AvilaViewModelBase
     {
         private readonly IEventTracker _eventTracker;
+        private readonly IContact _contact;
+        private readonly IMap _map;
 
         ImageSource avilaIndoorImageSource = null;
         public ImageSource AvilaIndoorImageSource
@@ -63,6 +67,8 @@ namespace AvilaShellAppSample.ViewModels
         public HomeViewModel()
         {
             _eventTracker = new AppCenterEventTracker();
+            _contact = new Contact();
+            _map = new Map();
 
             Title = "Home";
 
@@ -83,35 +89,16 @@ namespace AvilaShellAppSample.ViewModels
 
         private void Call()
         {
-            try
-            {
-                _eventTracker.Click(EventName.AvilaCall, EventPage.HomePage, EventPage.NativeCallApp);
-                PhoneDialer.Open(AvilaPhoneNumber);
-            }
-            catch (ArgumentNullException anEx)
-            {
-                // Number was null or white space
-                _eventTracker.Error(anEx);
-            }
-            catch (FeatureNotSupportedException fnsEx)
-            {
-                // Phone Dialer is not supported on this device
-                _eventTracker.Error(fnsEx);
-            }
-            catch (Exception ex)
-            {
-                // Other error has occurred
-                _eventTracker.Error(ex);
-            }
-
+            _eventTracker.Click(EventName.AvilaCall, EventPage.HomePage, EventPage.NativeCallApp);
+            _contact.Call(AvilaPhoneNumber);
         }
 
         private async Task OpenMapAsync()
         {
+            _eventTracker.Click(EventName.AvilaMap, EventPage.HomePage, EventPage.NativeMapApp);
             var placemark = new Placemark
             {
                 CountryName = AvilaAddress.Country,
-                //Thoroughfare = String.Format("{0} {1}", AvilaAddress.StreetNumber, AvilaAddress.StreetName),
                 Thoroughfare = AvilaAddress.Street,
                 Locality = AvilaAddress.City
             };
@@ -119,41 +106,13 @@ namespace AvilaShellAppSample.ViewModels
             {
                 Name = "Avila"
             };
-
-            try
-            {
-                _eventTracker.Click(EventName.AvilaMap, EventPage.HomePage, EventPage.NativeMapApp);
-                await Map.OpenAsync(placemark, options);
-            }
-            catch (Exception ex)
-            {
-                // No map application available to open or placemark can not be located
-                _eventTracker.Error(ex);
-            }
+            await _map.OpenAsync(placemark, options);
         }
 
         private async Task SendEmailAsync()
         {
-            var message = new EmailMessage
-            {
-                To = new List<string>() { AvilaEmail }
-            };
-
-            try
-            {
-                _eventTracker.Click(EventName.AvilaMail, EventPage.HomePage, EventPage.NativeMailApp);
-                await Email.ComposeAsync(message);
-            }
-            catch (FeatureNotSupportedException fnsEx)
-            {
-                // Email is not supported on this device
-                _eventTracker.Error(fnsEx);
-            }
-            catch (Exception ex)
-            {
-                // Some other exception occurred
-                _eventTracker.Error(ex);
-            }
+            _eventTracker.Click(EventName.AvilaMail, EventPage.HomePage, EventPage.NativeMailApp);
+            await _contact.SendEmailAsync(AvilaEmail);
         }
     }
 }
