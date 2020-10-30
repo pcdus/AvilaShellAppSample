@@ -72,13 +72,16 @@
                                                BackgroundColor="{StaticResource Gray-050}"
                                                CornerRadius="0,0,16,16">
                                 <ffimageloading:CachedImage x:Name="headerImage"
-                                       Grid.Row="0"
-                                       Aspect="AspectFill"
-                                       BackgroundColor="{DynamicResource Gray-200}"
-                                       HeightRequest="240"
-                                       HorizontalOptions="FillAndExpand"
-                                       VerticalOptions="Start"
-                                       Source="{Binding AvilaIndoorImageSource}">
+                                                Grid.Row="0"
+                                                Aspect="AspectFill"
+                                                BackgroundColor="{DynamicResource Gray-200}"
+                                                HeightRequest="240"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="Start"
+                                                Source="resource://AvilaShellAppSample.Resources.avila_indoor.jpg">
+                                    <!--
+                                    Source="{Binding AvilaIndoorImageSource}">
+                                    -->
                                 </ffimageloading:CachedImage>
                                 <yummy:PancakeView.Shadow>
                                           <yummy:DropShadow Offset="2,4"

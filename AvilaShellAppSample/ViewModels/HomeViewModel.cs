@@ -19,20 +19,6 @@ namespace AvilaShellAppSample.ViewModels
         private readonly IContact _contact;
         private readonly IMap _map;
 
-        ImageSource avilaIndoorImageSource = null;
-        public ImageSource AvilaIndoorImageSource
-        {
-            get { return avilaIndoorImageSource; }
-            set { SetProperty(ref avilaIndoorImageSource, value); }
-        }
-
-        ImageSource avilaLogo = null;
-        public ImageSource AvilaLogo
-        {
-            get { return avilaLogo; }
-            set { SetProperty(ref avilaLogo, value); }
-        }
-
         string avilaPhoneNumber = "03 88 23 05 43";
         public string AvilaPhoneNumber
         {
@@ -80,9 +66,6 @@ namespace AvilaShellAppSample.ViewModels
                 System.Diagnostics.Debug.WriteLine("found resource: " + res);
             }
             */
-
-            AvilaIndoorImageSource = ImageSource.FromResource("AvilaShellAppSample.Resources.avila_indoor.jpg");
-            AvilaLogo = ImageSource.FromResource("avila_logo_4colors.svg");
 
             _eventTracker.Display(EventPage.HomePage);
         }

@@ -133,7 +133,7 @@ namespace AvilaShellAppSample.Infrastructure
 
         private async Task<bool> IsFacebookDeepLinkingSupported()
         {
-            return await Xamarin.Essentials.Launcher.CanOpenAsync("fb://"); ;
+            return await Xamarin.Essentials.Launcher.CanOpenAsync("fb://");
         }
     }
 }
