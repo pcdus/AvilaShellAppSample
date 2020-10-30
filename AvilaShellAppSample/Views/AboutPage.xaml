@@ -30,15 +30,14 @@
             </StackLayout>
             -->
             <!-- transparent -->
-            <StackLayout  BackgroundColor="Transparent"
-                          HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+            <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                 <ffimageloadingsvg:SvgCachedImage HeightRequest="120"
                                                   Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg" />
 
             </StackLayout>
 
             <!-- Avila details -->
-            <StackLayout Margin="16"
+            <StackLayout Margin="16,4,16,24"
                          Spacing="16">
 
                 <!-- About us -->
@@ -114,16 +113,14 @@
             </StackLayout>
             -->
             <!-- transparent -->
-            <StackLayout  BackgroundColor="Transparent"
-                          HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                          Margin="0,20"
+            <StackLayout  HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                           Padding="0,10">
                 <ffimageloading:CachedImage Source="resource://AvilaShellAppSample.Resources.Hourrapps_Colored.png"
-                                            HeightRequest="100"/>
+                                            HeightRequest="60"/>
             </StackLayout>
 
             <!-- Hourrapps details -->
-            <StackLayout Margin="16"
+            <StackLayout Margin="16,4,16,16"
                          Spacing="16">
 
                 <!-- About Hourrapps -->

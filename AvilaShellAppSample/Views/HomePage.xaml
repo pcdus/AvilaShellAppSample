@@ -79,9 +79,6 @@
                                                 HorizontalOptions="FillAndExpand"
                                                 VerticalOptions="Start"
                                                 Source="resource://AvilaShellAppSample.Resources.avila_indoor.jpg">
-                                    <!--
-                                    Source="{Binding AvilaIndoorImageSource}">
-                                    -->
                                 </ffimageloading:CachedImage>
                                 <yummy:PancakeView.Shadow>
                                           <yummy:DropShadow Offset="2,4"
@@ -104,7 +101,7 @@
                                         BottomRightCornerSize="120"/>
                                 </ffimageloading:CachedImage.Transformations>
                             </ffimageloading:CachedImage>
-                                        -->
+                            -->
                         </Grid>
                     </ContentView>
                 </ScrollView>
