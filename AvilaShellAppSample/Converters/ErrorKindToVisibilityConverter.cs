@@ -17,15 +17,17 @@ namespace AvilaShellAppSample.Converters
                 try
                 {
                     var ek = (ServiceErrorKind)value;
+                    if (ek == ServiceErrorKind.None)
+                        return false;
 
                     string[] str = new string[((StringCollection)parameter).Count];
                     ((StringCollection)parameter).CopyTo(str, 0);
-
                     foreach(var s in str)
                     {
                         if (s.Contains(ek.ToString()))
                             return true;
                     }
+
                     return false;
                 }
                 catch (Exception ex)

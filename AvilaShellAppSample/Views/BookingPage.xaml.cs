@@ -11,24 +11,16 @@ namespace AvilaShellAppSample.Views
         public BookingPage()
         {
             InitializeComponent();
-            //webView.Source = "https://booking.wavy.pro/avila";
         }
-
-        /*
-        void ToolbarItem_Clicked(System.Object sender, System.EventArgs e)
-        {
-            this.webView.Reload();
-        }
-        */
 
         void webviewNavigating(object sender, WebNavigatingEventArgs e)
         {
-            labelLoading.IsVisible = true;
+            //labelLoading.IsVisible = true;
         }
 
         void webviewNavigated(object sender, WebNavigatedEventArgs e)
         {
-            labelLoading.IsVisible = false;
+            //labelLoading.IsVisible = false;
         }
     }
 }

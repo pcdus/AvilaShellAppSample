@@ -3,19 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AvilaShellAppSample.Views.BookingPage"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             xmlns:behaviors="clr-namespace:AvilaShellAppSample.Behaviors"
+             xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
+             xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
+             xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:BookingViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <conv:AllTrueConverter x:Key="AllTrueConverter" />
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
     <ToolbarItem Text="Refresh"
                  Order="Primary"
                  Priority="0"
                  Command="{Binding RefreshCommand}"
-                 CommandParameter="{x:Reference webView}">
-                 <!--Clicked="ToolbarItem_Clicked">-->
-                 
-            
+                 CommandParameter="{x:Reference webView}">                             
         <ToolbarItem.IconImageSource>
             <FontImageSource Glyph="{StaticResource FalIconRefresh}"
                              FontFamily="FontAwesomeLight"
@@ -23,10 +29,120 @@
         </ToolbarItem.IconImageSource>
     </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <StackLayout>
-        <Label x:Name="labelLoading" Text="Loading..." IsVisible="false" />
-        <WebView x:Name="webView" Source="{Binding AvilaUrlBooking}"
-                 WidthRequest="1000" HeightRequest="1000"
-                 Navigated="webviewNavigated" Navigating="webviewNavigating"/>
-        </StackLayout>
+    <ContentPage.Content>
+        <Grid>
+            <Grid BackgroundColor="{StaticResource Gray-050}"
+                  IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}" >
+
+                <!-- Syncfusion Shimmer => use a skeletton -->
+                <!-- WaveDirection="LeftToRight" -->
+
+                <shimmer:SfShimmer x:Name="shimmer" VerticalOptions="Fill"
+                                    WaveColor="{StaticResource Gray-200}" WaveWidth ="75">
+                    <shimmer:SfShimmer.IsActive>
+                        <MultiBinding Converter="{StaticResource AllTrueConverter}">
+                            <Binding Path="IsBusy" />
+                            <Binding Path="IsFirstDisplay" />
+                        </MultiBinding>
+                    </shimmer:SfShimmer.IsActive>
+          
+                    <!-- Skeletton structure -->
+                    <!--
+                    <shimmer:SfShimmer.CustomView>
+                        <Grid RowSpacing="16" Margin="16">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="90" />
+                                <RowDefinition Height="90" />
+                                <RowDefinition Height="90" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="90" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <BoxView Grid.Row="0" Grid.Column="0"
+                                        HorizontalOptions="Start"
+                                        WidthRequest="20"
+                                        BackgroundColor="{StaticResource Gray-400}" />
+                            <BoxView Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
+                                        HorizontalOptions="StartAndExpand"
+                                        WidthRequest="150"
+                                        BackgroundColor="{StaticResource Gray-400}" />
+                            <BoxView Grid.Row="0" Grid.Column="4"
+                                        HorizontalOptions="Start"
+                                        WidthRequest="20"
+                                        BackgroundColor="{StaticResource Gray-400}" />
+                            <yummy:PancakeView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
+                                                Style="{StaticResource YummyFrame}"
+                                                HorizontalOptions="FillAndExpand"
+                                                BackgroundColor="{StaticResource Gray-300}" />
+                            <yummy:PancakeView Grid.Row="2" Grid.Column="1"
+                                                Style="{StaticResource YummyFrame}"
+                                                BackgroundColor="{StaticResource Gray-300}" />
+                            <yummy:PancakeView Grid.Row="2" Grid.Column="3"
+                                                Style="{StaticResource YummyFrame}"
+                                                BackgroundColor="{StaticResource Gray-300}" />
+                            <yummy:PancakeView Grid.Row="3" Grid.Column="1"
+                                                Style="{StaticResource YummyFrame}"
+                                                BackgroundColor="{StaticResource Gray-300}" />
+                            <yummy:PancakeView Grid.Row="3" Grid.Column="3"
+                                                Style="{StaticResource YummyFrame}"
+                                                BackgroundColor="{StaticResource Gray-300}" />
+                        </Grid>
+                    </shimmer:SfShimmer.CustomView>
+                    -->
+
+                    <shimmer:SfShimmer.Content>
+
+
+    <!--
+                        <Label x:Name="labelLoading" Text="Loading..." IsVisible="false" />
+    -->
+                        <!--
+                        <WebView x:Name="webView" Source="{Binding AvilaUrlBooking}"
+                                    WidthRequest="1000" HeightRequest="1000"
+                                    Navigated="webviewNavigated" Navigating="webviewNavigating"/>
+                        -->
+                        <ctrl:CustomWebView x:Name="webView"
+                                            Source="{Binding AvilaUrlBooking}"
+                                            Uri="{Binding AvilaUrlBooking}"
+                                            WidthRequest="1000" HeightRequest="1000">
+                            <WebView.Behaviors>
+                                <behaviors:EventToCommandBehavior
+                                    EventName="Navigating"
+                                    Command="{Binding NavigatingCommand}" />
+                                <behaviors:EventToCommandBehavior
+                                    EventName="Navigated"
+                                    Command="{Binding NavigatedCommand}" />
+                                <behaviors:EventToCommandBehavior
+                                    EventName="LoadingStart"
+                                    Command="{Binding LoadingStartCommand}" />
+                                <behaviors:EventToCommandBehavior
+                                    EventName="LoadingFinished"
+                                    Command="{Binding LoadingFinishedCommand}" />
+                                <behaviors:EventToCommandBehavior
+                                    EventName="LoadingFailed"
+                                    Command="{Binding LoadingFailedCommand}"
+                                    CommandParameter="{x:Reference webView}"
+                                    />
+                            </WebView.Behaviors>
+                        </ctrl:CustomWebView>
+
+                    </shimmer:SfShimmer.Content>
+                </shimmer:SfShimmer>
+            </Grid>
+
+            <ctrl:ErrorView IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}}"
+                            Title="{Binding ErrorTitle}"
+                            Description="{Binding ErrorDescription}"
+                            ErrorKind="{Binding ErrorKind}"
+                            RetryButtonCommand="{Binding RetryCommand}"
+                            RetryButtonCommandParameter="{x:Reference webView}"/>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

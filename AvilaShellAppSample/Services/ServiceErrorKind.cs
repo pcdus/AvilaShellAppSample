@@ -4,9 +4,8 @@
     {
         None = 0,
         NoInternetAccess = 1,
-        NoSuccessStatusCode = 2,
-        Timeout = 3,
-        Other = 9
+        ServiceIssue = 2,
+        Timeout = 3
 
     }
 }

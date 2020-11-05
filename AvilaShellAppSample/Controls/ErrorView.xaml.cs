@@ -66,6 +66,18 @@ namespace AvilaShellAppSample.Controls
             }
         }
 
+        public static readonly BindableProperty RetryButtonCommandParameterProperty = BindableProperty.Create(
+            propertyName: nameof(RetryButtonCommandParameter),
+            returnType: typeof(object),
+            declaringType: typeof(ErrorView),
+            null);
+
+        public object RetryButtonCommandParameter
+        {
+            get { return GetValue(RetryButtonCommandParameterProperty); }
+            set { SetValue(RetryButtonCommandParameterProperty, value); }
+        }
+
         public ErrorView()
         {
             InitializeComponent();

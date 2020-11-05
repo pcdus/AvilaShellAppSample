@@ -54,6 +54,8 @@
             <Color x:Key="BlondAvilaColor">#f4edbe</Color>
             <Color x:Key="LincolnGreenAvilaColor">#00571f</Color>
             <Color x:Key="FlorralWhiteAvilaColor">#fefbf2</Color>
+            <Color x:Key="ApricotLightAvilaColor">#fbd5c2</Color>
+            <Color x:Key="ApricotDarkAvilaColor">#f9bfa2</Color>
             <Color x:Key="GreenBlueCrayoloHourrappsColor">#008ace</Color>
             <!-- Gray shades -->
             <Color x:Key="Gray-100">#f6f7f8</Color>
@@ -343,8 +345,8 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush StartPoint="0, 0" EndPoint="1, 1">
-                                <GradientStop Offset="0" Color="{StaticResource ApricotAvilaColor}" />
-                                <GradientStop Offset="1" Color="{StaticResource BlondAvilaColor}" />
+                                <GradientStop Offset="0" Color="{StaticResource ApricotLightAvilaColor}" />
+                                <GradientStop Offset="1" Color="{StaticResource ApricotDarkAvilaColor}" />
                         </LinearGradientBrush>
                     </Setter.Value>
                 </Setter>

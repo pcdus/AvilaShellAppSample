@@ -4,6 +4,9 @@ using Xamarin.Forms;
 
 namespace AvilaShellAppSample.Controls
 {
+    /// <summary>
+    /// Use to adjust size of images in news page
+    /// </summary>
     public class ImageFit : CachedImage
     {
 

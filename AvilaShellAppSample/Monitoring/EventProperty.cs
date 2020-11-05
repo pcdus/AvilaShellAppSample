@@ -11,7 +11,6 @@ namespace AvilaShellAppSample.Monitoring
         public const string ApiDto = "ApiDto";
         public const string ResponseTime = "ResponseTime";
         public const string Uri = "Uri";
-        public const string AffiliateCategory = "AffiliateCategory";
         public const string Message = "Message";
         public const string Element = "Element";
         public const string Tag = "Tag";

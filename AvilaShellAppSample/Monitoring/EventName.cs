@@ -5,9 +5,8 @@ namespace AvilaShellAppSample.Monitoring
     {
         // common events
         public const string NoInternetAccessRetry = "NoInternetAccessRetry";
-        public const string NoSuccessStatusCodeRetry = "NoSuccessStatusCodeRetry";
+        public const string ServiceIssueRetry = "ServiceIssueRetry";
         public const string TimeoutRetry = "TimeoutRetry";
-        public const string OtherRetry = "OtherRetry";
         // NewsPage events
         public const string OpenNews = "OpenNews";
         public const string OpenEvent = "OpenEvent";

@@ -14,9 +14,11 @@ namespace AvilaShellAppSample.Monitoring
         public const string AboutPage = nameof(AboutPage);
         // errors app pages
         public const string NewsPageNoInternetAccess = nameof(NewsPageNoInternetAccess);
-        public const string NewsPageNoSuccessStatusCode = nameof(NewsPageNoSuccessStatusCode);
-        public const string NewsPageOtherError = nameof(NewsPageOtherError);
+        public const string NewsPageServiceIssue = nameof(NewsPageServiceIssue);
         public const string NewsPageTimeoutError = nameof(NewsPageTimeoutError);
+        public const string BookingPageNoInternetAccess = nameof(BookingPageNoInternetAccess);
+        public const string BookingPageServiceIssue = nameof(BookingPageServiceIssue);
+        public const string BookingPageTimeoutError = nameof(BookingPageTimeoutError);
         // external native apps pages
         public const string NativeCallApp = nameof(NativeCallApp);
         public const string NativeMapApp = nameof(NativeMapApp);

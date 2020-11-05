@@ -63,18 +63,25 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref hasServiceError, value); }
         }
 
-        ServiceErrorKind serviceErrorKind = ServiceErrorKind.None;
-        public ServiceErrorKind ServiceErrorKind
+        ServiceErrorKind errorKind = ServiceErrorKind.None;
+        public ServiceErrorKind ErrorKind
         {
-            get { return serviceErrorKind; }
-            set { SetProperty(ref serviceErrorKind, value); }
+            get { return errorKind; }
+            set { SetProperty(ref errorKind, value); }
         }
 
-        string serviceErrorDescription;
-        public string ServiceErrorDescription
+        string errorDescription;
+        public string ErrorDescription
         {
-            get { return serviceErrorDescription; }
-            set { SetProperty(ref serviceErrorDescription, value); }
+            get { return errorDescription; }
+            set { SetProperty(ref errorDescription, value); }
+        }
+
+        string errorTitle;
+        public string ErrorTitle
+        {
+            get { return errorTitle; }
+            set { SetProperty(ref errorTitle, value); }
         }
 
         bool showErrorView = false;
@@ -110,8 +117,10 @@ namespace AvilaShellAppSample.ViewModels
             try
             {
                 ShowErrorView = false;
+                ErrorKind = ServiceErrorKind.None;
                 IsBusy = true;
 
+                await Task.Delay(2000);
                 /*
                 var _events = await _dataService.GetEvents(forceRefresh);
                 Events = new ObservableCollection<Event>(_events);
@@ -127,36 +136,34 @@ namespace AvilaShellAppSample.ViewModels
             {
                 Debug.WriteLine($"NewsViewModel - GetNewsAsync() - IOException : {ioEx.Message}");
                 _eventTracker.Error(ioEx);
-                ServiceErrorKind = ServiceErrorKind.NoInternetAccess;
-                await SetServiceError();
+                ErrorKind = ServiceErrorKind.NoInternetAccess;
             }
             catch (WebException wEx)
             {
                 Debug.WriteLine($"NewsViewModel - GetNewsAsync() - WebException : {wEx.Message}");
                 _eventTracker.Error(wEx);
-                ServiceErrorKind = ServiceErrorKind.NoSuccessStatusCode;
-                await SetServiceError();
+                ErrorKind = ServiceErrorKind.ServiceIssue;
             }
             catch (TimeoutRejectedException trEx)
             {
                 Debug.WriteLine($"NewsViewModel - GetNewsAsync() - TimeoutRejectedException : {trEx.Message}");
                 _eventTracker.Error(trEx);
-                ServiceErrorKind = ServiceErrorKind.Timeout;
-                await SetServiceError();
+                ErrorKind = ServiceErrorKind.Timeout;
             }
             catch (Exception ex)
             {
                 _eventTracker.Error(ex);
                 Debug.WriteLine($"NewsViewModel - GetNewsAsync() - Exception : {ex.Message}");
-                ServiceErrorKind = ServiceErrorKind.Other;
-                await SetServiceError();
+                ErrorKind = ServiceErrorKind.ServiceIssue;
             }
             finally
             {
                 Debug.WriteLine("NewsViewModel - GetNewsAsync() - Finally");
+                await SetServiceError();
                 if (News.Count > 0 || Events.Count > 0)
+                {
                     HasEmptyData = false;
-
+                }
                 IsBusy = false;
             }
         }
@@ -164,28 +171,18 @@ namespace AvilaShellAppSample.ViewModels
         private async Task SetServiceError()
         {
             Debug.WriteLine("NewsViewModel - SetServiceError()");
-            /*
-            switch (ServiceErrorKind)
-            {
-                case ServiceErrorKind.NoInternetAccess:
-                    ServiceErrorDescription = "Aucune connexion internet n'est disponible.";
-                    break;
-                case ServiceErrorKind.NoSuccessStatusCode:
-                case ServiceErrorKind.Timeout:
-                case ServiceErrorKind.Other:
-                default:
-                    ServiceErrorDescription = "Le service ne réponds pas : rééssayez plus tard.";
-                    break;
-            }
-            */
 
-            ServiceErrorDescription = ServiceErrorKind.ToMessage();
+            if (ErrorKind == ServiceErrorKind.None)
+                return;
 
             if (IsRefreshing)
                 IsRefreshing = false;
 
-            var eventPage = ServiceErrorKind.ToNewsServiceErrorPage();
+            var eventPage = ErrorKind.ToNewsServiceErrorPage();
             _eventTracker.Display(eventPage);
+
+            ErrorTitle = ErrorKind.ToTitle();
+            ErrorDescription = ErrorKind.ToMessage();
 
             if (HasEmptyData)
             {
@@ -193,7 +190,7 @@ namespace AvilaShellAppSample.ViewModels
             }
             else
             {
-                await UserDialogs.Instance.AlertAsync(ServiceErrorDescription, "Attention", "OK");
+                await UserDialogs.Instance.AlertAsync(ErrorDescription, ErrorTitle, "OK");
             }
         }
 
@@ -216,7 +213,7 @@ namespace AvilaShellAppSample.ViewModels
         private async Task RetryAsync()
         {
             Debug.WriteLine("NewsViewModel - RetryAsync()");
-            var eventName = ServiceErrorKind.ToEventName();
+            var eventName = ErrorKind.ToEventName();
             _eventTracker?.Click(eventName, EventPage.NewsPage, EventPage.NewsPage);
             try
             {

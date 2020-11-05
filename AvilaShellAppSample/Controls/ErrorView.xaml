@@ -54,7 +54,7 @@
                     </Image>
                 </Grid>
 
-                <!-- Case : NoSuccessStatusCode / Timeout / Other -->
+                <!-- Case : ServiceIssue / Timeout / Other -->
                 <Grid>
                     <Grid.IsVisible>
                         <Binding Path="ErrorKind"
@@ -62,7 +62,7 @@
                                  Source="{x:Reference ServiceErrorControl}">
                             <Binding.ConverterParameter>
                                 <specialized:StringCollection>
-                                    <x:String>NoSuccessStatusCode</x:String>
+                                    <x:String>ServiceIssue</x:String>
                                     <x:String>Timeout</x:String>
                                     <x:String>Other</x:String>
                                 </specialized:StringCollection>
@@ -93,14 +93,18 @@
                        Style="{StaticResource ErrorPageHaderLabelStyle}"/>
                 <Label Text="{Binding Description, Source={x:Reference ServiceErrorControl}}"
                        Style="{StaticResource ErrorPageDescriptionLabelStyle}"/>
+                <!-- for debug -->
+                <!-- 
                 <Label Text="{Binding ErrorKind, Source={x:Reference ServiceErrorControl}}" />
+                -->
             </StackLayout>
 
             <!-- Retry button -->
             <Button Grid.Row="1"
                     Text="Retry"
                     Style="{StaticResource GradientButtonStyle}"
-                    Command="{Binding RetryButtonCommand, Source={x:Reference ServiceErrorControl}}">
+                    Command="{Binding RetryButtonCommand, Source={x:Reference ServiceErrorControl}}"
+                    CommandParameter="{Binding RetryButtonCommandParameter, Source={x:Reference ServiceErrorControl}}">
             </Button>
         </Grid>
     </ContentView.Content>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -73,6 +73,8 @@
     <Compile Include="Renderers\CustomShadowFrameRenderer.cs" />
     <Compile Include="Renderers\NoShadowFrameRenderer.cs" />
     <Compile Include="Renderers\LightShadowFrameRenderer.cs" />
+    <Compile Include="Renderers\CustomWkWebViewRenderer.cs" />
+    <Compile Include="Renderers\CustomWkWebViewNavigationDelegate.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
