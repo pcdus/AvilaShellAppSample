@@ -27,13 +27,6 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref avilaUrlBooking, value); }
         }
 
-        bool isFirstDisplay;
-        public bool IsFirstDisplay
-        {
-            get { return isFirstDisplay; }
-            set { SetProperty(ref isFirstDisplay, value); }
-        }
-
         ServiceErrorKind errorKind = ServiceErrorKind.None;
         public ServiceErrorKind ErrorKind
         {
@@ -104,7 +97,6 @@ namespace AvilaShellAppSample.ViewModels
             IsBusy = true;
             ShowLoadingView = true;
             ShowErrorView = false;
-
             return Task.CompletedTask;
         }
 
@@ -122,7 +114,7 @@ namespace AvilaShellAppSample.ViewModels
             }
         }
 
-        private async Task WebViewNavigatedAsync(WebNavigatedEventArgs eventArgs)
+        private Task WebViewNavigatedAsync(WebNavigatedEventArgs eventArgs)
         {
             Debug.WriteLine($"BookingViewModel - WebViewNavigatedAsync()");
 
@@ -151,8 +143,6 @@ namespace AvilaShellAppSample.ViewModels
                 case WebNavigationResult.Success:
                     Debug.WriteLine($"BookingViewModel - WebViewNavigatedAsync() - Success");
                     ErrorKind = ServiceErrorKind.None;
-                    IsFirstDisplay = false;
-                    ShowWebView = true;
                     break;
                 case WebNavigationResult.Timeout:
                     Debug.WriteLine($"BookingViewModel - WebViewNavigatedAsync() - Timeout");
@@ -161,14 +151,7 @@ namespace AvilaShellAppSample.ViewModels
             }
 
             IsBusy = false;
-
-            // for display loading animation on Refresh
-            while (ShowLoadingView)
-                await Task.Delay(50);
-
-            SetErrorView();
-
-            //return Task.CompletedTask;
+            return Task.CompletedTask;
         }
 
         #endregion
@@ -193,7 +176,6 @@ namespace AvilaShellAppSample.ViewModels
             IsBusy = true;
             ShowLoadingView = true;
             ShowErrorView = false;
-
             return Task.CompletedTask;
         }
 
@@ -213,9 +195,6 @@ namespace AvilaShellAppSample.ViewModels
             Debug.WriteLine($"BookingViewModel - WebViewLoadingFinishedAsync()");
 
             IsBusy = false;
-            IsFirstDisplay = false;
-            ShowWebView = true;
-
             return Task.CompletedTask;
         }
 
@@ -233,7 +212,7 @@ namespace AvilaShellAppSample.ViewModels
             }
         }
 
-        private async Task WebViewLoadingFailedAsync(object sender)
+        private Task WebViewLoadingFailedAsync(object sender)
         {
             Debug.WriteLine($"BookingViewModel - WebViewLoadingFailedAsync()");
 
@@ -242,12 +221,7 @@ namespace AvilaShellAppSample.ViewModels
             Debug.WriteLine($"BookingViewModel - WebViewLoadingFailedAsync() - error : {ErrorKind}");
 
             IsBusy = false;
-
-            // for display loading animation on Refresh
-            while (ShowLoadingView)
-                await Task.Delay(50);
-
-            SetErrorView();
+            return Task.CompletedTask;
         }
 
         #endregion
@@ -280,8 +254,12 @@ namespace AvilaShellAppSample.ViewModels
             }
             else
             {
-                Debug.WriteLine($"BookingViewModel - OnFinishedAnimation() - animation ended");
+                Debug.WriteLine($"BookingViewModel - OnFinishedAnimation() - animation ended");                
                 ShowLoadingView = false;
+                if (ErrorKind == ServiceErrorKind.None)
+                    ShowWebView = true;
+                else
+                    SetErrorView();
             }
             return Task.CompletedTask;
         }
@@ -291,10 +269,8 @@ namespace AvilaShellAppSample.ViewModels
         public BookingViewModel()
         {
             Debug.WriteLine($"BookingViewModel - Ctor()");
-
             _eventTracker = new AppCenterEventTracker();
 
-            IsFirstDisplay = true;
             Title = "Booking";
 
             _eventTracker.Display(EventPage.BookingPage);
@@ -337,7 +313,6 @@ namespace AvilaShellAppSample.ViewModels
         {
             Debug.WriteLine($"BookingViewModel - ReloadWebview()");
 
-            IsFirstDisplay = true;
             ErrorKind = ServiceErrorKind.None;
             ShowWebView = false;
 
@@ -367,19 +342,5 @@ namespace AvilaShellAppSample.ViewModels
             ShowErrorView = true;
         }
 
-        /*
-        private async Task WebViewNavigating()
-        {
-            //IsBusy = true;
-            //await Task.Delay(1000);
-        }
-
-        private async Task WebViewNavigated()
-        {
-            //await Task.Delay(1000);
-            //IsBusy = false;
-            IsFirstDisplay = false;
-        }
-        */
     }
 }
