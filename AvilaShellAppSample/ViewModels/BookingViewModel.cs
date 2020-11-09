@@ -9,6 +9,7 @@ using AvilaShellAppSample.Services;
 using MvvmHelpers.Commands;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Lottie.Forms;
 
 namespace AvilaShellAppSample.ViewModels
 {
@@ -61,52 +62,24 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref showErrorView, value); }
         }
 
+        bool showLoadingView = false;
+        public bool ShowLoadingView
+        {
+            get { return showLoadingView; }
+            set { SetProperty(ref showLoadingView, value); }
+        }
+
+        bool showWebView = false;
+        public bool ShowWebView
+        {
+            get { return showWebView; }
+            set { SetProperty(ref showWebView, value); }
+        }
+
         public bool IsConnected { get; set; }
 
         public MvvmHelpers.Commands.Command RefreshCommand => new MvvmHelpers.Commands.Command(this.Refresh);
         public ICommand RetryCommand => new Xamarin.Forms.Command<object>(Retry);
-
-
-        /*
-        public AsyncCommand WebViewNavigatingCommand => new AsyncCommand(this.WebViewNavigating);
-        public AsyncCommand WebViewNavigatedCommand => new AsyncCommand(this.WebViewNavigated);
-        */
-
-        /*
-        private Xamarin.Forms.Command<WebNavigatingEventArgs> navigatingCommand;
-        public Xamarin.Forms.Command<WebNavigatingEventArgs> NavigatingCommand
-        {
-            get
-            {
-                return navigatingCommand ?? (navigatingCommand = new Xamarin.Forms.Command<WebNavigatingEventArgs>(
-                    (param) =>
-                    {
-                        if (param != null)
-                        {
-
-                        }
-                    },
-                    (param) => true
-                    ));
-            }
-        }
-        */
-
-        /*
-        public ICommand NavigatingCommand => new Xamarin.Forms.Command(async () => await NavigationAsync());
-        private Task NavigationAsync()
-        {
-
-            return Task.CompletedTask;
-        }
-
-
-        public ICommand NavigatedCommand => new Xamarin.Forms.Command(async () => await NavigatedAsync());
-        private Task NavigatedAsync()
-        {
-            return Task.CompletedTask;
-        }
-        */
 
         #region Xamarin.Forms WebView Behaviors Commands : NavigatingCommand / Navigated Command
 
@@ -129,6 +102,7 @@ namespace AvilaShellAppSample.ViewModels
             Debug.WriteLine($"BookingViewModel - WebViewNavigatingAsync()");
 
             IsBusy = true;
+            ShowLoadingView = true;
             ShowErrorView = false;
 
             return Task.CompletedTask;
@@ -148,11 +122,10 @@ namespace AvilaShellAppSample.ViewModels
             }
         }
 
-        private Task WebViewNavigatedAsync(WebNavigatedEventArgs eventArgs)
+        private async Task WebViewNavigatedAsync(WebNavigatedEventArgs eventArgs)
         {
             Debug.WriteLine($"BookingViewModel - WebViewNavigatedAsync()");
 
-            IsBusy = false;
             switch (eventArgs.Result)
             {
                 // to check : Cancel => error or not?
@@ -179,19 +152,26 @@ namespace AvilaShellAppSample.ViewModels
                     Debug.WriteLine($"BookingViewModel - WebViewNavigatedAsync() - Success");
                     ErrorKind = ServiceErrorKind.None;
                     IsFirstDisplay = false;
+                    ShowWebView = true;
                     break;
                 case WebNavigationResult.Timeout:
                     Debug.WriteLine($"BookingViewModel - WebViewNavigatedAsync() - Timeout");
                     ErrorKind = ServiceErrorKind.Timeout;
                     break;
             }
-            SetServiceError();
 
-            return Task.CompletedTask;
+            IsBusy = false;
+
+            // for display loading animation on Refresh
+            while (ShowLoadingView)
+                await Task.Delay(50);
+
+            SetErrorView();
+
+            //return Task.CompletedTask;
         }
 
         #endregion
-
 
         #region iOS platform specific WkWebView Behaviors Command : LoadingStartCommand / LoadingFinishedCommand / LoadingFailedCommand
 
@@ -211,6 +191,7 @@ namespace AvilaShellAppSample.ViewModels
             Debug.WriteLine($"BookingViewModel - WebViewLoadingStartAsync()");
 
             IsBusy = true;
+            ShowLoadingView = true;
             ShowErrorView = false;
 
             return Task.CompletedTask;
@@ -233,6 +214,7 @@ namespace AvilaShellAppSample.ViewModels
 
             IsBusy = false;
             IsFirstDisplay = false;
+            ShowWebView = true;
 
             return Task.CompletedTask;
         }
@@ -251,7 +233,7 @@ namespace AvilaShellAppSample.ViewModels
             }
         }
 
-        private Task WebViewLoadingFailedAsync(object sender)
+        private async Task WebViewLoadingFailedAsync(object sender)
         {
             Debug.WriteLine($"BookingViewModel - WebViewLoadingFailedAsync()");
 
@@ -260,8 +242,47 @@ namespace AvilaShellAppSample.ViewModels
             Debug.WriteLine($"BookingViewModel - WebViewLoadingFailedAsync() - error : {ErrorKind}");
 
             IsBusy = false;
-            SetServiceError();
 
+            // for display loading animation on Refresh
+            while (ShowLoadingView)
+                await Task.Delay(50);
+
+            SetErrorView();
+        }
+
+        #endregion
+
+        #region Lottie Behaviors Command
+
+        public ICommand OnFinishedAnimationCommand
+        {
+            get
+            {
+                return new Xamarin.Forms.Command<object>(async (object sender) =>
+                {
+                    if (sender != null)
+                    {
+                        await OnFinishedAnimation(sender);
+                    }
+                });
+            }
+        }
+
+        private Task OnFinishedAnimation(object sender)
+        {
+            Debug.WriteLine($"BookingViewModel - OnFinishedAnimation()");
+
+            var view = sender as AnimationView;
+            if (IsBusy)
+            {
+                Debug.WriteLine($"BookingViewModel - OnFinishedAnimation() - animation replayed");
+                view.PlayAnimation();
+            }
+            else
+            {
+                Debug.WriteLine($"BookingViewModel - OnFinishedAnimation() - animation ended");
+                ShowLoadingView = false;
+            }
             return Task.CompletedTask;
         }
 
@@ -304,7 +325,7 @@ namespace AvilaShellAppSample.ViewModels
             try
             {
                 var webView = sender as CustomWebView;
-                ReloadWebview(webView);
+                ReloadWebview(webView, true);
             }
             catch (Exception ex)
             {
@@ -312,20 +333,27 @@ namespace AvilaShellAppSample.ViewModels
             }
         }
 
-        private void ReloadWebview(CustomWebView webView)
+        private void ReloadWebview(CustomWebView webView, bool isRetry = false)
         {
+            Debug.WriteLine($"BookingViewModel - ReloadWebview()");
+
             IsFirstDisplay = true;
+            ErrorKind = ServiceErrorKind.None;
+            ShowWebView = false;
 
             webView.Source = AvilaUrlBooking;
             webView.Uri = AvilaUrlBooking;
 
             webView.Reload();
-            webView.Refresh();
+            if (isRetry)
+                webView.RetryNavigation();
+            else
+                webView.Refresh();
         }
 
-        private void SetServiceError()
+        private void SetErrorView()
         {
-            Debug.WriteLine($"BookingViewModel - SetServiceError()");
+            Debug.WriteLine($"BookingViewModel - SetErrorView()");
 
             if (ErrorKind == ServiceErrorKind.None)
                 return;

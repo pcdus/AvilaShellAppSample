@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using System.Diagnostics;
+using System.Windows.Input;
 using AvilaShellAppSample.Services;
 using Xamarin.Forms;
 
@@ -37,10 +38,14 @@ namespace AvilaShellAppSample.Controls
         {
             get
             {
+                Debug.WriteLine($"ErrorView - ErrorKind getter : {(ServiceErrorKind)GetValue(ErrorKindProperty)}");
+                var newValue = (ServiceErrorKind)GetValue(ErrorKindProperty);
+                RelaunchAnimation(newValue);
                 return (ServiceErrorKind)GetValue(ErrorKindProperty);
             }
             set
             {
+                Debug.WriteLine($"ErrorView - ErrorKind setter : {value}");
                 SetValue(ErrorKindProperty, value);
             }
         }
@@ -82,5 +87,14 @@ namespace AvilaShellAppSample.Controls
         {
             InitializeComponent();
         }
+
+        private void RelaunchAnimation(ServiceErrorKind errorKind)
+        {
+            if (errorKind == ServiceErrorKind.NoInternetAccess)
+                networkErrorAnimationView.PlayAnimation();
+            if (errorKind == ServiceErrorKind.ServiceIssue || errorKind == ServiceErrorKind.Timeout)
+                serviceErrorAnimationView.PlayAnimation();
+        }
+
     }
 }

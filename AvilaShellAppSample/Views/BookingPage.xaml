@@ -6,8 +6,8 @@
              xmlns:behaviors="clr-namespace:AvilaShellAppSample.Behaviors"
              xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
-             xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:triggers="clr-namespace:AvilaShellAppSample.Triggers"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
         <vm:BookingViewModel />
@@ -30,113 +30,81 @@
     </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        <!-- Main content (LoadingView / WebView / ErrorView -->
         <Grid>
-            <Grid BackgroundColor="{StaticResource Gray-050}"
-                  IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}" >
 
-                <!-- Syncfusion Shimmer => use a skeletton -->
-                <!-- WaveDirection="LeftToRight" -->
+            <!-- No error case (LoadingView / WebView) -->
+            <Grid IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}" >
 
-                <shimmer:SfShimmer x:Name="shimmer" VerticalOptions="Fill"
-                                    WaveColor="{StaticResource Gray-200}" WaveWidth ="75">
-                    <shimmer:SfShimmer.IsActive>
-                        <MultiBinding Converter="{StaticResource AllTrueConverter}">
-                            <Binding Path="IsBusy" />
-                            <Binding Path="IsFirstDisplay" />
-                        </MultiBinding>
-                    </shimmer:SfShimmer.IsActive>
-          
-                    <!-- Skeletton structure -->
-                    <!--
-                    <shimmer:SfShimmer.CustomView>
-                        <Grid RowSpacing="16" Margin="16">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="30" />
-                                <RowDefinition Height="90" />
-                                <RowDefinition Height="90" />
-                                <RowDefinition Height="90" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="90" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="90" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <BoxView Grid.Row="0" Grid.Column="0"
-                                        HorizontalOptions="Start"
-                                        WidthRequest="20"
-                                        BackgroundColor="{StaticResource Gray-400}" />
-                            <BoxView Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3"
-                                        HorizontalOptions="StartAndExpand"
-                                        WidthRequest="150"
-                                        BackgroundColor="{StaticResource Gray-400}" />
-                            <BoxView Grid.Row="0" Grid.Column="4"
-                                        HorizontalOptions="Start"
-                                        WidthRequest="20"
-                                        BackgroundColor="{StaticResource Gray-400}" />
-                            <yummy:PancakeView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
-                                                Style="{StaticResource YummyFrame}"
-                                                HorizontalOptions="FillAndExpand"
-                                                BackgroundColor="{StaticResource Gray-300}" />
-                            <yummy:PancakeView Grid.Row="2" Grid.Column="1"
-                                                Style="{StaticResource YummyFrame}"
-                                                BackgroundColor="{StaticResource Gray-300}" />
-                            <yummy:PancakeView Grid.Row="2" Grid.Column="3"
-                                                Style="{StaticResource YummyFrame}"
-                                                BackgroundColor="{StaticResource Gray-300}" />
-                            <yummy:PancakeView Grid.Row="3" Grid.Column="1"
-                                                Style="{StaticResource YummyFrame}"
-                                                BackgroundColor="{StaticResource Gray-300}" />
-                            <yummy:PancakeView Grid.Row="3" Grid.Column="3"
-                                                Style="{StaticResource YummyFrame}"
-                                                BackgroundColor="{StaticResource Gray-300}" />
-                        </Grid>
-                    </shimmer:SfShimmer.CustomView>
-                    -->
+                <!-- Loading View -->
+                <!--
+                <Label x:Name="labelLoading" Text="Loading..." IsVisible="false" />
+                -->
+                <lottie:AnimationView
+                    x:Name="animationView"
+                    Animation="resource://lottie_loading_2circles_rotating_apricot.json?assembly=AvilaShellAppSample"
+                    AnimationSource="EmbeddedResource"
+                    BackgroundColor="Transparent"
+                    AutoPlay="True"
+                    Speed="0.75"
+                    HeightRequest="100" WidthRequest="100"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    IsVisible="{Binding ShowLoadingView}">
+                    <lottie:AnimationView.Triggers>
+                        <MultiTrigger TargetType="lottie:AnimationView">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding ShowLoadingView}" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <triggers:PlayLottieAnimationTriggerAction />
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <triggers:StopLottieAnimationTriggerAction />
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                    </lottie:AnimationView.Triggers>
+                    <lottie:AnimationView.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="OnFinishedAnimation"
+                            Command="{Binding OnFinishedAnimationCommand}"
+                            CommandParameter="{x:Reference animationView}" />
+                    </lottie:AnimationView.Behaviors>
+                </lottie:AnimationView>
 
-                    <shimmer:SfShimmer.Content>
-
-
-    <!--
-                        <Label x:Name="labelLoading" Text="Loading..." IsVisible="false" />
-    -->
-                        <!--
-                        <WebView x:Name="webView" Source="{Binding AvilaUrlBooking}"
+                <!-- WebView -->
+                <ctrl:CustomWebView x:Name="webView"
+                                    Source="{Binding AvilaUrlBooking}"
+                                    Uri="{Binding AvilaUrlBooking}"                                    
                                     WidthRequest="1000" HeightRequest="1000"
-                                    Navigated="webviewNavigated" Navigating="webviewNavigating"/>
-                        -->
-                        <ctrl:CustomWebView x:Name="webView"
-                                            Source="{Binding AvilaUrlBooking}"
-                                            Uri="{Binding AvilaUrlBooking}"
-                                            WidthRequest="1000" HeightRequest="1000">
-                            <WebView.Behaviors>
-                                <behaviors:EventToCommandBehavior
-                                    EventName="Navigating"
-                                    Command="{Binding NavigatingCommand}" />
-                                <behaviors:EventToCommandBehavior
-                                    EventName="Navigated"
-                                    Command="{Binding NavigatedCommand}" />
-                                <behaviors:EventToCommandBehavior
-                                    EventName="LoadingStart"
-                                    Command="{Binding LoadingStartCommand}" />
-                                <behaviors:EventToCommandBehavior
-                                    EventName="LoadingFinished"
-                                    Command="{Binding LoadingFinishedCommand}" />
-                                <behaviors:EventToCommandBehavior
-                                    EventName="LoadingFailed"
-                                    Command="{Binding LoadingFailedCommand}"
-                                    CommandParameter="{x:Reference webView}"
-                                    />
-                            </WebView.Behaviors>
-                        </ctrl:CustomWebView>
+                                    IsVisible="{Binding ShowWebView, Converter={StaticResource BoolToVisibilityConverter}}">
+                <!-- bug on Android : WebView with errors visible during a short time -->
+                <!--
+                     IsVisible="{Binding ShowLoadingView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}">
+                -->
+             
+                    <WebView.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="Navigating"
+                            Command="{Binding NavigatingCommand}" />
+                        <behaviors:EventToCommandBehavior
+                            EventName="Navigated"
+                            Command="{Binding NavigatedCommand}" />
+                        <behaviors:EventToCommandBehavior
+                            EventName="LoadingStart"
+                            Command="{Binding LoadingStartCommand}" />
+                        <behaviors:EventToCommandBehavior
+                            EventName="LoadingFinished"
+                            Command="{Binding LoadingFinishedCommand}" />
+                        <behaviors:EventToCommandBehavior
+                            EventName="LoadingFailed"
+                            Command="{Binding LoadingFailedCommand}"
+                            CommandParameter="{x:Reference webView}" />
+                    </WebView.Behaviors>
+                </ctrl:CustomWebView>
 
-                    </shimmer:SfShimmer.Content>
-                </shimmer:SfShimmer>
             </Grid>
 
+            <!-- ErrorView -->
             <ctrl:ErrorView IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}}"
                             Title="{Binding ErrorTitle}"
                             Description="{Binding ErrorDescription}"

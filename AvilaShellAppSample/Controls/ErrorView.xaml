@@ -4,6 +4,7 @@
              x:Class="AvilaShellAppSample.Controls.ErrorView"
              xmlns:specialized="clr-namespace:System.Collections.Specialized;assembly=System"
              xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              x:Name="ServiceErrorControl">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -33,6 +34,7 @@
                             </Binding.ConverterParameter>
                         </Binding>
                     </Grid.IsVisible>
+                    <!--
                     <Image Style="{StaticResource ErrorImageIconDuotonePart1Style}">
                         <Image.Source>
                             <FontImageSource x:Name="fisPart1"
@@ -52,6 +54,16 @@
                                              Size="90" />
                         </Image.Source>
                     </Image>
+                    -->
+                    <lottie:AnimationView
+                        x:Name="networkErrorAnimationView"
+                        Animation="resource://lottie_error_no_network_apricot.json?assembly=AvilaShellAppSample"
+                        AnimationSource="EmbeddedResource"
+                        BackgroundColor="Transparent"
+                        AutoPlay="True"
+                        Speed="0.75"
+                        HeightRequest="200" WidthRequest="200"
+                        VerticalOptions="Center" HorizontalOptions="Center" />
                 </Grid>
 
                 <!-- Case : ServiceIssue / Timeout / Other -->
@@ -69,6 +81,7 @@
                             </Binding.ConverterParameter>
                         </Binding>
                     </Grid.IsVisible>
+                    <!--
                     <Image Style="{StaticResource ErrorImageIconDuotonePart1Style}">
                         <Image.Source>
                             <FontImageSource Glyph="{StaticResource FadsIconWarningTrianglePart1}"
@@ -86,6 +99,16 @@
   
                         </Image.Source>
                     </Image>
+                    -->
+                    <lottie:AnimationView
+                        x:Name="serviceErrorAnimationView"
+                        Animation="resource://lottie_error_warning_apricot.json?assembly=AvilaShellAppSample"
+                        AnimationSource="EmbeddedResource"
+                        BackgroundColor="Transparent"
+                        AutoPlay="True"
+                        Speed="0.75"
+                        HeightRequest="200" WidthRequest="200"
+                        VerticalOptions="Center" HorizontalOptions="Center" />
                 </Grid>
 
                 <!-- Other informations -->
