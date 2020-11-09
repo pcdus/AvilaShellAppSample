@@ -256,6 +256,7 @@ namespace AvilaShellAppSample.ViewModels
             {
                 Debug.WriteLine($"BookingViewModel - OnFinishedAnimation() - animation ended");                
                 ShowLoadingView = false;
+
                 if (ErrorKind == ServiceErrorKind.None)
                     ShowWebView = true;
                 else
@@ -275,6 +276,24 @@ namespace AvilaShellAppSample.ViewModels
 
             _eventTracker.Display(EventPage.BookingPage);
         }
+
+        private void SetErrorView()
+        {
+            Debug.WriteLine($"BookingViewModel - SetErrorView()");
+
+            if (ErrorKind == ServiceErrorKind.None)
+                return;
+
+            var eventPage = ErrorKind.ToBookingWebviewErrorPage();
+            _eventTracker.Display(eventPage);
+
+            ErrorTitle = ErrorKind.ToTitle();
+            ErrorDescription = ErrorKind.ToMessage();
+
+            ShowErrorView = true;
+        }
+
+        #region User's interactions
 
         private void Refresh(object sender)
         {
@@ -326,21 +345,7 @@ namespace AvilaShellAppSample.ViewModels
                 webView.Refresh();
         }
 
-        private void SetErrorView()
-        {
-            Debug.WriteLine($"BookingViewModel - SetErrorView()");
-
-            if (ErrorKind == ServiceErrorKind.None)
-                return;
-
-            var eventPage = ErrorKind.ToBookingWebviewErrorPage();
-            _eventTracker.Display(eventPage);
-
-            ErrorTitle = ErrorKind.ToTitle();
-            ErrorDescription = ErrorKind.ToMessage();
-
-            ShowErrorView = true;
-        }
+        #endregion
 
     }
 }

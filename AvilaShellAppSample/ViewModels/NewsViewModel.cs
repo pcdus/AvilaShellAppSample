@@ -17,6 +17,7 @@ using AvilaShellAppSample.Monitoring;
 using AvilaShellAppSample.Helpers;
 using System.Collections.Generic;
 using AvilaShellAppSample.Infrastructure;
+using Lottie.Forms;
 
 namespace AvilaShellAppSample.ViewModels
 {
@@ -91,10 +92,55 @@ namespace AvilaShellAppSample.ViewModels
             set { SetProperty(ref showErrorView, value); }
         }
 
+        bool showLoadingView = false;
+        public bool ShowLoadingView
+        {
+            get { return showLoadingView; }
+            set { SetProperty(ref showLoadingView, value); }
+        }
+
         public AsyncCommand RefreshCommand => new AsyncCommand(this.RefreshAsync);
         public AsyncCommand<News> OpenNewsCommand => new AsyncCommand<News>(this.OpenNewsAsync);
         public AsyncCommand<Event> OpenEventCommand => new AsyncCommand<Event>(this.OpenEventAsync);
         public ICommand RetryCommand => new Xamarin.Forms.Command(async () => await RetryAsync());
+
+        #region Lottie Behaviors Command
+
+        public ICommand OnFinishedAnimationCommand
+        {
+            get
+            {
+                return new Xamarin.Forms.Command<object>(async (object sender) =>
+                {
+                    if (sender != null)
+                    {
+                        await OnFinishedAnimationAsync(sender);
+                    }
+                });
+            }
+        }
+
+    private async Task OnFinishedAnimationAsync(object sender)
+    {
+        Debug.WriteLine($"NewsViewModel - OnFinishedAnimation()");
+
+        var view = sender as AnimationView;
+        if (IsBusy)
+        {
+            Debug.WriteLine($"NewsViewModel - OnFinishedAnimation() - animation replayed");
+            view.PlayAnimation();
+        }
+        else
+        {
+            Debug.WriteLine($"NewsViewModel - OnFinishedAnimation() - animation ended");
+            ShowLoadingView = false;
+
+            await SetErrorViewAsync();
+        }
+        //return Task.CompletedTask;
+    }
+
+        #endregion
 
         public NewsViewModel()
         {
@@ -108,6 +154,7 @@ namespace AvilaShellAppSample.ViewModels
             News = new ObservableCollection<News>();
 
             Task.Run(async () => await GetNewsAsync());
+
             _eventTracker.Display(EventPage.NewsPage);
         }
 
@@ -120,13 +167,9 @@ namespace AvilaShellAppSample.ViewModels
                 ErrorKind = ServiceErrorKind.None;
                 IsBusy = true;
 
-                await Task.Delay(2000);
-                /*
-                var _events = await _dataService.GetEvents(forceRefresh);
-                Events = new ObservableCollection<Event>(_events);
-                var _news = await _dataService.GetNews(forceRefresh);
-                News = new ObservableCollection<News>(_news);
-                */
+                ShowLoadingView = HasEmptyData;
+
+                await Task.Delay(250);
 
                 var newsAndEvents = await _dataService.GetNewsAndEvents(forceRefresh);
                 News = new ObservableCollection<News>(newsAndEvents.news);
@@ -159,16 +202,20 @@ namespace AvilaShellAppSample.ViewModels
             finally
             {
                 Debug.WriteLine("NewsViewModel - GetNewsAsync() - Finally");
-                await SetServiceError();
+
+                IsBusy = false;
+
                 if (News.Count > 0 || Events.Count > 0)
                 {
                     HasEmptyData = false;
                 }
-                IsBusy = false;
+
+                if (IsRefreshing)
+                    await SetErrorViewAsync();
             }
         }
 
-        private async Task SetServiceError()
+        private async Task SetErrorViewAsync()
         {
             Debug.WriteLine("NewsViewModel - SetServiceError()");
 
@@ -193,6 +240,8 @@ namespace AvilaShellAppSample.ViewModels
                 await UserDialogs.Instance.AlertAsync(ErrorDescription, ErrorTitle, "OK");
             }
         }
+
+        #region User's interactions
 
         private async Task RefreshAsync()
         {
@@ -253,6 +302,8 @@ namespace AvilaShellAppSample.ViewModels
 
             await _deepLinkingLauncher.OpenFacebookEventAsync(selectedEvent.Url, selectedEvent.Id);
         }
+
+        #endregion
     }
 }
 

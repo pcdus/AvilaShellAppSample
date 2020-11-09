@@ -8,7 +8,9 @@
              xmlns:model="clr-namespace:AvilaShellAppSample.Models"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:shimmer="clr-namespace:Syncfusion.XForms.Shimmer;assembly=Syncfusion.Core.XForms"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:triggers="clr-namespace:AvilaShellAppSample.Triggers"
+             xmlns:behaviors="clr-namespace:AvilaShellAppSample.Behaviors"
              x:Name="AppNewsPage"
              Title="{Binding Title}">
     <ContentPage.BindingContext>
@@ -19,269 +21,268 @@
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </ContentPage.Resources>
     <ContentPage.Content>
+
+        <!-- Main content (LoadingView / News + Events / ErrorView -->
         <Grid>
-            <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                         IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}"
-                         Command="{Binding RefreshCommand}">
-                <ScrollView BackgroundColor="{StaticResource Gray-050}">
 
-                    <!-- Syncfusion Shimmer => use a skeletton -->
-                    <!-- WaveDirection="LeftToRight" -->
-                    <shimmer:SfShimmer x:Name="shimmer" VerticalOptions="Fill"
-                                       WaveColor="{StaticResource Gray-200}" WaveWidth="75">
-                        <shimmer:SfShimmer.IsActive>
-                            <MultiBinding Converter="{StaticResource AllTrueConverter}">
-                                <Binding Path="IsBusy" />
-                                <Binding Path="HasEmptyData" />
-                            </MultiBinding>
-                        </shimmer:SfShimmer.IsActive>
-                        <!-- Skeletton structure -->
-                        <shimmer:SfShimmer.CustomView>
-                            <Grid RowSpacing="16" Margin="16">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="15" />
-                                    <RowDefinition Height="245" />
-                                    <RowDefinition Height="10" />
-                                    <RowDefinition Height="15" />
-                                    <RowDefinition Height="150" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <BoxView Grid.Row="0"
-                                         WidthRequest="100"
-                                         HorizontalOptions="Start"
-                                         BackgroundColor="{StaticResource Gray-400}" />
-                                <yummy:PancakeView Grid.Row="1"
-                                                   Style="{StaticResource YummyFrame}"
-                                                   BackgroundColor="{StaticResource Gray-300}" />
-                                <BoxView Grid.Row="2"
-                                         WidthRequest="75"
-                                         HorizontalOptions="Center"
-                                         BackgroundColor="{StaticResource Gray-200}"/>
-                                <BoxView Grid.Row="3"
-                                         WidthRequest="150"
-                                         HorizontalOptions="Start"
-                                         BackgroundColor="{StaticResource Gray-400}" />
-                                <yummy:PancakeView Grid.Row="4"
-                                                   Style="{StaticResource YummyFrame}"
-                                                   BackgroundColor="{StaticResource Gray-300}" />
+            <!-- No error case (LoadingView / News + Events) -->
+            <Grid IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}" >
 
-                            </Grid>
-                        </shimmer:SfShimmer.CustomView>
-                        <shimmer:SfShimmer.Content>
-  
-                            <StackLayout Padding="0" Spacing="0" BackgroundColor="Transparent">
+                <!-- Loading View -->
+                <!--
+                <Label x:Name="labelLoading" Text="Loading..." IsVisible="false" />
+                -->
+                <lottie:AnimationView
+                    x:Name="animationView"
+                    Animation="resource://lottie_loading_2circles_rotating_apricot.json?assembly=AvilaShellAppSample"
+                    AnimationSource="EmbeddedResource"
+                    BackgroundColor="Transparent"
+                    AutoPlay="True"
+                    Speed="0.75"
+                    HeightRequest="100" WidthRequest="100"
+                    VerticalOptions="Center" HorizontalOptions="Center"
+                    IsVisible="{Binding ShowLoadingView}">
+                    <lottie:AnimationView.Triggers>
+                        <MultiTrigger TargetType="lottie:AnimationView">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding ShowLoadingView}" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <triggers:PlayLottieAnimationTriggerAction />
+                            </MultiTrigger.EnterActions>
+                            <!--
+                            <MultiTrigger.ExitActions>
+                                <triggers:StopLottieAnimationTriggerAction />
+                            </MultiTrigger.ExitActions>
+                            -->
+                        </MultiTrigger>
+                    </lottie:AnimationView.Triggers>
+                    <lottie:AnimationView.Behaviors>
+                        <behaviors:EventToCommandBehavior
+                            EventName="OnFinishedAnimation"
+                            Command="{Binding OnFinishedAnimationCommand}"
+                            CommandParameter="{x:Reference animationView}" />
+                    </lottie:AnimationView.Behaviors>
+                </lottie:AnimationView>
 
-                                <!-- Events -->
-                                <!-- ====== -->
-                                <!-- Events Header label  -->
-                                <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
-                                       Text="AGENDA" />
+                <!-- News + Events -->
+                <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                             Command="{Binding RefreshCommand}"
+                             IsVisible="{Binding ShowLoadingView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}">
+                    <ScrollView BackgroundColor="{StaticResource Gray-050}">
+                        <StackLayout Padding="0" Spacing="0" BackgroundColor="Transparent">
 
-                                <!-- Events List -->
-                                <CarouselView x:Name="EventsList"
-                                              BackgroundColor="Transparent"
-                                              IndicatorView="indicatorView"
-                                              ItemsSource="{Binding Events}"
-                                              HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never"
-                                              HeightRequest="253">
-                                    <!--
-                                              HorizontalOptions="StartAndExpand"
-                                              FlowDirection="LeftToRight"
-                                              VerticalOptions="Center"
-                                              Margin="8,0">
-                                    -->
-                                    <CarouselView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackLayout Spacing="0">
-                                                <!-- CustomShadowFrame => KO : image not rounded + wide border effect -->
-                                                <!--
-                                                <ctrl:CustomShadowFrame x:Name="Rotator" BackgroundColor="{DynamicResource Gray-White}" 
-                                                                        BorderColor="{DynamicResource Gray-White}" BorderWidth="1" 
-                                                                        CornerRadius="4" HasShadow="True" Margin="4" Padding="0">
-                                                -->
-                                                <!-- LightShadowFrame => KO : image not rounded + wide border effect-->
-                                                <!--
-                                                <ctrl:LightShadowFrame Padding="0" x:Name="Rotator" IsClippedToBounds="True" Margin="4">
-                                                -->
-                                                <!-- Pancakeview -->
-                                                <yummy:PancakeView Style="{StaticResource YummyFrame}"
-                                                                   Margin="8,0,8,8">
-                                                    <Grid RowSpacing="0">
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="*"/>
-                                                            <RowDefinition Height="Auto"/>
-                                                        </Grid.RowDefinitions>
+                            <!-- Events -->
+                            <!-- ====== -->
+                            <!-- Events Header label  -->
+                            <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
+                                    Text="AGENDA" />
 
-                                                        <!-- Image of the event -->
-                                                        <!--
-                                                        <Image Aspect="AspectFill"
-                                                               BackgroundColor="{DynamicResource Gray-White}"
-                                                               HeightRequest="195">
-                                                            <Image.Source>
-                                                                <UriImageSource CacheValidity="14"
-                                                                                CachingEnabled="true" 
-                                                                                Uri="{Binding Image}" />
-                                                            </Image.Source>
-                                                        </Image>
-                                                        -->
-                                                        <ffimageloading:CachedImage Aspect="AspectFill"
-                                                                                    BackgroundColor="{DynamicResource Gray-White}"
-                                                                                    HeightRequest="195" DownsampleHeight="195"
-                                                                                    DownsampleToViewSize = "true"
-                                                                                    Source="{Binding Image}">
-                                                        </ffimageloading:CachedImage>
-
-                                                        <Grid Grid.Row="1"
-                                                              Padding="8,8" ColumnSpacing="0"
-                                                              BackgroundColor="{StaticResource Gray-White}">
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto"/>
-                                                                <ColumnDefinition Width="*"/>
-                                                            </Grid.ColumnDefinitions>
-
-                                                            <!-- Date of the event -->
-                                                            <yummy:PancakeView CornerRadius="6" Margin="0" HasShadow="False" BorderColor="Transparent"
-                                                                               WidthRequest="40" HeightRequest="40"
-                                                                               BackgroundColor="{StaticResource ApricotAvilaColor}">
-                                                                <Grid>
-                                                                    <StackLayout Spacing="0" Margin="0,4,0,0">
-                                                                        <Label Text="{Binding StartDate, StringFormat= '{}{0:MMM}'}"
-                                                                                Style="{StaticResource NewsPageEventDateLabelStyle}" />
-                                                                        <Label Text="{Binding StartDate, StringFormat= '{}{0:dd}'}"
-                                                                                Style="{StaticResource NewsPageEventDateLabelStyle}" />
-                                                                    </StackLayout>
-                                                                </Grid>
-                                                            </yummy:PancakeView>
-
-                                                            <StackLayout Margin="8,4,0,0" Grid.Column="1" Spacing="0">
-                                                                <!--  Event name   -->
-                                                                <Label Text="{Binding Name}"
-                                                                       Style="{StaticResource NewsPageTitleLabelStyle}"
-                                                                       HorizontalOptions="Start" 
-                                                                       MaxLines="1" LineBreakMode="TailTruncation"/>
-
-                                                                <!--  Event location -->
-                                                                <Label Text="{Binding Address.Name}"
-                                                                       Style="{StaticResource NewsPageSubtitleLabelStyle}"
-                                                                       HorizontalOptions="Start" 
-                                                                       MaxLines="1" LineBreakMode="TailTruncation"/>
-
-                                                            </StackLayout>
-                                                        </Grid>
-                                                        <Grid.GestureRecognizers>
-                                                            <TapGestureRecognizer Command="{Binding BindingContext.OpenEventCommand,Source={x:Reference EventsList}}"
-                                                                                  CommandParameter="{Binding .}"/>
-                                                        </Grid.GestureRecognizers>
-                                                    </Grid>
-                                                <!--
-                                                </ctrl:CustomShadowFrame>
-                                                -->
-                                                <!--
-                                                </ctrl:LightShadowFrame>
-                                                -->
-                                                </yummy:PancakeView>
-                                            </StackLayout>
-                                        </DataTemplate>
-                                    </CarouselView.ItemTemplate>
-                                </CarouselView>
-
-                                <!-- Events indicator -->
-                                <IndicatorView x:Name="indicatorView"
-                                               SelectedIndicatorColor="{StaticResource ApricotAvilaColor}"
-                                               HideSingle="True"
-                                               IndicatorSize="8"
-                                               IndicatorColor="{StaticResource Gray-300}"
-                                               Margin="0,8,0,0" />
-
-                                <!-- News -->
-                                <!-- ==== -->
-                                <!-- Events Header label  -->
-                                <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
-                                       Text="ACTUALITES" />
-
-                                <!-- News List-->
-                                <StackLayout x:Name="NewsList"
-                                             BindableLayout.ItemsSource="{Binding News}"
-                                             BackgroundColor="Transparent"
-                                             Spacing="16"
-                                             Margin="8, 0">
-                                    <BindableLayout.ItemTemplate>
-                                        <DataTemplate x:DataType="model:News">
-
-                                            <!-- Solution implementation -->
-                                            <!-- ======================= -->
-                                            <!-- Cell container ( CustomShadowFrame //ShadowFrame // NoShadowFrame // Frame )-->
+                            <!-- Events List -->
+                            <CarouselView x:Name="EventsList"
+                                            BackgroundColor="Transparent"
+                                            IndicatorView="indicatorView"
+                                            ItemsSource="{Binding Events}"
+                                            HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never"
+                                            HeightRequest="253">
+                                <!--
+                                            HorizontalOptions="StartAndExpand"
+                                            FlowDirection="LeftToRight"
+                                            VerticalOptions="Center"
+                                            Margin="8,0">
+                                -->
+                                <CarouselView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Spacing="0">
+                                            <!-- CustomShadowFrame => KO : image not rounded + wide border effect -->
                                             <!--
                                             <ctrl:CustomShadowFrame x:Name="Rotator" BackgroundColor="{DynamicResource Gray-White}" 
                                                                     BorderColor="{DynamicResource Gray-White}" BorderWidth="1" 
                                                                     CornerRadius="4" HasShadow="True" Margin="4" Padding="0">
                                             -->
+                                            <!-- LightShadowFrame => KO : image not rounded + wide border effect-->
                                             <!--
-                                            <ctrl:ShadowFrame
-                                                IsClippedToBounds="True">
+                                            <ctrl:LightShadowFrame Padding="0" x:Name="Rotator" IsClippedToBounds="True" Margin="4">
                                             -->
-                                            <!--
-                                            <ctrl:NoShadowFrame>
-                                            -->
-                                            <!--
-                                            <Frame Margin="0" Padding="0">
-                                            -->
-                                            <yummy:PancakeView Style="{StaticResource YummyFrame}">
-
-                                                <!-- Content container ( StackLayout // Grid )-->
-                                                <!-- StackLayout => issue on PullToRefresh : latest image not displayed -->
-                                    
-                                                <StackLayout x:DataType="model:News" Margin="0" Spacing="0">
-                                    
-                                                <!-- Grid -->
-                                                <!--
-                                                <Grid Padding="8">
-                                                     <Grid.RowDefinitions>
+                                            <!-- Pancakeview -->
+                                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                                                Margin="8,0,8,8">
+                                                <Grid RowSpacing="0">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="*"/>
                                                         <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="Auto"/>
-                                                        <RowDefinition Height="*" />
                                                     </Grid.RowDefinitions>
-                                                -->
 
-                                                    <!-- Content (Image // Label) -->
-                                                    <!-- Text="{Binding Date, StringFormat= '{}{0:dddd dd MMMM yyyy}'}" -->
-                                                    <Label Grid.Row="0"
-                                                           Style="{StaticResource NewsPageSubtitleLabelStyle}"
-                                                           Margin="12,16,8,16">
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <Span Text="Publié le " />
-                                                                <Span Text="{Binding Date, StringFormat= '{}{0:dddd dd MMMM yyyy}'}" />
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                                    </Label>
+                                                    <!-- Image of the event -->
+                                                    <!--
+                                                    <Image Aspect="AspectFill"
+                                                            BackgroundColor="{DynamicResource Gray-White}"
+                                                            HeightRequest="195">
+                                                        <Image.Source>
+                                                            <UriImageSource CacheValidity="14"
+                                                                            CachingEnabled="true" 
+                                                                            Uri="{Binding Image}" />
+                                                        </Image.Source>
+                                                    </Image>
+                                                    -->
+                                                    <ffimageloading:CachedImage Aspect="AspectFill"
+                                                                                BackgroundColor="{DynamicResource Gray-White}"
+                                                                                HeightRequest="195" DownsampleHeight="195"
+                                                                                DownsampleToViewSize = "true"
+                                                                                Source="{Binding Image}">
+                                                    </ffimageloading:CachedImage>
 
-                                                    <Label Grid.Row="1"
-                                                           Text="{Binding Description}"
-                                                           Style="{StaticResource NewsPageDescriptionLabelStyle}"
-                                                           MaxLines="3" LineBreakMode="TailTruncation"
-                                                           Margin="12,0,8,12" />
+                                                    <Grid Grid.Row="1"
+                                                            Padding="8,8" ColumnSpacing="0"
+                                                            BackgroundColor="{StaticResource Gray-White}">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
 
-                                                    <ctrl:ImageFit Grid.Row="2"
-                                                                   Source="{Binding Image}" />
-            
-                                                    <!-- Gesture and Command -->
-                                                    <StackLayout.GestureRecognizers>
-                                                        <TapGestureRecognizer Command="{Binding BindingContext.OpenNewsCommand,Source={x:Reference NewsList}}"
-                                                                              CommandParameter="{Binding .}"/>
-                                                    </StackLayout.GestureRecognizers>
-                                                    <!-- End of content container ( StackLayout // Grid )-->
-                                        
-                                                </StackLayout>
+                                                        <!-- Date of the event -->
+                                                        <!-- HasShadow="False" BorderColor="Transparent" -->
+                                                        <yummy:PancakeView CornerRadius="6" Margin="0" 
+                                                                            WidthRequest="40" HeightRequest="40"
+                                                                            BackgroundColor="{StaticResource ApricotAvilaColor}">
+                                                            <Grid>
+                                                                <StackLayout Spacing="0" Margin="0,4,0,0">
+                                                                    <Label Text="{Binding StartDate, StringFormat= '{}{0:MMM}'}"
+                                                                            Style="{StaticResource NewsPageEventDateLabelStyle}" />
+                                                                    <Label Text="{Binding StartDate, StringFormat= '{}{0:dd}'}"
+                                                                            Style="{StaticResource NewsPageEventDateLabelStyle}" />
+                                                                </StackLayout>
+                                                            </Grid>
+                                                        </yummy:PancakeView>
+
+                                                        <StackLayout Margin="8,4,0,0" Grid.Column="1" Spacing="0">
+                                                            <!--  Event name   -->
+                                                            <Label Text="{Binding Name}"
+                                                                    Style="{StaticResource NewsPageTitleLabelStyle}"
+                                                                    HorizontalOptions="Start" 
+                                                                    MaxLines="1" LineBreakMode="TailTruncation"/>
+
+                                                            <!--  Event location -->
+                                                            <Label Text="{Binding Address.Name}"
+                                                                    Style="{StaticResource NewsPageSubtitleLabelStyle}"
+                                                                    HorizontalOptions="Start" 
+                                                                    MaxLines="1" LineBreakMode="TailTruncation"/>
+
+                                                        </StackLayout>
+                                                    </Grid>
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding BindingContext.OpenEventCommand,Source={x:Reference EventsList}}"
+                                                                                CommandParameter="{Binding .}"/>
+                                                    </Grid.GestureRecognizers>
+                                                </Grid>
+                                            <!--
+                                            </ctrl:CustomShadowFrame>
+                                            -->
+                                            <!--
+                                            </ctrl:LightShadowFrame>
+                                            -->
                                             </yummy:PancakeView>
-                                        </DataTemplate>
-                                    </BindableLayout.ItemTemplate>
-                                </StackLayout>
-                            </StackLayout>                
-                        </shimmer:SfShimmer.Content>
-                    </shimmer:SfShimmer>  
-                </ScrollView>
-            </RefreshView>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CarouselView.ItemTemplate>
+                            </CarouselView>
+
+                            <!-- Events indicator -->
+                            <IndicatorView x:Name="indicatorView"
+                                            SelectedIndicatorColor="{StaticResource ApricotAvilaColor}"
+                                            HideSingle="True"
+                                            IndicatorSize="8"
+                                            IndicatorColor="{StaticResource Gray-300}"
+                                            Margin="0,8,0,0" />
+
+                            <!-- News -->
+                            <!-- ==== -->
+                            <!-- Events Header label  -->
+                            <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
+                                    Text="ACTUALITES" />
+
+                            <!-- News List-->
+                            <StackLayout x:Name="NewsList"
+                                            BindableLayout.ItemsSource="{Binding News}"
+                                            BackgroundColor="Transparent"
+                                            Spacing="16"
+                                            Margin="8, 0">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="model:News">
+
+                                        <!-- Solution implementation -->
+                                        <!-- ======================= -->
+                                        <!-- Cell container ( CustomShadowFrame //ShadowFrame // NoShadowFrame // Frame )-->
+                                        <!--
+                                        <ctrl:CustomShadowFrame x:Name="Rotator" BackgroundColor="{DynamicResource Gray-White}" 
+                                                                BorderColor="{DynamicResource Gray-White}" BorderWidth="1" 
+                                                                CornerRadius="4" HasShadow="True" Margin="4" Padding="0">
+                                        -->
+                                        <!--
+                                        <ctrl:ShadowFrame
+                                            IsClippedToBounds="True">
+                                        -->
+                                        <!--
+                                        <ctrl:NoShadowFrame>
+                                        -->
+                                        <!--
+                                        <Frame Margin="0" Padding="0">
+                                        -->
+                                        <yummy:PancakeView Style="{StaticResource YummyFrame}">
+
+                                            <!-- Content container ( StackLayout // Grid )-->
+                                            <!-- StackLayout => issue on PullToRefresh : latest image not displayed -->
+                                    
+                                            <StackLayout x:DataType="model:News" Margin="0" Spacing="0">
+                                    
+                                            <!-- Grid -->
+                                            <!--
+                                            <Grid Padding="8">
+                                                    <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                            -->
+
+                                                <!-- Content (Image // Label) -->
+                                                <!-- Text="{Binding Date, StringFormat= '{}{0:dddd dd MMMM yyyy}'}" -->
+                                                <Label Grid.Row="0"
+                                                        Style="{StaticResource NewsPageSubtitleLabelStyle}"
+                                                        Margin="12,16,8,16">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Publié le " />
+                                                            <Span Text="{Binding Date, StringFormat= '{}{0:dddd dd MMMM yyyy}'}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+
+                                                <Label Grid.Row="1"
+                                                        Text="{Binding Description}"
+                                                        Style="{StaticResource NewsPageDescriptionLabelStyle}"
+                                                        MaxLines="3" LineBreakMode="TailTruncation"
+                                                        Margin="12,0,8,12" />
+
+                                                <ctrl:ImageFit Grid.Row="2"
+                                                                Source="{Binding Image}" />
+            
+                                                <!-- Gesture and Command -->
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.OpenNewsCommand,Source={x:Reference NewsList}}"
+                                                                            CommandParameter="{Binding .}"/>
+                                                </StackLayout.GestureRecognizers>
+                                                <!-- End of content container ( StackLayout // Grid )-->
+                                        
+                                            </StackLayout>
+                                        </yummy:PancakeView>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+                        </StackLayout>
+                    </ScrollView>
+                </RefreshView>
+            </Grid>
 
             <ctrl:ErrorView IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}}"
                             Title="{Binding ErrorTitle}"
