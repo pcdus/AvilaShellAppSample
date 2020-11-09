@@ -96,5 +96,17 @@ namespace AvilaShellAppSample.Controls
                 serviceErrorAnimationView.PlayAnimation();
         }
 
+        void NetworkErrorAnimationView_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if (!networkErrorAnimationView.IsAnimating)
+                networkErrorAnimationView.PlayAnimation();
+        }
+
+        void ServiceErrorAnimationView_Clicked(System.Object sender, System.EventArgs e)
+        {
+            if (!serviceErrorAnimationView.IsAnimating)
+                serviceErrorAnimationView.PlayAnimation();
+        }
+
     }
 }

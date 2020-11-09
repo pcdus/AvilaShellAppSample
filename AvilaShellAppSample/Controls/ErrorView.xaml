@@ -63,7 +63,8 @@
                         AutoPlay="True"
                         Speed="0.75"
                         HeightRequest="200" WidthRequest="200"
-                        VerticalOptions="Center" HorizontalOptions="Center" />
+                        VerticalOptions="Center" HorizontalOptions="Center"
+                        Clicked="NetworkErrorAnimationView_Clicked"/>
                 </Grid>
 
                 <!-- Case : ServiceIssue / Timeout / Other -->
@@ -108,7 +109,8 @@
                         AutoPlay="True"
                         Speed="0.75"
                         HeightRequest="200" WidthRequest="200"
-                        VerticalOptions="Center" HorizontalOptions="Center" />
+                        VerticalOptions="Center" HorizontalOptions="Center"
+                        Clicked="ServiceErrorAnimationView_Clicked"/>
                 </Grid>
 
                 <!-- Other informations -->
