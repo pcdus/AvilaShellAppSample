@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 using Xamarin.Forms;
 
 namespace AvilaShellAppSample.Views
@@ -10,17 +10,9 @@ namespace AvilaShellAppSample.Views
 
         public BookingPage()
         {
+            Debug.WriteLine($"BookingPage - Ctor()");
             InitializeComponent();
         }
 
-        void webviewNavigating(object sender, WebNavigatingEventArgs e)
-        {
-            //labelLoading.IsVisible = true;
-        }
-
-        void webviewNavigated(object sender, WebNavigatedEventArgs e)
-        {
-            //labelLoading.IsVisible = false;
-        }
     }
 }

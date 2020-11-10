@@ -2,12 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AvilaShellAppSample.Views.AboutPage"
-             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
-             xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             Title="{Binding Title}">
+             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             Shell.NavBarHasShadow="True">
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+              BackgroundColor="Transparent">
+            <Label Text="{Binding Title}"
+                   Style="{StaticResource PagesTitleLabelStyle}" />
+        </Grid>
+    </Shell.TitleView>
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
@@ -226,7 +232,6 @@
                         </Expander.ContentTemplate>
                     </Expander>
                 </yummy:PancakeView>
-
             </StackLayout>
         </StackLayout> 
     </ScrollView>

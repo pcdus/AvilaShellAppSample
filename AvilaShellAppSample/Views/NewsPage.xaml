@@ -2,17 +2,24 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AvilaShellAppSample.Views.NewsPage"
-             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             xmlns:behaviors="clr-namespace:AvilaShellAppSample.Behaviors"
              xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
-             xmlns:model="clr-namespace:AvilaShellAppSample.Models"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:model="clr-namespace:AvilaShellAppSample.Models"
              xmlns:triggers="clr-namespace:AvilaShellAppSample.Triggers"
-             xmlns:behaviors="clr-namespace:AvilaShellAppSample.Behaviors"
-             x:Name="AppNewsPage"
-             Title="{Binding Title}">
+             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             Shell.NavBarHasShadow="True">
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+              BackgroundColor="Transparent">
+            <Label Text="{Binding Title}"
+                   Style="{StaticResource PagesTitleLabelStyle}" />
+        </Grid>
+    </Shell.TitleView>
     <ContentPage.BindingContext>
         <vm:NewsViewModel />
     </ContentPage.BindingContext>

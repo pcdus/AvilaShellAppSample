@@ -1,14 +1,21 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AvilaShellAppSample.Views.BookingPage"
-             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:behaviors="clr-namespace:AvilaShellAppSample.Behaviors"
              xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              xmlns:triggers="clr-namespace:AvilaShellAppSample.Triggers"
-             Title="{Binding Title}">
+             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             Shell.NavBarHasShadow="True">
+    <Shell.TitleView>
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+              BackgroundColor="Transparent">
+            <Label Text="{Binding Title}"
+                   Style="{StaticResource PagesTitleLabelStyle}" />
+        </Grid>
+    </Shell.TitleView>
     <ContentPage.BindingContext>
         <vm:BookingViewModel />
     </ContentPage.BindingContext>
@@ -17,17 +24,17 @@
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-    <ToolbarItem Text="Refresh"
-                 Order="Primary"
-                 Priority="0"
-                 Command="{Binding RefreshCommand}"
-                 CommandParameter="{x:Reference webView}">                             
-        <ToolbarItem.IconImageSource>
-            <FontImageSource Glyph="{StaticResource FalIconRefresh}"
-                             FontFamily="FontAwesomeLight"
-                             Size="Medium"/>
-        </ToolbarItem.IconImageSource>
-    </ToolbarItem>
+        <ToolbarItem Text="Refresh"
+                     Order="Primary"
+                     Priority="0"
+                     Command="{Binding RefreshCommand}"
+                     CommandParameter="{x:Reference webView}">                             
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="{StaticResource FalIconRefresh}"
+                                 FontFamily="FontAwesomeLight"
+                                 Size="Medium"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <!-- Main content (LoadingView / WebView / ErrorView -->
@@ -76,9 +83,14 @@
                 <!-- WebView -->
                 <ctrl:CustomWebView x:Name="webView"
                                     Source="{Binding AvilaUrlBooking}"
-                                    Uri="{Binding AvilaUrlBooking}"                                    
+                                    Uri="{Binding AvilaUrlBooking}"  
                                     WidthRequest="1000" HeightRequest="1000"
                                     IsVisible="{Binding ShowWebView, Converter={StaticResource BoolToVisibilityConverter}}">
+                <!-- bug on Android : WebView reloaded each time the tab is displayed -->
+                <!--
+                                Source="{Binding AvilaUrlBooking}"
+                                Uri="{Binding AvilaUrlBooking}"  
+                -->
                 <!-- bug on Android : WebView with errors visible during a short time -->
                 <!--
                      IsVisible="{Binding ShowLoadingView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}">

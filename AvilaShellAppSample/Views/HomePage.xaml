@@ -3,35 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AvilaShellAppSample.Views.HomePage"
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
-             xmlns:local="clr-namespace:AvilaShellAppSample;assembly=AvilaShellAppSample"
-             xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
-             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
-             xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
-    <!--
-             Title="{Binding Title}">
-    -->
-    <ContentPage.BindingContext>
-        <vm:HomeViewModel />
-    </ContentPage.BindingContext>
-    <!--
-    <NavigationPage.TitleIconImageSource>
-        <svg:SvgImageSource Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg" />
-    </NavigationPage.TitleIconImageSource>
-
-    <NavigationPage.TitleView>
-        <Label Text="PCD" TextColor="Red" />
-    </NavigationPage.TitleView>
-        -->
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             Shell.NavBarHasShadow="False">
     <Shell.TitleView>
         <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg"
                                           DownsampleHeight="6"
                                           HeightRequest="45"/>
     </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel />
+    </ContentPage.BindingContext>
     <ContentPage.Content>
-
         <Grid RowSpacing="0"
               BackgroundColor="{StaticResource Gray-050}">
             <Grid.RowDefinitions>
