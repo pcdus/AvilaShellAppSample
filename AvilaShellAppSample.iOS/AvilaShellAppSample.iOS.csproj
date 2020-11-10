@@ -129,9 +129,6 @@
     <PackageReference Include="Xamarin.Forms.PancakeView">
       <Version>2.3.0.759</Version>
     </PackageReference>
-    <PackageReference Include="Syncfusion.Xamarin.Core">
-      <Version>18.3.0.38</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.AppCenter.Crashes">
       <Version>3.4.3</Version>
     </PackageReference>

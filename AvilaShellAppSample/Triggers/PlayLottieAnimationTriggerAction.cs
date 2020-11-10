@@ -13,4 +13,4 @@ namespace AvilaShellAppSample.Triggers
             sender.PlayAnimation();
         }
     }
-    }
+}

@@ -23,8 +23,8 @@ namespace AvilaShellAppSample
 
         public App()
         {
-            //Register Syncfusion license
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzMxMTM2QDMxMzgyZTMzMmUzMEZXOG80REI3eHlHcGREcE5jSFMxalFCYSswZXlIalNQNTNta3J0U2ZnbE09");
+            //Register Syncfusion license: no longser used
+            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzMxMTM2QDMxMzgyZTMzMmUzMEZXOG80REI3eHlHcGREcE5jSFMxalFCYSswZXlIalNQNTNta3J0U2ZnbE09");
 
             InitializeComponent();
 

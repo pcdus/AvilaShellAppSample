@@ -58,9 +58,11 @@
                             <MultiTrigger.EnterActions>
                                 <triggers:PlayLottieAnimationTriggerAction />
                             </MultiTrigger.EnterActions>
+                            <!--
                             <MultiTrigger.ExitActions>
                                 <triggers:StopLottieAnimationTriggerAction />
                             </MultiTrigger.ExitActions>
+                            -->
                         </MultiTrigger>
                     </lottie:AnimationView.Triggers>
                     <lottie:AnimationView.Behaviors>

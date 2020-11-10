@@ -284,11 +284,12 @@
                 </RefreshView>
             </Grid>
 
+            <!-- Error View -->
             <ctrl:ErrorView IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}}"
                             Title="{Binding ErrorTitle}"
                             Description="{Binding ErrorDescription}"
                             ErrorKind="{Binding ErrorKind}"
-                            RetryButtonCommand="{Binding RetryCommand}" />
+                            RetryButtonCommand="{Binding RetryCommand}"/>
             <!--
                 RetryButtonCommand="{Binding RefreshCommand, Source={x:Reference NewsPage}}"                    
             -->

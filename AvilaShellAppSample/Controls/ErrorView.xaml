@@ -5,6 +5,7 @@
              xmlns:specialized="clr-namespace:System.Collections.Specialized;assembly=System"
              xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:triggers="clr-namespace:AvilaShellAppSample.Triggers"
              x:Name="ServiceErrorControl">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -34,6 +35,7 @@
                             </Binding.ConverterParameter>
                         </Binding>
                     </Grid.IsVisible>
+                    <!-- FontAwesome icons version -->
                     <!--
                     <Image Style="{StaticResource ErrorImageIconDuotonePart1Style}">
                         <Image.Source>
@@ -55,16 +57,28 @@
                         </Image.Source>
                     </Image>
                     -->
+                    <!-- Lottie animation version -->
                     <lottie:AnimationView
                         x:Name="networkErrorAnimationView"
                         Animation="resource://lottie_error_no_network_apricot.json?assembly=AvilaShellAppSample"
                         AnimationSource="EmbeddedResource"
                         BackgroundColor="Transparent"
-                        AutoPlay="True"
+                        AutoPlay="False"
                         Speed="0.75"
                         HeightRequest="200" WidthRequest="200"
                         VerticalOptions="Center" HorizontalOptions="Center"
-                        Clicked="NetworkErrorAnimationView_Clicked"/>
+                        Clicked="NetworkErrorAnimationView_Clicked">
+                        <lottie:AnimationView.Triggers>
+                            <MultiTrigger TargetType="lottie:AnimationView">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding IsVisible}" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <triggers:PlayLottieAnimationTriggerAction />
+                                </MultiTrigger.EnterActions>
+                            </MultiTrigger>
+                        </lottie:AnimationView.Triggers>
+                    </lottie:AnimationView>
                 </Grid>
 
                 <!-- Case : ServiceIssue / Timeout / Other -->
@@ -82,6 +96,7 @@
                             </Binding.ConverterParameter>
                         </Binding>
                     </Grid.IsVisible>
+                    <!-- FontAwesome icons version -->
                     <!--
                     <Image Style="{StaticResource ErrorImageIconDuotonePart1Style}">
                         <Image.Source>
@@ -101,16 +116,28 @@
                         </Image.Source>
                     </Image>
                     -->
+                    <!-- Lottie animation version -->
                     <lottie:AnimationView
                         x:Name="serviceErrorAnimationView"
                         Animation="resource://lottie_error_warning_apricot.json?assembly=AvilaShellAppSample"
                         AnimationSource="EmbeddedResource"
                         BackgroundColor="Transparent"
-                        AutoPlay="True"
+                        AutoPlay="False"
                         Speed="0.75"
                         HeightRequest="200" WidthRequest="200"
                         VerticalOptions="Center" HorizontalOptions="Center"
-                        Clicked="ServiceErrorAnimationView_Clicked"/>
+                        Clicked="ServiceErrorAnimationView_Clicked">
+                        <lottie:AnimationView.Triggers>
+                            <MultiTrigger TargetType="lottie:AnimationView">
+                                <MultiTrigger.Conditions>
+                                    <BindingCondition Binding="{Binding IsVisible}" Value="True" />
+                                </MultiTrigger.Conditions>
+                                <MultiTrigger.EnterActions>
+                                    <triggers:PlayLottieAnimationTriggerAction />
+                                </MultiTrigger.EnterActions>
+                            </MultiTrigger>
+                        </lottie:AnimationView.Triggers>
+                    </lottie:AnimationView>
                 </Grid>
 
                 <!-- Other informations -->

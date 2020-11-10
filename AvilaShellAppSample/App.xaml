@@ -141,7 +141,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}" />
                 <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
-                <Setter Property="Margin" Value="8,0,8,0" />
+                <Setter Property="Margin" Value="24,0,24,0" />
                 <Setter Property="FontFamily" Value="MontserratMedium" />
                 <Setter Property="FontSize" Value="16" />
             </Style>

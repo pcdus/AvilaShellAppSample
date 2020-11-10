@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using AvilaShellAppSample.Services;
 using Xamarin.Forms;
@@ -38,14 +39,10 @@ namespace AvilaShellAppSample.Controls
         {
             get
             {
-                Debug.WriteLine($"ErrorView - ErrorKind getter : {(ServiceErrorKind)GetValue(ErrorKindProperty)}");
-                var newValue = (ServiceErrorKind)GetValue(ErrorKindProperty);
-                RelaunchAnimation(newValue);
                 return (ServiceErrorKind)GetValue(ErrorKindProperty);
             }
             set
             {
-                Debug.WriteLine($"ErrorView - ErrorKind setter : {value}");
                 SetValue(ErrorKindProperty, value);
             }
         }
@@ -96,16 +93,41 @@ namespace AvilaShellAppSample.Controls
                 serviceErrorAnimationView.PlayAnimation();
         }
 
-        void NetworkErrorAnimationView_Clicked(System.Object sender, System.EventArgs e)
+        private void NetworkErrorAnimationView_Clicked(System.Object sender, System.EventArgs e)
         {
             if (!networkErrorAnimationView.IsAnimating)
                 networkErrorAnimationView.PlayAnimation();
         }
 
-        void ServiceErrorAnimationView_Clicked(System.Object sender, System.EventArgs e)
+        private void ServiceErrorAnimationView_Clicked(System.Object sender, System.EventArgs e)
         {
             if (!serviceErrorAnimationView.IsAnimating)
                 serviceErrorAnimationView.PlayAnimation();
+        }
+
+        // Hack to launch the animation when the ErrorView is really displayed in the parent view
+        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+            if (propertyName == nameof(IsVisible))
+            {
+                if (this.IsVisible)
+                {
+                    PlayAnimationOnDisplay();
+                }
+            }
+        }
+
+        private void PlayAnimationOnDisplay()
+        {
+            Debug.WriteLine($"ErrorView - InvokePlayAnimationOnDisplay()");
+            if (ErrorKind != ServiceErrorKind.None)
+            {
+                if (ErrorKind == ServiceErrorKind.NoInternetAccess)
+                    networkErrorAnimationView.PlayAnimation();
+                if (ErrorKind == ServiceErrorKind.ServiceIssue || ErrorKind == ServiceErrorKind.Timeout)
+                    serviceErrorAnimationView.PlayAnimation();
+            }
         }
 
     }
