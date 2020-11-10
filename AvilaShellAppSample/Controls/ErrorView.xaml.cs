@@ -85,14 +85,6 @@ namespace AvilaShellAppSample.Controls
             InitializeComponent();
         }
 
-        private void RelaunchAnimation(ServiceErrorKind errorKind)
-        {
-            if (errorKind == ServiceErrorKind.NoInternetAccess)
-                networkErrorAnimationView.PlayAnimation();
-            if (errorKind == ServiceErrorKind.ServiceIssue || errorKind == ServiceErrorKind.Timeout)
-                serviceErrorAnimationView.PlayAnimation();
-        }
-
         private void NetworkErrorAnimationView_Clicked(System.Object sender, System.EventArgs e)
         {
             if (!networkErrorAnimationView.IsAnimating)
