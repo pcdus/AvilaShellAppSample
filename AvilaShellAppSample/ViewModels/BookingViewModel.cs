@@ -265,6 +265,12 @@ namespace AvilaShellAppSample.ViewModels
             return Task.CompletedTask;
         }
 
+        // Hack to abort the Animation when the Animation is playing when switching tab on iOS (called by the View)
+        public void AbortAnimation(object sender)
+        {
+            Task.Run(() => OnFinishedAnimation(sender));
+        }
+
         #endregion
 
         public BookingViewModel()

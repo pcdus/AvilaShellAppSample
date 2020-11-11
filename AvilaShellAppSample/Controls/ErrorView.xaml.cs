@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using AvilaShellAppSample.Services;
@@ -116,9 +117,13 @@ namespace AvilaShellAppSample.Controls
             if (ErrorKind != ServiceErrorKind.None)
             {
                 if (ErrorKind == ServiceErrorKind.NoInternetAccess)
-                    networkErrorAnimationView.PlayAnimation();
+                {
+                    networkErrorAnimationView?.PlayAnimation();
+                }
                 if (ErrorKind == ServiceErrorKind.ServiceIssue || ErrorKind == ServiceErrorKind.Timeout)
-                    serviceErrorAnimationView.PlayAnimation();
+                {
+                    serviceErrorAnimationView?.PlayAnimation();
+                }
             }
         }
 

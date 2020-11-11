@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using AvilaShellAppSample.Services;
@@ -120,25 +120,31 @@ namespace AvilaShellAppSample.ViewModels
             }
         }
 
-    private async Task OnFinishedAnimationAsync(object sender)
-    {
-        Debug.WriteLine($"NewsViewModel - OnFinishedAnimation()");
-
-        var view = sender as AnimationView;
-        if (IsBusy)
+        private async Task OnFinishedAnimationAsync(object sender)
         {
-            Debug.WriteLine($"NewsViewModel - OnFinishedAnimation() - animation replayed");
-            view.PlayAnimation();
-        }
-        else
-        {
-            Debug.WriteLine($"NewsViewModel - OnFinishedAnimation() - animation ended");
-            ShowLoadingView = false;
+            Debug.WriteLine($"NewsViewModel - OnFinishedAnimation()");
 
-            await SetErrorViewAsync();
+            var view = sender as AnimationView;
+            if (IsBusy)
+            {
+                Debug.WriteLine($"NewsViewModel - OnFinishedAnimation() - animation replayed");
+                view.PlayAnimation();
+            }
+            else
+            {
+                Debug.WriteLine($"NewsViewModel - OnFinishedAnimation() - animation ended");
+                ShowLoadingView = false;
+
+                await SetErrorViewAsync();
+            }
+            //return Task.CompletedTask;
         }
-        //return Task.CompletedTask;
-    }
+
+        // Hack to abort the Animation when the Animation is playing when switching tab on iOS (called by the View)
+        public void AbortAnimation(object sender)
+        {
+            Task.Run(async () => await OnFinishedAnimationAsync(sender));
+        }
 
         #endregion
 
@@ -304,6 +310,7 @@ namespace AvilaShellAppSample.ViewModels
         }
 
         #endregion
+
     }
 }
 
