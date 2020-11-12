@@ -35,58 +35,16 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <!--  Article header image  -->
-                            <!--
                             <ffimageloading:CachedImage x:Name="headerImage"
-                                   Grid.Row="0"
-                                   Aspect="AspectFill"
-                                   BackgroundColor="{DynamicResource Gray-200}"
-                                   HeightRequest="250"
-                                   HorizontalOptions="FillAndExpand"
-                                   VerticalOptions="Start"
-                                   Source="{Binding AvilaIndoorImageSource}">
+                                            Grid.Row="0"
+                                            Aspect="AspectFill"
+                                            BackgroundColor="{DynamicResource Gray-200}"
+                                            DownsampleToViewSize="true"
+                                            HeightRequest="280"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="Start"
+                                            Source="resource://AvilaShellAppSample.Resources.avila_indoor.jpg">
                             </ffimageloading:CachedImage>
-                            <yummy:PancakeView Grid.Row="0"
-                                               HeightRequest="20"
-                                               VerticalOptions="End"
-                                               BackgroundColor="{StaticResource Gray-050}"
-                                               CornerRadius="16,16,0,0"/>
-                            -->
-
-                            <yummy:PancakeView Grid.Row="0"
-                                               VerticalOptions="End"
-                                               BackgroundColor="{StaticResource Gray-050}"
-                                               CornerRadius="0,0,16,16">
-                                <ffimageloading:CachedImage x:Name="headerImage"
-                                                Grid.Row="0"
-                                                Aspect="AspectFill"
-                                                BackgroundColor="{DynamicResource Gray-200}"
-                                                HeightRequest="240"
-                                                HorizontalOptions="FillAndExpand"
-                                                VerticalOptions="Start"
-                                                Source="resource://AvilaShellAppSample.Resources.avila_indoor.jpg">
-                                </ffimageloading:CachedImage>
-                                <yummy:PancakeView.Shadow>
-                                          <yummy:DropShadow Offset="2,4"
-                                                            Color="{StaticResource Gray-Black}"
-                                                            BlurRadius="{OnPlatform Android=2, Default=4}"
-                                                            Opacity="{OnPlatform Android=1, Default=0.2}" />
-                                    </yummy:PancakeView.Shadow>
-                            </yummy:PancakeView>
-
-                            <!--
-                            <ffimageloading:CachedImage
-                                HorizontalOptions="FillAndExpand" VerticalOptions="Start"
-                                DownsampleToViewSize="true"
-                                Aspect="AspectFill" HeightRequest="250"  WidthRequest="Auto"
-                                            Source="{Binding AvilaIndoorImageSource}">
-                                <ffimageloading:CachedImage.Transformations>
-                                    <fftransformations:CornersTransformation
-                                        CornersTransformType="BottomLeftRounded,BottomRightRounded"
-                                        BottomLeftCornerSize="90"
-                                        BottomRightCornerSize="120"/>
-                                </ffimageloading:CachedImage.Transformations>
-                            </ffimageloading:CachedImage>
-                            -->
                         </Grid>
                     </ContentView>
                 </ScrollView>
@@ -95,206 +53,205 @@
                 <ctrl:ParallaxScrollView HorizontalOptions="FillAndExpand"
                                          ParallaxHeaderView="{x:Reference headerView}"
                                          LogoHeaderView="{x:Reference logoHeaderView}"
-                                         VerticalOptions="FillAndExpand"
-                                         >
+                                         VerticalOptions="FillAndExpand">
+
                     <Grid ColumnSpacing="0"
                           RowSpacing="0"
                           VerticalOptions="FillAndExpand">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="240" />
+                            <RowDefinition Height="140" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-
-                        <StackLayout Grid.Row="1"
-                                     Margin="16,-50,16,0"
-                                     Spacing="16">
-
-
+                        <StackLayout Grid.Row="1" BackgroundColor="Transparent">
                             <!-- Avila SVG logo -->
-                            <!--
-                            <Image HeightRequest="80"
-                                   WidthRequest="80">
-                                <Image.Source>
-                                    <svg:SvgImageSource Source="4colorsCircleAvilaLogoOmg.svg" />
-                                </Image.Source>
-                            </Image>
-                            -->
                             <ffimageloadingsvg:SvgCachedImage x:Name="logoHeaderView"
+                                                              BackgroundColor="Transparent"
+                                                              Margin="0,0,0,0"
                                                               WidthRequest="90" HeightRequest="90"
                                                               Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg" />
                             <!-- Logos : 4colorsCircleAvilaLogoOmg // ApricotCircleAvilaLogo" -->
+                            <yummy:PancakeView CornerRadius="16,16,0,0"
+                                               BackgroundColor="{StaticResource Gray-050}">
+                                <StackLayout BackgroundColor="Transparent"
+                                             Spacing="16" Margin="16">
 
-                            <!-- Phone -->
-                            <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
-                                               Padding="16">
-                                <Grid RowSpacing="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource HomePageHeaderLabelStyle}"
-                                           Text="Téléphone" />
-                                    <Label Grid.Row="1"
-                                           Style="{StaticResource HomePageLabelStyle}"
-                                           Text="{Binding AvilaPhoneNumber}"  />
-                                    <Image  Grid.RowSpan="2"
-                                            Style="{StaticResource ImageIconDuotonePart1Style}">
-                                        <Image.Source>
-                                            <FontImageSource Glyph="{StaticResource FadsIconPhonePart1}"
-                                                             Color="{StaticResource BlondAvilaColor}"
-                                                             FontFamily="FontAwesomeDuotoneSolid"
-                                                             Size="30" />
-                                        </Image.Source>
-                                    </Image>
-                                    <Image Grid.RowSpan="2" 
-                                           Style="{StaticResource ImageIconDuotonePart2Style}">
-                                        <Image.Source>
-                                            <FontImageSource Glyph="{StaticResource FadsIconPhonePart2}"
-                                                             Color="{StaticResource ApricotAvilaColor}"
-                                                             FontFamily="FontAwesomeDuotoneSolid"
-                                                             Size="30" />
+                                    <!-- Phone -->
+                                    <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                                       Padding="16"
+                                                       Margin="{OnPlatform Android=2, Default=0}">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Style="{StaticResource HomePageHeaderLabelStyle}"
+                                                   Text="Téléphone" />
+                                            <Label Grid.Row="1"
+                                                   Style="{StaticResource HomePageLabelStyle}"
+                                                   Text="{Binding AvilaPhoneNumber}"  />
+                                            <Image  Grid.RowSpan="2"
+                                                    Style="{StaticResource ImageIconDuotonePart1Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconPhonePart1}"
+                                                                     Color="{StaticResource BlondAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Image Grid.RowSpan="2" 
+                                                   Style="{StaticResource ImageIconDuotonePart2Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconPhonePart2}"
+                                                                     Color="{StaticResource ApricotAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
   
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                                <yummy:PancakeView.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding CallCommand}"/>
-                                </yummy:PancakeView.GestureRecognizers>
-                            </yummy:PancakeView>
+                                                </Image.Source>
+                                            </Image>
+                                        </Grid>
+                                        <yummy:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding CallCommand}"/>
+                                        </yummy:PancakeView.GestureRecognizers>
+                                    </yummy:PancakeView>
 
-                            <!-- Address -->
-                            <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
-                                               Padding="16">
-                                <Grid RowSpacing="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource HomePageHeaderLabelStyle}"
-                                           Text="Adresse" />
-                                    <Label Grid.Row="1"
-                                           Style="{StaticResource HomePageLabelStyle}">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="{Binding AvilaAddress.Street}" />
-                                                <Span Text="&#10;" />
-                                                <Span Text="{Binding AvilaAddress.ZipCode}" />
-                                                <Span Text=" " />
-                                                <Span Text="{Binding AvilaAddress.City}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Image  Grid.RowSpan="2"
-                                            Style="{StaticResource ImageIconDuotonePart1Style}">
-                                        <Image.Source>
-                                            <FontImageSource Glyph="{StaticResource FadsIconMapPart1}"
-                                                             Color="{StaticResource BlondAvilaColor}"
-                                                             FontFamily="FontAwesomeDuotoneSolid"
-                                                             Size="30" />
-                                        </Image.Source>
-                                    </Image>
-                                    <Image Grid.RowSpan="2" 
-                                           Style="{StaticResource ImageIconDuotonePart2Style}">
-                                        <Image.Source>
-                                            <FontImageSource Glyph="{StaticResource FadsIconMapPart2}"
-                                                             Color="{StaticResource ApricotAvilaColor}"
-                                                             FontFamily="FontAwesomeDuotoneSolid"
-                                                             Size="30" />
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                                <yummy:PancakeView.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding OpenMapCommand}"/>
-                                </yummy:PancakeView.GestureRecognizers>
-                            </yummy:PancakeView>
+                                    <!-- Address -->
+                                    <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                                       Padding="16"
+                                                       Margin="{OnPlatform Android=2, Default=0}">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label Style="{StaticResource HomePageHeaderLabelStyle}"
+                                                   Text="Adresse" />
+                                            <Label Grid.Row="1"
+                                                   Style="{StaticResource HomePageLabelStyle}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding AvilaAddress.Street}" />
+                                                        <Span Text="&#10;" />
+                                                        <Span Text="{Binding AvilaAddress.ZipCode}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding AvilaAddress.City}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Image  Grid.RowSpan="2"
+                                                    Style="{StaticResource ImageIconDuotonePart1Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconMapPart1}"
+                                                                     Color="{StaticResource BlondAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Image Grid.RowSpan="2" 
+                                                   Style="{StaticResource ImageIconDuotonePart2Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconMapPart2}"
+                                                                     Color="{StaticResource ApricotAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                        </Grid>
+                                        <yummy:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenMapCommand}"/>
+                                        </yummy:PancakeView.GestureRecognizers>
+                                    </yummy:PancakeView>
 
-                            <!-- Schedule -->
-                            <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
-                                               Padding="16">
-                                <Grid RowSpacing="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource HomePageHeaderLabelStyle}"
-                                           Text="Horaires" />
-                                    <Label Grid.Row="1"
-                                           Style="{StaticResource HomePageLabelStyle}">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Lundi : 9h - 20h&#10;" />
-                                                <Span Text="Mardi : 9h - 20h&#10;" />
-                                                <Span Text="Mercredi : 9h - 20h&#10;" />
-                                                <Span Text="Jeudi : 9h - 20h&#10;" />
-                                                <Span Text="Vendredi : 9h - 17h&#10;" />
-                                                <Span Text="Dimanche : fermé" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Image  Grid.RowSpan="2"
-                                            Style="{StaticResource ImageIconDuotonePart1Style}">
-                                        <Image.Source>
-                                            <FontImageSource Glyph="{StaticResource FadsIconClockPart1}"
-                                                             Color="{StaticResource BlondAvilaColor}"
-                                                             FontFamily="FontAwesomeDuotoneSolid"
-                                                             Size="30" />
-                                        </Image.Source>
-                                    </Image>
-                                    <Image Grid.RowSpan="2" 
-                                           Style="{StaticResource ImageIconDuotonePart2Style}">
-                                        <Image.Source>
-                                            <FontImageSource Glyph="{StaticResource FadsIconClockPart2}"
-                                                             Color="{StaticResource ApricotAvilaColor}"
-                                                             FontFamily="FontAwesomeDuotoneSolid"
-                                                             Size="30" />
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                            </yummy:PancakeView>
+                                    <!-- Schedule -->
+                                    <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                                       Padding="16"
+                                                       Margin="{OnPlatform Android=2, Default=0}">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label Style="{StaticResource HomePageHeaderLabelStyle}"
+                                                   Text="Horaires" />
+                                            <Label Grid.Row="1"
+                                                   Style="{StaticResource HomePageLabelStyle}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="Lundi : 9h - 20h&#10;" />
+                                                        <Span Text="Mardi : 9h - 20h&#10;" />
+                                                        <Span Text="Mercredi : 9h - 20h&#10;" />
+                                                        <Span Text="Jeudi : 9h - 20h&#10;" />
+                                                        <Span Text="Vendredi : 9h - 17h&#10;" />
+                                                        <Span Text="Dimanche : fermé" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Image  Grid.RowSpan="2"
+                                                    Style="{StaticResource ImageIconDuotonePart1Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconClockPart1}"
+                                                                     Color="{StaticResource BlondAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Image Grid.RowSpan="2" 
+                                                   Style="{StaticResource ImageIconDuotonePart2Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconClockPart2}"
+                                                                     Color="{StaticResource ApricotAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                        </Grid>
+                                    </yummy:PancakeView>
 
-                            <!-- Mail -->
-                            <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
-                                               Padding="16" Margin="0,0,0,16">
-                                <Grid RowSpacing="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Label Style="{StaticResource HomePageHeaderLabelStyle}"
-                                           Text="Mail" />
-                                    <Label Grid.Row="1"
-                                           Style="{StaticResource HomePageLabelStyle}"
-                                           Text="{Binding AvilaEmail}"  />
-                                    <Image  Grid.RowSpan="2"
-                                            Style="{StaticResource ImageIconDuotonePart1Style}">
-                                        <Image.Source>
-                                            <FontImageSource Glyph="{StaticResource FadsIconMailPart1}"
-                                                             Color="{StaticResource BlondAvilaColor}"
-                                                             FontFamily="FontAwesomeDuotoneSolid"
-                                                             Size="30" />
-                                        </Image.Source>
-                                    </Image>
-                                    <Image Grid.RowSpan="2" 
-                                           Style="{StaticResource ImageIconDuotonePart2Style}">
-                                        <Image.Source>
-                                            <FontImageSource Glyph="{StaticResource FadsIconMailPart2}"
-                                                             Color="{StaticResource ApricotAvilaColor}"
-                                                             FontFamily="FontAwesomeDuotoneSolid"
-                                                             Size="30" />
-                                        </Image.Source>
-                                    </Image>
-                                </Grid>
-                                <yummy:PancakeView.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding SendEmailCommand}"/>
-                                </yummy:PancakeView.GestureRecognizers>   
-                            </yummy:PancakeView>
+                                    <!-- Mail -->
+                                    <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                                       Padding="16"
+                                                       Margin="{OnPlatform Android=2, Default=0}">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Style="{StaticResource HomePageHeaderLabelStyle}"
+                                                   Text="Mail" />
+                                            <Label Grid.Row="1"
+                                                   Style="{StaticResource HomePageLabelStyle}"
+                                                   Text="{Binding AvilaEmail}"  />
+                                            <Image  Grid.RowSpan="2"
+                                                    Style="{StaticResource ImageIconDuotonePart1Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconMailPart1}"
+                                                                     Color="{StaticResource BlondAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Image Grid.RowSpan="2" 
+                                                   Style="{StaticResource ImageIconDuotonePart2Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconMailPart2}"
+                                                                     Color="{StaticResource ApricotAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                        </Grid>
+                                        <yummy:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SendEmailCommand}"/>
+                                        </yummy:PancakeView.GestureRecognizers>   
+                                    </yummy:PancakeView>
 
-                            </StackLayout>
-                        </Grid>
-                    </ctrl:ParallaxScrollView>
-                </Grid>
+                                </StackLayout>
+                            </yummy:PancakeView>
+                        </StackLayout>                                                                       
+                    </Grid>
+                </ctrl:ParallaxScrollView>
             </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

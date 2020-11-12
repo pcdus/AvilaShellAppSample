@@ -32,6 +32,9 @@ namespace AvilaShellAppSample.Controls
         /// </summary>
         private double height;
 
+
+        private double logoHeight;
+
         #endregion
 
         #region Constructor
@@ -79,6 +82,9 @@ namespace AvilaShellAppSample.Controls
             if (height <= 0)
                 height = this.ParallaxHeaderView.Height;
 
+            if (logoHeight <= 0)
+                logoHeight = this.LogoHeaderView.Height;
+
             var y = -(int)((float)ScrollY / 2.0f);
 
             if (y < 0)
@@ -86,9 +92,25 @@ namespace AvilaShellAppSample.Controls
                 this.ParallaxHeaderView.Scale = 1;
                 this.ParallaxHeaderView.TranslationY = y;
 
+                var newLogoHeight = logoHeight + ((ScrollY / 2) * -1);
+                var newLogoScale = newLogoHeight / logoHeight;
+                var newLogoTranslation = (ScrollY / 2);
+                var newLogoOpacity = Math.Log(newLogoScale) + 1; 
+                this.LogoHeaderView.Scale = newLogoScale;
+                //this.LogoHeaderView.TranslationY = newLogoTranslation;
+                this.LogoHeaderView.Opacity = newLogoOpacity;
+
                 Debug.WriteLine("y<0 => " +
+                    " y : " + y.ToString() +
+                    " - height : " + height.ToString() +
+                    " - logoHeight : " + logoHeight.ToString() +
+                    " - newLogoHeight : " + newLogoHeight.ToString() +
+                    " - newLogoScale : " + newLogoScale.ToString() +
+                    " - newLogoOpacity : " + newLogoOpacity.ToString() +
                     " - PHV.Scale : 1 " +
-                    " - PHV.TranslationY : " + y.ToString());
+                    " - PHV.TranslationY : " + y.ToString()); 
+
+
             }
             else if (Device.RuntimePlatform == "iOS")
             {
@@ -98,14 +120,17 @@ namespace AvilaShellAppSample.Controls
                 this.ParallaxHeaderView.Scale = newScale;
                 this.ParallaxHeaderView.TranslationY = newTranslation;
 
+                LogoHeaderView.Scale = newScale;
+                LogoHeaderView.Opacity = 1;
+                //this.LogoHeaderView.RotateTo(newTranslation);
+
                 Debug.WriteLine("iOS => " +
+                    " y : " + y.ToString() +
+                    " - height : " + height.ToString() +
+                    " - logoHeight : " + logoHeight.ToString() +
                     " - newHeight : " + newHeight.ToString() +
                     " - PHV.Scale : " + newScale.ToString() +
-                    " - PHV.TranslationY : " + newTranslation.ToString());
-                if (LogoHeaderView != null)
-                {
-                    this.LogoHeaderView.RotateTo(newTranslation);
-                }
+                    " - PHV.TranslationY : " + newTranslation.ToString()) ;
             }
             else
             {
@@ -113,6 +138,9 @@ namespace AvilaShellAppSample.Controls
                 this.ParallaxHeaderView.TranslationY = 0;
 
                 Debug.WriteLine("else => " +
+                    " y : " + y.ToString() +
+                    " - height : " + height.ToString() +
+                    " - logoHeight : " + logoHeight.ToString() +
                     " - PHV.Scale : 1 " +
                     " - PHV.TranslationY : 0");
             }
