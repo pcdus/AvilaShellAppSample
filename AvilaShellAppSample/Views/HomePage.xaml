@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AvilaShellAppSample.Views.HomePage"
@@ -51,32 +51,46 @@
 
                 <!--  Custom control for parallax scroll view  -->
                 <ctrl:ParallaxScrollView HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="FillAndExpand"
                                          ParallaxHeaderView="{x:Reference headerView}"
                                          LogoHeaderView="{x:Reference logoHeaderView}"
-                                         VerticalOptions="FillAndExpand">
-
+                                         HiddenView="{x:Reference hiddenView}">
                     <Grid ColumnSpacing="0"
                           RowSpacing="0"
                           VerticalOptions="FillAndExpand">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="140" />
+                            <RowDefinition Height="220" /> <!-- used by ParallaxScrollView control -->
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
+                        <!-- solution with RelativeLayout -->
+                        <!--
                         <StackLayout Grid.Row="1" BackgroundColor="Transparent">
-                            <!-- Avila SVG logo -->
-                            <ffimageloadingsvg:SvgCachedImage x:Name="logoHeaderView"
-                                                              BackgroundColor="Transparent"
-                                                              Margin="0,0,0,0"
-                                                              WidthRequest="90" HeightRequest="90"
-                                                              Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg" />
-                            <!-- Logos : 4colorsCircleAvilaLogoOmg // ApricotCircleAvilaLogo" -->
-                            <yummy:PancakeView CornerRadius="16,16,0,0"
-                                               BackgroundColor="{StaticResource Gray-050}">
-                                <StackLayout BackgroundColor="Transparent"
-                                             Spacing="16" Margin="16">
+                            <RelativeLayout>
+                        -->
+                        <!-- solution without RelativeLayout -->
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
+                            <yummy:PancakeView x:Name="MainFrame"
+                                               CornerRadius="16,16,0,0"
+                                               Padding="0,0,0,0"
+                                               BackgroundColor="{StaticResource Gray-050}"
+                                               Grid.Row="1">
+                                <StackLayout x:Name="mainContainer"
+                                             BackgroundColor="Transparent"
+                                             Spacing="16" Margin="16,16,16,128"> 
+
+                                    <!-- Hidden item to adjust margin with Logo -->
+                                    <BoxView x:Name="hiddenView"
+                                             BackgroundColor="Transparent"
+                                             Margin="0,-16,0,0"
+                                             HeightRequest="45" /> <!-- used by ParallaxScrollView control -->
+ 
                                     <!-- Phone -->
                                     <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
                                                        Padding="16"
@@ -248,7 +262,37 @@
 
                                 </StackLayout>
                             </yummy:PancakeView>
-                        </StackLayout>                                                                       
+
+                            <!-- With RelativeLayout -->
+                            <!--
+                            <ffimageloadingsvg:SvgCachedImage
+                                x:Name="logoHeaderView"
+                                BackgroundColor="Transparent"
+                                WidthRequest="90" HeightRequest="90"
+                                Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg"
+                                VerticalOptions="Center" HorizontalOptions="Center"
+                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                                    Property=Width, 
+                                                                                    Factor=0.5,
+                                                                                    Constant=-45}"
+                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+                                                                                    ElementName=MainFrame,
+                                                                                    Property=Y,
+                                                                                    Constant=-45}"/>
+                            </RelativeLayout>
+                        </StackLayout>
+                            -->
+
+                            <!-- Without RelativeLayout -->
+                            <ffimageloadingsvg:SvgCachedImage
+                                x:Name="logoHeaderView"
+                                Grid.Row="1"
+                                Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg"
+                                BackgroundColor="Transparent"
+                                WidthRequest="90" HeightRequest="90"
+                                VerticalOptions="Start" HorizontalOptions="Center"
+                                Margin="0,-45,0,0" />
+                        </Grid>
                     </Grid>
                 </ctrl:ParallaxScrollView>
             </Grid>
