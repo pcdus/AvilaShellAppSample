@@ -7,18 +7,26 @@
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             Shell.NavBarHasShadow="False">
-    <Shell.TitleView>
-        <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg"
-                                          DownsampleHeight="6"
-                                          HeightRequest="45"/>
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             Shell.NavBarHasShadow="True"
+             Shell.NavBarIsVisible="True">
+    <Shell.TitleView >
+            <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg"
+                                              DownsampleHeight="6"
+                                              VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
+                                              HeightRequest="45"
+                                              Margin="{OnPlatform Android='0,0,8,0', Default=0}"/>
     </Shell.TitleView>
+
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <Grid RowSpacing="0"
-              BackgroundColor="{StaticResource Gray-050}">
+              Padding="0"
+              BackgroundColor="{StaticResource Gray-050}"
+              Margin="0,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -49,12 +57,12 @@
                     </ContentView>
                 </ScrollView>
 
-                <!--  Custom control for parallax scroll view  -->
                 <ctrl:ParallaxScrollView HorizontalOptions="FillAndExpand"
                                          VerticalOptions="FillAndExpand"
                                          ParallaxHeaderView="{x:Reference headerView}"
                                          LogoHeaderView="{x:Reference logoHeaderView}"
-                                         HiddenView="{x:Reference hiddenView}">
+                                         HiddenView="{x:Reference hiddenView}"
+                                         ContentView="{x:Reference mainContainer}">
                     <Grid ColumnSpacing="0"
                           RowSpacing="0"
                           VerticalOptions="FillAndExpand">
@@ -64,26 +72,19 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <!-- solution with RelativeLayout -->
-                        <!--
-                        <StackLayout Grid.Row="1" BackgroundColor="Transparent">
-                            <RelativeLayout>
-                        -->
-                        <!-- solution without RelativeLayout -->
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="1" BackgroundColor="Transparent" Margin="0" Padding="0" RowSpacing="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <yummy:PancakeView x:Name="MainFrame"
-                                               CornerRadius="16,16,0,0"
+                            <yummy:PancakeView CornerRadius="16,16,0,0"
                                                Padding="0,0,0,0"
                                                BackgroundColor="{StaticResource Gray-050}"
                                                Grid.Row="1">
                                 <StackLayout x:Name="mainContainer"
                                              BackgroundColor="Transparent"
-                                             Spacing="16" Margin="16,16,16,128"> 
+                                             Spacing="16" Margin="16,16,16,16"> 
 
                                     <!-- Hidden item to adjust margin with Logo -->
                                     <BoxView x:Name="hiddenView"
@@ -263,35 +264,25 @@
                                 </StackLayout>
                             </yummy:PancakeView>
 
-                            <!-- With RelativeLayout -->
-                            <!--
-                            <ffimageloadingsvg:SvgCachedImage
-                                x:Name="logoHeaderView"
-                                BackgroundColor="Transparent"
-                                WidthRequest="90" HeightRequest="90"
-                                Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg"
-                                VerticalOptions="Center" HorizontalOptions="Center"
-                                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                                    Property=Width, 
-                                                                                    Factor=0.5,
-                                                                                    Constant=-45}"
-                                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
-                                                                                    ElementName=MainFrame,
-                                                                                    Property=Y,
-                                                                                    Constant=-45}"/>
-                            </RelativeLayout>
-                        </StackLayout>
-                            -->
+                            <!-- Logo + Circle-->
+                            <yummy:PancakeView x:Name="logoHeaderView"
+                                               Grid.Row="1"
+                                               Margin="0,-45,0,0"
+                                               WidthRequest="90" HeightRequest="90"
+                                               VerticalOptions="Start" HorizontalOptions="Center"
+                                               CornerRadius="45"
+                                               BackgroundColor="{StaticResource Gray-050}">
+                                <yummy:PancakeView.Border>
+                                    <yummy:Border Color="{StaticResource Gray-050}"
+                                                  Thickness="2" />
+                                </yummy:PancakeView.Border>
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg"
+                                    BackgroundColor="Transparent"
+                                    WidthRequest="86" HeightRequest="86"
+                                    VerticalOptions="Center" HorizontalOptions="Center" />
+                                </yummy:PancakeView>
 
-                            <!-- Without RelativeLayout -->
-                            <ffimageloadingsvg:SvgCachedImage
-                                x:Name="logoHeaderView"
-                                Grid.Row="1"
-                                Source="resource://AvilaShellAppSample.Resources.4colorsCircleAvilaLogoOmg.svg"
-                                BackgroundColor="Transparent"
-                                WidthRequest="90" HeightRequest="90"
-                                VerticalOptions="Start" HorizontalOptions="Center"
-                                Margin="0,-45,0,0" />
                         </Grid>
                     </Grid>
                 </ctrl:ParallaxScrollView>
