@@ -5,6 +5,7 @@
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:strings="clr-namespace:AvilaShellAppSample.Strings"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
@@ -102,10 +103,10 @@
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
                                             <Label Style="{StaticResource HomePageHeaderLabelStyle}"
-                                                   Text="Téléphone" />
+                                                   Text="{x:Static strings:Strings.HomePagePhoneNumberHeader}" />
                                             <Label Grid.Row="1"
                                                    Style="{StaticResource HomePageLabelStyle}"
-                                                   Text="{Binding AvilaPhoneNumber}"  />
+                                                   Text="{Binding AvilaPhoneNumber}" />
                                             <Image  Grid.RowSpan="2"
                                                     Style="{StaticResource ImageIconDuotonePart1Style}">
                                                 <Image.Source>
@@ -141,7 +142,7 @@
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <Label Style="{StaticResource HomePageHeaderLabelStyle}"
-                                                   Text="Adresse" />
+                                                   Text="{x:Static strings:Strings.HomePageAddressHeader}" />
                                             <Label Grid.Row="1"
                                                    Style="{StaticResource HomePageLabelStyle}">
                                                 <Label.FormattedText>
@@ -188,17 +189,18 @@
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <Label Style="{StaticResource HomePageHeaderLabelStyle}"
-                                                   Text="Horaires" />
+                                                   Text="{x:Static strings:Strings.HomePageScheduleHeader}" />
                                             <Label Grid.Row="1"
                                                    Style="{StaticResource HomePageLabelStyle}">
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="Lundi : 9h - 20h&#10;" />
-                                                        <Span Text="Mardi : 9h - 20h&#10;" />
-                                                        <Span Text="Mercredi : 9h - 20h&#10;" />
-                                                        <Span Text="Jeudi : 9h - 20h&#10;" />
-                                                        <Span Text="Vendredi : 9h - 17h&#10;" />
-                                                        <Span Text="Dimanche : fermé" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleMonday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleTuesday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleWednesday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleThursday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleFriday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleSaturday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleSunday}" />
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
@@ -233,7 +235,7 @@
                                                 <RowDefinition Height="*" />
                                             </Grid.RowDefinitions>
                                             <Label Style="{StaticResource HomePageHeaderLabelStyle}"
-                                                   Text="Mail" />
+                                                   Text="{x:Static strings:Strings.HomePageEmailHeader}" />
                                             <Label Grid.Row="1"
                                                    Style="{StaticResource HomePageLabelStyle}"
                                                    Text="{Binding AvilaEmail}"  />

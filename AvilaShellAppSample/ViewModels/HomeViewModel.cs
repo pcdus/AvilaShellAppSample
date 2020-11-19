@@ -1,12 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AvilaShellAppSample.Models;
 using Xamarin.Essentials;
-using Xamarin.Forms;
-using MvvmHelpers;
 using MvvmHelpers.Commands;
 using Command = MvvmHelpers.Commands.Command;
-using System.Collections.Generic;
 using AvilaShellAppSample.Monitoring;
 using AvilaShellAppSample.Infrastructure;
 using Map = AvilaShellAppSample.Infrastructure.Map;
@@ -19,27 +15,21 @@ namespace AvilaShellAppSample.ViewModels
         private readonly IContact _contact;
         private readonly IMap _map;
 
-        string avilaPhoneNumber = "03 88 23 05 43";
+        string avilaPhoneNumber;
         public string AvilaPhoneNumber
         {
             get { return avilaPhoneNumber; }
             set { SetProperty(ref avilaPhoneNumber, value); }
         }
 
-        Address avilaAddress = new Address
-        {
-            Street = "69 rue des Grandes Arcades",
-            ZipCode = "67 000",
-            City = "STRASBOURG",
-            Country = "France"
-        };
+        Address avilaAddress;
         public Address AvilaAddress
         {
             get { return avilaAddress; }
             set { SetProperty(ref avilaAddress, value); }
         }
 
-        string avilaEmail = "avila.coiffure@voila.fr";
+        string avilaEmail;
         public string AvilaEmail
         {
             get { return avilaEmail; }
@@ -56,16 +46,17 @@ namespace AvilaShellAppSample.ViewModels
             _contact = new Contact();
             _map = new Map();
 
-            Title = "Home";
-
-            // debug : get assembly files list
-            /*
-            var assembly = this.GetType().Assembly;
-            foreach (var res in assembly.GetManifestResourceNames())
+            this.Title = Strings.Strings.HomePageTitle;
+            this.AvilaPhoneNumber = Strings.Strings.HomePageAvilaPhoneNumber;
+            this.AvilaAddress = new Address
             {
-                System.Diagnostics.Debug.WriteLine("found resource: " + res);
-            }
-            */
+                Name = Strings.Strings.HomePageAvilaAddressName,
+                Street = Strings.Strings.HomePageAvilaAddressStreet,
+                ZipCode = Strings.Strings.HomePageAvilaAddressZipCode,
+                City = Strings.Strings.HomePageAvilaAddressCity,
+                Country = Strings.Strings.HomePageAvilaAddressCountry
+            };
+            this.AvilaEmail = Strings.Strings.HomePageAvilaEmail;
 
             _eventTracker.Display(EventPage.HomePage);
         }
@@ -87,7 +78,7 @@ namespace AvilaShellAppSample.ViewModels
             };
             var options = new MapLaunchOptions
             {
-                Name = "Avila"
+                Name = AvilaAddress.Name
             };
             await _map.OpenAsync(placemark, options);
         }

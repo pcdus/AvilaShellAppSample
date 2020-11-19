@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <data name="HomePageTitle" xml:space="preserve">
+        <value>Accueil</value>
+    </data>    
+    <data name="HomePagePhoneNumberHeader" xml:space="preserve">
+        <value>Téléphone</value>
+    </data>
+    <data name="HomePageAvilaPhoneNumber" xml:space="preserve">
+        <value>03 88 23 05 43</value>
+    </data>
+    <data name="HomePageAddressHeader" xml:space="preserve">
+        <value>Adresse</value>
+    </data>
+    <data name="HomePageAvilaAddressName" xml:space="preserve">
+        <value>Avila</value>
+    </data>
+    <data name="HomePageAvilaAddressStreet" xml:space="preserve">
+        <value>69 rue des Grandes Arcades</value>
+    </data>
+    <data name="HomePageAvilaAddressZipCode" xml:space="preserve">
+        <value>67 000</value>
+    </data>
+    <data name="HomePageAvilaAddressCity" xml:space="preserve">
+        <value>STRASBOURG</value>
+    </data> 
+    <data name="HomePageAvilaAddressCountry" xml:space="preserve">
+        <value>France</value>
+    </data> 
+    <data name="HomePageScheduleHeader" xml:space="preserve">
+        <value>Horaires</value>
+    </data>
+    <data name="HomePageAvilaScheduleMonday" xml:space="preserve">
+        <value>Lundi : 9h - 20h &#10;</value>
+    </data>
+    <data name="HomePageAvilaScheduleTuesday" xml:space="preserve">
+        <value>Mardi : 9h - 20h &#10;</value>
+    </data>
+    <data name="HomePageAvilaScheduleWednesday" xml:space="preserve">
+        <value>Mercredi : 9h - 20h &#10;</value>
+    </data>
+    <data name="HomePageAvilaScheduleThursday" xml:space="preserve">
+        <value>Jeudi : 9h - 20h &#10;</value>
+    </data>
+    <data name="HomePageAvilaScheduleFriday" xml:space="preserve">
+        <value>Vendredi : 9h - 20h &#10;</value>
+    </data>    
+    <data name="HomePageAvilaScheduleSaturday" xml:space="preserve">
+        <value>Samedi : 9h - 17h &#10;</value>
+    </data>
+    <data name="HomePageAvilaScheduleSunday" xml:space="preserve">
+        <value>Dimanche : fermé</value>
+    </data>
+    <data name="HomePageEmailHeader" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="HomePageAvilaEmail" xml:space="preserve">
+        <value>avila.coiffure@voila.fr</value>
+    </data>    
+</root>
