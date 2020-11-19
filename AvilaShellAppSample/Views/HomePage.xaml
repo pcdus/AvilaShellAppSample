@@ -12,11 +12,11 @@
              Shell.NavBarHasShadow="True"
              Shell.NavBarIsVisible="True">
     <Shell.TitleView >
-            <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg"
-                                              DownsampleHeight="6"
-                                              VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand"
-                                              HeightRequest="45"
-                                              Margin="{OnPlatform Android='0,0,8,0', Default=0}"/>
+        <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg"
+                                          DownsampleHeight="6"
+                                          VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
+                                          HeightRequest="45"
+                                          Margin="{OnPlatform Android='0,0,16,0', Default=0}"/>
     </Shell.TitleView>
 
     <ContentPage.BindingContext>

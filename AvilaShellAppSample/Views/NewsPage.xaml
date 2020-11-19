@@ -14,11 +14,9 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Shell.NavBarHasShadow="True">
     <Shell.TitleView>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-              BackgroundColor="Transparent">
-            <Label Text="{Binding Title}"
-                   Style="{StaticResource PagesTitleLabelStyle}" />
-        </Grid>
+        <Label Text="{Binding Title}"
+                Style="{StaticResource PagesTitleLabelStyle}"
+                Margin="{OnPlatform Android='0,0,16,0', Default=0}"/>
     </Shell.TitleView>
     <ContentPage.BindingContext>
         <vm:NewsViewModel />
@@ -122,7 +120,7 @@
 
                                                     <!-- Image of the event -->
                                                     <!--
-                                                    <Image Aspect="AspectFill"
+                                                    <Image Aspect="AspectFill"be
                                                             BackgroundColor="{DynamicResource Gray-White}"
                                                             HeightRequest="195">
                                                         <Image.Source>
@@ -292,14 +290,12 @@
             </Grid>
 
             <!-- Error View -->
-            <ctrl:ErrorView IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}}"
+            <ctrl:ErrorView x:Name="errorView"
+                            IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}}"
                             Title="{Binding ErrorTitle}"
                             Description="{Binding ErrorDescription}"
                             ErrorKind="{Binding ErrorKind}"
                             RetryButtonCommand="{Binding RetryCommand}"/>
-            <!--
-                RetryButtonCommand="{Binding RefreshCommand, Source={x:Reference NewsPage}}"                    
-            -->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

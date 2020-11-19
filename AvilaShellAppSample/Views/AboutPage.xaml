@@ -11,7 +11,7 @@
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
               BackgroundColor="Transparent">
             <Label Text="{Binding Title}"
-                   Style="{StaticResource PagesTitleLabelStyle}" />
+                   Style="{StaticResource PagesTitleLabelStyle}"/>
         </Grid>
     </Shell.TitleView>
     <ContentPage.BindingContext>

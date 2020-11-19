@@ -7,6 +7,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Acr.UserDialogs;
+using AvilaShellAppSample.Droid.Helpers;
 
 namespace AvilaShellAppSample.Droid
 {
@@ -25,6 +26,7 @@ namespace AvilaShellAppSample.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental", "Brush_Experimental", "Expander_Experimental" });
+            //Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental", "Brush_Experimental" });
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
@@ -36,6 +38,16 @@ namespace AvilaShellAppSample.Droid
 
             // Acr.UserDialogs initizialization
             UserDialogs.Init(this);
+
+            // StatusBar helper initialiaztion
+            StatusBar.Activity = this;
+
+
+
+            // StatusBar => translucent
+            //this.Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+            // StatusBar => set color programatically
+            //this.Window.SetStatusBarColor(Android.Graphics.Color.Argb(255, 0, 0, 0));
 
             LoadApplication(new App());
         }

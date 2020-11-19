@@ -1,10 +1,8 @@
 ﻿using System;
 namespace AvilaShellAppSample.Infrastructure
 {
-    public class IStatusBar
+    public interface IStatusBar
     {
-        public IStatusBar()
-        {
-        }
+        double GetStatusBarHeight();
     }
 }

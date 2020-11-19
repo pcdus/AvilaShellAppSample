@@ -75,6 +75,7 @@
     <Compile Include="Renderers\LightShadowFrameRenderer.cs" />
     <Compile Include="Renderers\CustomWkWebViewRenderer.cs" />
     <Compile Include="Renderers\CustomWkWebViewNavigationDelegate.cs" />
+    <Compile Include="Helpers\StatusBar.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -147,6 +148,9 @@
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
       <Version>4.0.6</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Forms.DebugRainbows">
+      <Version>1.1.4</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
@@ -157,5 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Renderers\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 </Project>

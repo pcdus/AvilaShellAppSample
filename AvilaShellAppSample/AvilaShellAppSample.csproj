@@ -20,6 +20,7 @@
     <PackageReference Include="Polly" Version="7.2.1" />
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.454" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.0.6" />
+    <PackageReference Include="Xamarin.Forms.DebugRainbows" Version="1.1.4" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />

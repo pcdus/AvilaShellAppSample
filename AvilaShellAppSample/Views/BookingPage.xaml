@@ -10,10 +10,14 @@
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              Shell.NavBarHasShadow="True">
     <Shell.TitleView>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-              BackgroundColor="Transparent">
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" /> <!-- to manage ToolBarItem : seems OK for iOS and Android-->
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
             <Label Text="{Binding Title}"
-                   Style="{StaticResource PagesTitleLabelStyle}" />
+                   Grid.Column="1"
+                   Style="{StaticResource PagesTitleLabelStyle}"/>
         </Grid>
     </Shell.TitleView>
     <ContentPage.BindingContext>
@@ -26,7 +30,8 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh"
                      Order="Primary"
-                     Priority="0"
+                     
+                     Priority="1"
                      Command="{Binding RefreshCommand}"
                      CommandParameter="{x:Reference webView}">                             
             <ToolbarItem.IconImageSource>
@@ -44,6 +49,7 @@
             <Grid IsVisible="{Binding ShowErrorView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}" >
 
                 <!-- Loading View -->
+                <!-- debug label -->
                 <!--
                 <Label x:Name="labelLoading" Text="Loading..." IsVisible="false" />
                 -->
