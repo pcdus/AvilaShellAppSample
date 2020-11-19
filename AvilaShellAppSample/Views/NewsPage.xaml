@@ -6,17 +6,17 @@
              xmlns:conv="clr-namespace:AvilaShellAppSample.Converters"
              xmlns:ctrl="clr-namespace:AvilaShellAppSample.Controls"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              xmlns:model="clr-namespace:AvilaShellAppSample.Models"
+             xmlns:strings="clr-namespace:AvilaShellAppSample.Strings"
              xmlns:triggers="clr-namespace:AvilaShellAppSample.Triggers"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              Shell.NavBarHasShadow="True">
     <Shell.TitleView>
         <Label Text="{Binding Title}"
-                Style="{StaticResource PagesTitleLabelStyle}"
-                Margin="{OnPlatform Android='0,0,16,0', Default=0}"/>
+               Style="{StaticResource PagesTitleLabelStyle}"
+               Margin="{OnPlatform Android='0,0,16,0', Default=0}"/>
     </Shell.TitleView>
     <ContentPage.BindingContext>
         <vm:NewsViewModel />
@@ -81,7 +81,7 @@
                             <!-- ====== -->
                             <!-- Events Header label  -->
                             <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
-                                    Text="AGENDA" />
+                                   Text="{x:Static strings:Strings.NewsPageEventsHeader}" />
 
                             <!-- Events List -->
                             <CarouselView x:Name="EventsList"
@@ -204,7 +204,7 @@
                             <!-- ==== -->
                             <!-- Events Header label  -->
                             <Label Style="{StaticResource NewsPageCategoryLabelStyle}"
-                                    Text="ACTUALITES" />
+                                   Text="{x:Static strings:Strings.NewsPageNewsHeader}" />
 
                             <!-- News List-->
                             <StackLayout x:Name="NewsList"
@@ -257,7 +257,7 @@
                                                         Margin="12,16,8,16">
                                                     <Label.FormattedText>
                                                         <FormattedString>
-                                                            <Span Text="Publié le " />
+                                                            <Span Text="{x:Static strings:Strings.NewsPageNewsPubicationDateHeader}" />
                                                             <Span Text="{Binding Date, StringFormat= '{}{0:dddd dd MMMM yyyy}'}" />
                                                         </FormattedString>
                                                     </Label.FormattedText>
@@ -275,7 +275,7 @@
                                                 <!-- Gesture and Command -->
                                                 <StackLayout.GestureRecognizers>
                                                     <TapGestureRecognizer Command="{Binding BindingContext.OpenNewsCommand,Source={x:Reference NewsList}}"
-                                                                            CommandParameter="{Binding .}"/>
+                                                                          CommandParameter="{Binding .}"/>
                                                 </StackLayout.GestureRecognizers>
                                                 <!-- End of content container ( StackLayout // Grid )-->
                                         

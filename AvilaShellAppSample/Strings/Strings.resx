@@ -68,5 +68,17 @@
     </data>
     <data name="HomePageAvilaEmail" xml:space="preserve">
         <value>avila.coiffure@voila.fr</value>
-    </data>    
+    </data>
+    <data name="NewsPageTitle" xml:space="preserve">
+        <value>Actualités</value>
+    </data>
+    <data name="NewsPageEventsHeader" xml:space="preserve">
+        <value>AGENDA</value>
+    </data>
+    <data name="NewsPageNewsHeader" xml:space="preserve">
+        <value>ACTUALITES</value>
+    </data>
+    <data name="NewsPageNewsPubicationDateHeader" xml:space="preserve">
+        <value>Publié le </value>
+    </data>       
 </root>

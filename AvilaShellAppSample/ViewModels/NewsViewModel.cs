@@ -1,12 +1,10 @@
 using System;
 using System.Threading.Tasks;
-using Xamarin.Forms;
 using AvilaShellAppSample.Services;
 using AvilaShellAppSample.Models;
 using System.Diagnostics;
 using MvvmHelpers.Commands;
 using System.Collections.ObjectModel;
-using Xamarin.Essentials;
 using AvilaShellAppSample.Services.Abstractions;
 using System.IO;
 using System.Net;
@@ -156,9 +154,9 @@ namespace AvilaShellAppSample.ViewModels
             _eventTracker = new AppCenterEventTracker();
             _deepLinkingLauncher = new DeepLinkingLauncher();
 
-            Title = "News";
-            News = new ObservableCollection<News>();
+            Title = Strings.Strings.NewsPageTitle;
 
+            News = new ObservableCollection<News>();
             Task.Run(async () => await GetNewsAsync());
 
             _eventTracker.Display(EventPage.NewsPage);

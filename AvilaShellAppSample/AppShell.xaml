@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:AvilaShellAppSample.Views"
+       xmlns:strings="clr-namespace:AvilaShellAppSample.Strings"
        Title="AvilaShellAppSample"
        x:Class="AvilaShellAppSample.AppShell">
     <!--
@@ -11,6 +12,8 @@
     -->
     <Shell.Resources>
         <ResourceDictionary>
+
+            <Color x:Key="NavigationPrimary">#2196F3</Color>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <!-- default (blue) -->
                 <!--
@@ -34,33 +37,50 @@
                 <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource Gray-300}"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95000000" />
                 <Setter Property="Shell.TabBarTitleColor" Value="Black" />
+                <!-- Debug -->
+
+
+                <!--
+                <Setter Property="Shell.BackgroundColor" Value="Transparent" />
+                <Setter Property="Shell.ForegroundColor" Value="Blue" />
+                <Setter Property="Shell.TitleColor" Value="Blue" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                -->
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="NavigationPage" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
     <TabBar x:Name="appTabBar">
-        <ShellContent x:Name="tabBarHome" Title="Home" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}">
+        <ShellContent x:Name="tabBarHome" Title="{x:Static strings:Strings.HomePageTitle}" Route="HomePage" ContentTemplate="{DataTemplate local:HomePage}">
             <ShellContent.Icon>
                 <FontImageSource x:Name="tabBarHomeIcon" Glyph="{StaticResource FalIconHome}" FontFamily="FontAwesomeLight" />
             </ShellContent.Icon>
         </ShellContent>
+        <!--
         <ShellContent Title="Browse" ContentTemplate="{DataTemplate local:ItemsPage}">
             <ShellContent.Icon>
                 <FontImageSource Glyph="{StaticResource FalIconRss}" FontFamily="FontAwesomeLight" />
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent Title="News" ContentTemplate="{DataTemplate local:NewsPage}">
+        -->
+        <ShellContent Title="{x:Static strings:Strings.NewsPageTitle}" ContentTemplate="{DataTemplate local:NewsPage}">
             <ShellContent.Icon>
                 <FontImageSource Glyph="{StaticResource FalIconNews}" FontFamily="FontAwesomeLight" />
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent Title="Booking" Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}">
+        <ShellContent Title="Booking" Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}" >
             <ShellContent.Icon>
                 <FontImageSource Glyph="{StaticResource FalIconCalendar}" FontFamily="FontAwesomeLight" />
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent Title="About" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}">
+        <ShellContent Title="About" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" >
             <ShellContent.Icon>
                 <FontImageSource Glyph="{StaticResource FalIconInfo}" FontFamily="FontAwesomeLight" />
             </ShellContent.Icon>

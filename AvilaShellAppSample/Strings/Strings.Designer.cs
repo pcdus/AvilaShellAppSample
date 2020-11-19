@@ -160,5 +160,29 @@ namespace AvilaShellAppSample.Strings {
                 return ResourceManager.GetString("HomePageAvilaEmail", resourceCulture);
             }
         }
+        
+        public static string NewsPageTitle {
+            get {
+                return ResourceManager.GetString("NewsPageTitle", resourceCulture);
+            }
+        }
+        
+        public static string NewsPageEventsHeader {
+            get {
+                return ResourceManager.GetString("NewsPageEventsHeader", resourceCulture);
+            }
+        }
+        
+        public static string NewsPageNewsHeader {
+            get {
+                return ResourceManager.GetString("NewsPageNewsHeader", resourceCulture);
+            }
+        }
+        
+        public static string NewsPageNewsPubicationDateHeader {
+            get {
+                return ResourceManager.GetString("NewsPageNewsPubicationDateHeader", resourceCulture);
+            }
+        }
     }
 }

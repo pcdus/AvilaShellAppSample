@@ -34,6 +34,7 @@
     <Folder Include="Infrastructure\" />
     <Folder Include="Behaviors\" />
     <Folder Include="Triggers\" />
+    <Folder Include="Strings\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\avila_indoor.jpg" />
@@ -94,5 +95,16 @@
     <EmbeddedResource Include="lottie_loading_2circles_rotating_apricot.json" />
     <EmbeddedResource Include="lottie_error_no_network_apricot.json" />
     <EmbeddedResource Include="lottie_error_warning_apricot.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Strings\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Strings\Strings.Designer.cs">
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>
