@@ -91,17 +91,7 @@
                                     Source="{Binding AvilaUrlBooking}"
                                     Uri="{Binding AvilaUrlBooking}"  
                                     WidthRequest="1000" HeightRequest="1000"
-                                    IsVisible="{Binding ShowWebView, Converter={StaticResource BoolToVisibilityConverter}}">
-                <!-- bug on Android : WebView reloaded each time the tab is displayed -->
-                <!--
-                                Source="{Binding AvilaUrlBooking}"
-                                Uri="{Binding AvilaUrlBooking}"  
-                -->
-                <!-- bug on Android : WebView with errors visible during a short time -->
-                <!--
-                     IsVisible="{Binding ShowLoadingView, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=true}">
-                -->
-             
+                                    IsVisible="{Binding ShowWebView, Converter={StaticResource BoolToVisibilityConverter}}">             
                     <WebView.Behaviors>
                         <behaviors:EventToCommandBehavior
                             EventName="Navigating"

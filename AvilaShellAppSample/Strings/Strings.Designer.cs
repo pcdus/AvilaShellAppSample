@@ -184,5 +184,11 @@ namespace AvilaShellAppSample.Strings {
                 return ResourceManager.GetString("NewsPageNewsPubicationDateHeader", resourceCulture);
             }
         }
+        
+        public static string BookingPageTitle {
+            get {
+                return ResourceManager.GetString("BookingPageTitle", resourceCulture);
+            }
+        }
     }
 }

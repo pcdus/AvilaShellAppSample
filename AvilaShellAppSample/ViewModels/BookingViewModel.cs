@@ -6,7 +6,6 @@ using AvilaShellAppSample.Controls;
 using AvilaShellAppSample.Helpers;
 using AvilaShellAppSample.Monitoring;
 using AvilaShellAppSample.Services;
-using MvvmHelpers.Commands;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Lottie.Forms;
@@ -20,7 +19,7 @@ namespace AvilaShellAppSample.ViewModels
         private readonly IEventTracker _eventTracker;
 
         // properties
-        string avilaUrlBooking = "https://booking.wavy.pro/avila";
+        string avilaUrlBooking = ApiConfig.WavyAvilaUrlBooking;
         public string AvilaUrlBooking
         {
             get { return avilaUrlBooking; }
@@ -278,7 +277,7 @@ namespace AvilaShellAppSample.ViewModels
             Debug.WriteLine($"BookingViewModel - Ctor()");
             _eventTracker = new AppCenterEventTracker();
 
-            Title = "Booking";
+            Title = Strings.Strings.BookingPageTitle;
 
             _eventTracker.Display(EventPage.BookingPage);
         }

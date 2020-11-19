@@ -25,8 +25,6 @@ namespace AvilaShellAppSample.ViewModels
         private readonly IEventTracker _eventTracker;
         private readonly IDeepLinkingLauncher _deepLinkingLauncher;
 
-        private static readonly string _avilaFacebookPageId = "115592608462989";
-
         ObservableCollection<News> news = null;
         public ObservableCollection<News> News
         {
@@ -289,8 +287,8 @@ namespace AvilaShellAppSample.ViewModels
                     new KeyValuePair<string, string>(EventProperty.Uri, selectedNews.Url)
                 });
 
-            var fbPostId = selectedNews.Id.Remove(0, _avilaFacebookPageId.Length + 1);
-            await _deepLinkingLauncher.OpenFacebookPostAsync(selectedNews.Url, _avilaFacebookPageId, fbPostId);
+            var fbPostId = selectedNews.Id.Remove(0, ApiConfig.FbAvilaPageId.Length + 1);
+            await _deepLinkingLauncher.OpenFacebookPostAsync(selectedNews.Url, ApiConfig.FbAvilaPageId, fbPostId);
         }
 
         private async Task OpenEventAsync(Event selectedEvent)

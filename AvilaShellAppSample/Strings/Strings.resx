@@ -80,5 +80,8 @@
     </data>
     <data name="NewsPageNewsPubicationDateHeader" xml:space="preserve">
         <value>Publié le </value>
-    </data>       
+    </data>
+    <data name="BookingPageTitle" xml:space="preserve">
+        <value>Rendez-vous</value>
+    </data>    
 </root>
