@@ -15,15 +15,55 @@
              Shell.NavBarHasShadow="True">
     <Shell.TitleView>
         <Label Text="{Binding Title}"
-               Style="{StaticResource PagesTitleLabelStyle}"
-               Margin="{OnPlatform Android='0,0,16,0', Default=0}"/>
+               Style="{StaticResource PagesTitleLabelStyle}"/>
     </Shell.TitleView>
     <ContentPage.BindingContext>
         <vm:NewsViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
+        <!-- Converters -->
         <conv:AllTrueConverter x:Key="AllTrueConverter" />
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <!-- Page Styles -->
+        <ResourceDictionary>
+            <!-- Labels -->
+            <Style x:Key="NewsPageCategoryLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}"/>
+                <Setter Property="Margin" Value="10,16,0,12" />
+            </Style>
+            <Style x:Key="NewsPageEventDateLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-White}"/>
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="NewsPageTitleLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+            </Style>
+            <Style x:Key="NewsPageSubtitleLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratMedium" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
+            </Style>
+            <!-- PancakeView -->
+            <Style x:Key="NewsPageYummyFrame" TargetType="yummy:PancakeView">
+                <Setter Property="BackgroundColor" Value="{StaticResource Gray-White}" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <yummy:DropShadow Offset="1,2"
+                                          Color="{StaticResource Gray-Black}"
+                                          BlurRadius="{OnPlatform Android=2, Default=2}"
+                                          Opacity="{OnPlatform Android=1, Default=0.2}" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
 
@@ -110,7 +150,7 @@
                                             <ctrl:LightShadowFrame Padding="0" x:Name="Rotator" IsClippedToBounds="True" Margin="4">
                                             -->
                                             <!-- Pancakeview -->
-                                            <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                            <yummy:PancakeView Style="{StaticResource NewsPageYummyFrame}"
                                                                 Margin="8,0,8,8">
                                                 <Grid RowSpacing="0">
                                                     <Grid.RowDefinitions>
@@ -233,7 +273,7 @@
                                         <!--
                                         <Frame Margin="0" Padding="0">
                                         -->
-                                        <yummy:PancakeView Style="{StaticResource YummyFrame}">
+                                        <yummy:PancakeView Style="{StaticResource NewsPageYummyFrame}">
 
                                             <!-- Content container ( StackLayout // Grid )-->
                                             <!-- StackLayout => issue on PullToRefresh : latest image not displayed -->
@@ -265,7 +305,7 @@
 
                                                 <Label Grid.Row="1"
                                                         Text="{Binding Description}"
-                                                        Style="{StaticResource NewsPageDescriptionLabelStyle}"
+                                                        Style="{StaticResource CommonDescriptionLabelStyle}"
                                                         MaxLines="3" LineBreakMode="TailTruncation"
                                                         Margin="12,0,8,12" />
 

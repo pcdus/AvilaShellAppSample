@@ -9,8 +9,31 @@
              xmlns:triggers="clr-namespace:AvilaShellAppSample.Triggers"
              x:Name="ServiceErrorControl">
     <ContentView.Resources>
+        <!-- Converters -->
+         <conv:ErrorKindToVisibilityConverter x:Key="ErrorKindToVisibilityConverter" />
+        <!-- Views Styles -->
         <ResourceDictionary>
-            <conv:ErrorKindToVisibilityConverter x:Key="ErrorKindToVisibilityConverter" />
+            <!-- ErrorControl style for labels -->
+            <Style x:Key="ErrorViewHeaderLabelStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}" />
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+                <Setter Property="Margin" Value="0,32,0,8" />
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="20" />     
+            </Style>
+            <Style x:Key="ErrorViewDescriptionLabelStyle" TargetType="Label">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}" />
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+                <Setter Property="Margin" Value="24,0,24,0" />
+                <Setter Property="FontFamily" Value="MontserratMedium" />
+                <Setter Property="FontSize" Value="16" />
+            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
@@ -36,29 +59,8 @@
                             </Binding.ConverterParameter>
                         </Binding>
                     </Grid.IsVisible>
-                    <!-- FontAwesome icons version -->
-                    <!--
-                    <Image Style="{StaticResource ErrorImageIconDuotonePart1Style}">
-                        <Image.Source>
-                            <FontImageSource x:Name="fisPart1"
-                                             Glyph="{StaticResource FadsIconNoInternetPart1}"
-                                             Color="{StaticResource BlondAvilaColor}"
-                                             FontFamily="FontAwesomeDuotoneSolid" 
-                                             Size="90">
-                            </FontImageSource>
-                        </Image.Source>
-                    </Image>
-                    <Image Style="{StaticResource ErrorImageIconDuotonePart2Style}">
-                        <Image.Source>
-                            <FontImageSource x:Name="fisPart2"
-                                             Glyph="{StaticResource FadsIconNoInternetPart2}"
-                                             Color="{StaticResource ApricotAvilaColor}"
-                                             FontFamily="FontAwesomeDuotoneSolid"
-                                             Size="90" />
-                        </Image.Source>
-                    </Image>
-                    -->
-                    <!-- Lottie animation version -->
+
+                    <!-- Lottie animation  -->
                     <lottie:AnimationView
                         x:Name="networkErrorAnimationView"
                         Animation="resource://lottie_error_no_network_apricot.json?assembly=AvilaShellAppSample"
@@ -97,27 +99,8 @@
                             </Binding.ConverterParameter>
                         </Binding>
                     </Grid.IsVisible>
-                    <!-- FontAwesome icons version -->
-                    <!--
-                    <Image Style="{StaticResource ErrorImageIconDuotonePart1Style}">
-                        <Image.Source>
-                            <FontImageSource Glyph="{StaticResource FadsIconWarningTrianglePart1}"
-                                                Color="{StaticResource BlondAvilaColor}"
-                                                FontFamily="FontAwesomeDuotoneSolid"
-                                                Size="90" />
-                        </Image.Source>
-                    </Image>
-                    <Image Style="{StaticResource ErrorImageIconDuotonePart2Style}">
-                        <Image.Source>
-                            <FontImageSource Glyph="{StaticResource FadsIconWarningTrianglePart2}"
-                                                Color="{StaticResource ApricotAvilaColor}"
-                                                FontFamily="FontAwesomeDuotoneSolid"
-                                                Size="90" />
-  
-                        </Image.Source>
-                    </Image>
-                    -->
-                    <!-- Lottie animation version -->
+
+                    <!-- Lottie animation -->
                     <lottie:AnimationView
                         x:Name="serviceErrorAnimationView"
                         Animation="resource://lottie_error_warning_apricot.json?assembly=AvilaShellAppSample"
@@ -143,9 +126,9 @@
 
                 <!-- Other informations -->
                 <Label Text="{Binding Title, Source={x:Reference ServiceErrorControl}}"
-                       Style="{StaticResource ErrorPageHaderLabelStyle}"/>
+                       Style="{StaticResource ErrorViewHeaderLabelStyle}"/>
                 <Label Text="{Binding Description, Source={x:Reference ServiceErrorControl}}"
-                       Style="{StaticResource ErrorPageDescriptionLabelStyle}"/>
+                       Style="{StaticResource ErrorViewDescriptionLabelStyle}"/>
                 <!-- for debug -->
                 <!-- 
                 <Label Text="{Binding ErrorKind, Source={x:Reference ServiceErrorControl}}" />

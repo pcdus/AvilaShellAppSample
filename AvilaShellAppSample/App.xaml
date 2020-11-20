@@ -88,12 +88,12 @@
             <Color x:Key="Gray-050">#fafafa</Color>
             <!-- HomePage icons colors -->
 
-            <!-- Style -->
-            <!-- ===== -->
+            <!-- Styles -->
+            <!-- ====== -->
 
             <!-- Labels -->
             <!-- ...... -->
-            <!-- Title style for labels -->
+            <!-- TitleView style -->
             <Style x:Key="PagesTitleLabelStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="MontserratSemiBold" />
                 <Setter Property="FontSize" Value="18"/>
@@ -105,197 +105,17 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
-            <!-- HomePage style for labels -->
-            <Style x:Key="HomePageLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratRegular" />
-                <Setter Property="FontSize" Value="15"/>
-                <Setter Property="Margin" Value="50,0,0,0"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
-                <Setter Property="MinimumHeightRequest" Value="24"/>
-                <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
-            </Style>
-            <Style x:Key="HomePageHeaderLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratMedium" />
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="Margin" Value="50,0,0,0"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
-                <Setter Property="HeightRequest" Value="18"/>
-                <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>
-            </Style>
-            <!-- NewsPage style for labels -->
-            <Style x:Key="NewsPageCategoryLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratSemiBold" />
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
-                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}"/>
-                <Setter Property="Margin" Value="10,16,0,12" />
-            </Style>
-            <Style x:Key="NewsPageEventDateLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratSemiBold" />
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-White}"/>
-                <Setter Property="HorizontalOptions" Value="Center" />
-            </Style>
-            <Style x:Key="NewsPageTitleLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratSemiBold" />
-                <Setter Property="FontSize" Value="15"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
-            </Style>
-            <Style x:Key="NewsPageSubtitleLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratMedium" />
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
-            </Style>
-            <Style x:Key="NewsPageDescriptionLabelStyle" TargetType="Label">
+            <!-- Description items style -->
+            <Style x:Key="CommonDescriptionLabelStyle" TargetType="Label">
                 <Setter Property="FontFamily" Value="MontserratRegular" />
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
-            </Style>
-            <!-- ErrorControl style for labels -->
-            <Style x:Key="ErrorPageHaderLabelStyle" TargetType="Label">
-                <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}" />
-                <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
-                <Setter Property="Margin" Value="0,32,0,8" />
-                <Setter Property="FontFamily" Value="MontserratSemiBold" />
-                <Setter Property="FontSize" Value="20" />     
-            </Style>
-            <Style x:Key="ErrorPageDescriptionLabelStyle" TargetType="Label">
-                <Setter Property="VerticalOptions" Value="Center" />
-                <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}" />
-                <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
-                <Setter Property="Margin" Value="24,0,24,0" />
-                <Setter Property="FontFamily" Value="MontserratMedium" />
-                <Setter Property="FontSize" Value="16" />
-            </Style>
-            <!-- AboutPage style for labels -->
-            <Style x:Key="AboutPageLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratRegular" />
-                <Setter Property="FontSize" Value="15"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
-                <Setter Property="MinimumHeightRequest" Value="24"/>
-                <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
-            </Style>
-            <Style x:Key="AboutPageHeaderLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratMedium" />
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
-                <Setter Property="HeightRequest" Value="18"/>
-                <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>
-            </Style>
-            <Style x:Key="AboutPageCategoryLabelStyle" TargetType="Label">
-                <Setter Property="FontFamily" Value="MontserratSemiBold" />
-                <Setter Property="FontSize" Value="12"/>
-                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
-                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}"/>
-                <Setter Property="Margin" Value="0,4,0,4" />
-            </Style>
-            <!-- Images -->
-            <!-- ...... -->
-            <!-- HomePage style for images -->
-            <Style x:Key="ImageIconDuotonePart1Style" TargetType="Image">
-                <Setter Property="BackgroundColor">Transparent</Setter>
-                <Setter Property="HorizontalOptions">Start</Setter>
-                <Setter Property="VerticalOptions">Center</Setter>
-                <Setter Property="Opacity">1</Setter>
-                <Setter Property="Source">
-                    <Setter.Value>
-                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
-                                         FontFamily="FontAwesomeDuotoneSolid"
-                                         Size="30" />
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="ImageIconDuotonePart2Style" TargetType="Image">
-                <Setter Property="BackgroundColor">Transparent</Setter>
-                <Setter Property="HorizontalOptions">Start</Setter>
-                <Setter Property="VerticalOptions">Center</Setter>
-                <Setter Property="Opacity">1</Setter>
-                <Setter Property="Source">
-                    <Setter.Value>
-                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
-                                         FontFamily="FontAwesomeDuotoneSolid"
-                                         Size="30" />
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <!-- AboutPage style for images -->
-            <Style x:Key="ImageIconContactHourrapps" TargetType="Image">
-                <Setter Property="BackgroundColor">Transparent</Setter>
-                <Setter Property="HorizontalOptions">Center</Setter>
-                <Setter Property="VerticalOptions">Center</Setter>
-                <Setter Property="Source">
-                    <Setter.Value>
-                        <FontImageSource Color="{StaticResource GreenBlueCrayoloHourrappsColor}"
-                                         FontFamily="FontAwesomeLight"
-                                         Size="15" />
-                    </Setter.Value>
-                </Setter>
             </Style>
 
-            <!-- ErrorControl style for images -->
-            <Style x:Key="ErrorImageIconDuotonePart1Style" TargetType="Image">
-                <Setter Property="BackgroundColor">Transparent</Setter>
-                <Setter Property="HorizontalOptions">Center</Setter>
-                <Setter Property="VerticalOptions">Center</Setter>
-                <Setter Property="Opacity">1</Setter>
-                <Setter Property="Source">
-                    <Setter.Value>
-                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
-                                         FontFamily="FontAwesomeDuotoneSolid"
-                                         Size="90" />
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="ErrorImageIconDuotonePart2Style" TargetType="Image">
-                <Setter Property="BackgroundColor">Transparent</Setter>
-                <Setter Property="HorizontalOptions">Center</Setter>
-                <Setter Property="VerticalOptions">Center</Setter>
-                <Setter Property="Opacity">1</Setter>
-                <Setter Property="Source">
-                    <Setter.Value>
-                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
-                                         FontFamily="FontAwesomeDuotoneSolid"
-                                         Size="90" />
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <!-- Expander style for chevron images -->
-            <Style x:Key="ChevronImageForExpander" TargetType="Image">
-                <Setter Property="BackgroundColor">Transparent</Setter>
-                <Setter Property="HorizontalOptions">End</Setter>
-                <Setter Property="VerticalOptions">Center</Setter>
-                <Setter Property="HeightRequest">20</Setter>
-                <Setter Property="WidthRequest">20</Setter>
-                <Setter Property="Source">
-                    <Setter.Value>
-                        <FontImageSource Glyph="{StaticResource FalIconChevronDown}"
-                                            FontFamily="FontAwesomeLight"
-                                            Size="20"
-                                            Color="{StaticResource Gray-600}"/>
-                    </Setter.Value>
-                </Setter>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
-                                    TargetType="Image"
-                                    Value="True">
-                        <Setter Property="Source">
-                            <Setter.Value>
-                                <FontImageSource
-                                    FontFamily="FontAwesomeLight"
-                                    Glyph="{StaticResource FalIconChevronUp}"
-                                    Size="20"
-                                    Color="{StaticResource Gray-600}" />
-                            </Setter.Value>
-                        </Setter>
-                    </DataTrigger>
-                </Style.Triggers>
-            </Style>
 
+            <!-- Entry -->
+            <!-- ..... -->
+            <!-- global Entry => used by NewsItemPage -->
             <Style TargetType="Entry">
                 <Style.Triggers>
                     <Trigger TargetType="Entry"
@@ -305,21 +125,12 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+
+
             <!-- PancakeView -->
             <!-- ........... -->
+            <!-- YummyFrame => used by HomePage / AboutPage -->
             <Style x:Key="YummyFrame" TargetType="yummy:PancakeView">
-                <Setter Property="BackgroundColor" Value="{StaticResource Gray-White}" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="Shadow">
-                    <Setter.Value>
-                        <yummy:DropShadow Offset="1,2"
-                                          Color="{StaticResource Gray-Black}"
-                                          BlurRadius="{OnPlatform Android=2, Default=2}"
-                                          Opacity="{OnPlatform Android=1, Default=0.2}" />
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="YummyHomeFrame" TargetType="yummy:PancakeView">
                 <Setter Property="BackgroundColor" Value="{StaticResource Gray-White}" />
                 <Setter Property="CornerRadius" Value="8" />
                 <Setter Property="Shadow">
@@ -331,29 +142,10 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <Style x:Key="YummyAvilaLogoFrame" TargetType="yummy:PancakeView">
-                <Setter Property="BackgroundColor" Value="{StaticResource FlorralWhiteAvilaColor}" />
-                <Setter Property="CornerRadius" Value="8" />
-                <Setter Property="Border">
-                    <Setter.Value>
-                        <yummy:Border Color="{StaticResource BlondAvilaColor}"
-                                      Thickness="2" />
-                    </Setter.Value>
-                </Setter>
-                <!--
-                <Setter Property="Shadow">
-                    <Setter.Value>
-                        <yummy:DropShadow Offset="1,2"
-                                          Color="{StaticResource Gray-Black}"
-                                          BlurRadius="{OnPlatform Android=2, Default=2}"
-                                          Opacity="{OnPlatform Android=1, Default=0.2}" />
-                    </Setter.Value>
-                </Setter>
-                -->
-            </Style>
 
             <!-- Button -->
             <!-- ...... -->
+            <!-- GradientButtonStyle -->
             <Style x:Key="GradientButtonStyle" TargetType="Button">
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="VerticalOptions" Value="EndAndExpand" />
@@ -379,26 +171,7 @@
                 </Setter>
             </Style>
 
-            <!-- Expander -->
-            <!-- ........ -->
-            <Style x:Key="AboutPageExpander" TargetType="Expander">
-                <Setter Property="Header">
-                    <Setter.Value>
-                        <Image HeightRequest="20" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="20">
-                            <Image.Source>
-                                <FontImageSource FontFamily="FontAwesomeLight"
-                                                   Glyph="{StaticResource FalIconChevronDown}"
-                                                   Size="20"
-                                                   Color="{StaticResource Gray-600}" />
-                            </Image.Source>
-
-                        </Image>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <!-- Controls -->
-            <!-- ======== -->
+            <!-- global Button => used by NewsItemPage / LoginPage -->
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White">
                 </Setter>

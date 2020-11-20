@@ -12,17 +12,64 @@
              ios:Page.UseSafeArea="True"
              Shell.NavBarHasShadow="True"
              Shell.NavBarIsVisible="True">
-    <Shell.TitleView >
+    <Shell.TitleView>
         <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg"
-                                          DownsampleHeight="6"
+                                          DownsampleToViewSize = "True"
                                           VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
-                                          HeightRequest="45"
                                           Margin="{OnPlatform Android='0,0,16,0', Default=0}"/>
     </Shell.TitleView>
-
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <!-- Page Styles -->
+        <ResourceDictionary>
+            <!-- Labels -->
+            <Style x:Key="HomePageLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratRegular" />
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Margin" Value="50,0,0,0"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="MinimumHeightRequest" Value="24"/>
+                <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
+            </Style>
+            <Style x:Key="HomePageHeaderLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratMedium" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Margin" Value="50,0,0,0"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
+                <Setter Property="HeightRequest" Value="18"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>
+            </Style>
+            <!-- Images -->
+            <Style x:Key="ImageIconDuotonePart1Style" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">Start</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Opacity">1</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
+                                         FontFamily="FontAwesomeDuotoneSolid"
+                                         Size="30" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ImageIconDuotonePart2Style" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">Start</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Opacity">1</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
+                                         FontFamily="FontAwesomeDuotoneSolid"
+                                         Size="30" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid RowSpacing="0"
               Padding="0"
@@ -94,7 +141,7 @@
                                              HeightRequest="45" /> <!-- used by ParallaxScrollView control -->
  
                                     <!-- Phone -->
-                                    <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                                        Padding="16"
                                                        Margin="{OnPlatform Android=2, Default=0}">
                                         <Grid RowSpacing="0">
@@ -133,7 +180,7 @@
                                     </yummy:PancakeView>
 
                                     <!-- Address -->
-                                    <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                                        Padding="16"
                                                        Margin="{OnPlatform Android=2, Default=0}">
                                         <Grid RowSpacing="0">
@@ -180,7 +227,7 @@
                                     </yummy:PancakeView>
 
                                     <!-- Schedule -->
-                                    <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                                        Padding="16"
                                                        Margin="{OnPlatform Android=2, Default=0}">
                                         <Grid RowSpacing="0">
@@ -226,7 +273,7 @@
                                     </yummy:PancakeView>
 
                                     <!-- Mail -->
-                                    <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                                        Padding="16"
                                                        Margin="{OnPlatform Android=2, Default=0}">
                                         <Grid RowSpacing="0">

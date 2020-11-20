@@ -9,18 +9,92 @@
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              Shell.NavBarHasShadow="True">
     <Shell.TitleView>
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
-              BackgroundColor="Transparent">
-            <Label Text="{Binding Title}"
-                   Style="{StaticResource PagesTitleLabelStyle}"/>
-        </Grid>
+        <Label Text="{Binding Title}"
+               Style="{StaticResource PagesTitleLabelStyle}"/>
     </Shell.TitleView>
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Resources>
+        <!-- Page Styles -->
         <ResourceDictionary>
-            <Color x:Key="Accent">#96d1ff</Color>
+            <!-- Labels -->
+            <Style x:Key="AboutPageLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratRegular" />
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="MinimumHeightRequest" Value="24"/>
+                <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
+            </Style>
+            <Style x:Key="AboutPageCategoryLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratSemiBold" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.25, Default=-1}"/>
+                <Setter Property="Margin" Value="0,4,0,4" />
+            </Style>
+            <!-- Images -->
+            <Style x:Key="ImageIconContactHourrapps" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">Center</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Color="{StaticResource GreenBlueCrayoloHourrappsColor}"
+                                         FontFamily="FontAwesomeLight"
+                                         Size="15" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ChevronImageForExpander" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">End</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="HeightRequest">20</Setter>
+                <Setter Property="WidthRequest">20</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Glyph="{StaticResource FalIconChevronDown}"
+                                         FontFamily="FontAwesomeLight"
+                                         Size="20"
+                                         Color="{StaticResource Gray-600}"/>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Source={RelativeSource AncestorType={x:Type Expander}}, Path=IsExpanded}"
+                                 TargetType="Image"
+                                 Value="True">
+                        <Setter Property="Source">
+                            <Setter.Value>
+                                <FontImageSource
+                                    FontFamily="FontAwesomeLight"
+                                    Glyph="{StaticResource FalIconChevronUp}"
+                                    Size="20"
+                                    Color="{StaticResource Gray-600}" />
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <!-- Expander -->
+            <!-- doesn't work => style applied on the chevron Image -->
+            <!--
+            <Style x:Key="AboutPageExpander" TargetType="Expander">
+                <Setter Property="Header">
+                    <Setter.Value>
+                        <Image HeightRequest="20" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="20">
+                            <Image.Source>
+                                <FontImageSource FontFamily="FontAwesomeLight"
+                                                   Glyph="{StaticResource FalIconChevronDown}"
+                                                   Size="20"
+                                                   Color="{StaticResource Gray-600}" />
+                            </Image.Source>
+
+                        </Image>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            -->
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
@@ -48,7 +122,7 @@
                          Spacing="16">
 
                 <!-- About us -->
-                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                    Padding="16">
                     <Expander>
                         <Expander.Header>
@@ -62,7 +136,7 @@
                             <DataTemplate>
                                 <StackLayout Margin="0,8,0,0">
                                     <Label Text="{x:Static strings:Strings.AboutPageAboutAvilaDescription}" 
-                                           Style="{StaticResource NewsPageDescriptionLabelStyle}" />
+                                           Style="{StaticResource CommonDescriptionLabelStyle}" />
                                 </StackLayout>
                             </DataTemplate>
                         </Expander.ContentTemplate>
@@ -70,7 +144,7 @@
                 </yummy:PancakeView>
 
                 <!-- Our mobile app -->
-                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                    Padding="16">
                     <Expander>
                         <Expander.Header>
@@ -84,7 +158,7 @@
                             <DataTemplate>
                                 <StackLayout Margin="0,8,0,0">
                                     <Label Text="{x:Static strings:Strings.AboutPageAvilaMobileAppDescription}"
-                                           Style="{StaticResource NewsPageDescriptionLabelStyle}" />
+                                           Style="{StaticResource CommonDescriptionLabelStyle}" />
                                 </StackLayout>
                             </DataTemplate>
                         </Expander.ContentTemplate>
@@ -92,7 +166,7 @@
                 </yummy:PancakeView>
 
                 <!-- App version -->
-                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                    Padding="16">
                     <StackLayout Orientation="Horizontal" VerticalOptions="Center"
                                  HorizontalOptions="FillAndExpand">
@@ -131,7 +205,7 @@
                          Spacing="16">
 
                 <!-- About Hourrapps -->
-                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                    Padding="16">
                     <Expander>
                         <Expander.Header>
@@ -145,7 +219,7 @@
                             <DataTemplate>
                                 <StackLayout Margin="0,8,0,0">
                                     <Label Text="{x:Static strings:Strings.AboutPageAboutHourrappsDescription}"
-                                           Style="{StaticResource NewsPageDescriptionLabelStyle}" />
+                                           Style="{StaticResource CommonDescriptionLabelStyle}" />
                                 </StackLayout>
                             </DataTemplate>
                         </Expander.ContentTemplate>
@@ -153,7 +227,7 @@
                 </yummy:PancakeView>
 
                 <!-- Contact Hourrapps -->
-                <yummy:PancakeView Style="{StaticResource YummyHomeFrame}"
+                <yummy:PancakeView Style="{StaticResource YummyFrame}"
                                    Padding="16">
                     <Expander>
                         <Expander.Header>
@@ -166,7 +240,7 @@
                         <Expander.ContentTemplate>
                             <DataTemplate>
                                 <StackLayout Margin="0,8,0,0">
-                                    <Label Style="{StaticResource NewsPageDescriptionLabelStyle}"
+                                    <Label Style="{StaticResource CommonDescriptionLabelStyle}"
                                            Text="{x:Static strings:Strings.AboutPageContactHourrappsDescription}" />
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="CenterAndExpand"
