@@ -1,5 +1,4 @@
-﻿using System;
-using AvilaShellAppSample.Monitoring;
+﻿using AvilaShellAppSample.Monitoring;
 using AvilaShellAppSample.Services;
 
 namespace AvilaShellAppSample.Helpers
@@ -12,10 +11,10 @@ namespace AvilaShellAppSample.Helpers
             switch (serviceErrorKind)
             {
                 case ServiceErrorKind.NoInternetAccess:
-                    return "Pas de connexion Internet";
+                    return Strings.Strings.ServiceErrorKindNoInternetAccessTitle;
                 case ServiceErrorKind.ServiceIssue:
                 case ServiceErrorKind.Timeout:
-                    return "Une erreur s'est produite";
+                    return Strings.Strings.ServiceErrorKindErrorAccessTitle;
                 case ServiceErrorKind.None:
                 default:
                     return string.Empty;
@@ -27,10 +26,10 @@ namespace AvilaShellAppSample.Helpers
             switch (serviceErrorKind)
             {
                 case ServiceErrorKind.NoInternetAccess:
-                    return "Aucune connexion internet n'est disponible. Veuillez vérifier et réessayer.";
+                    return Strings.Strings.ServiceErrorKindNoInternetAccessMessage;
                 case ServiceErrorKind.ServiceIssue:
                 case ServiceErrorKind.Timeout:
-                    return "Le service semble ne pas être accessible actuellement. Veuillez réessayer plus tard.";
+                    return Strings.Strings.ServiceErrorKindErrorAccessMessage;
                 case ServiceErrorKind.None:
                 default:
                     return string.Empty;

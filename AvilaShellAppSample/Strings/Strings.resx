@@ -123,4 +123,19 @@
      <data name="AboutPageContactHourrappsEmail" xml:space="preserve">
         <value>contact@hourrapps.com</value>
     </data>     
+     <data name="ServiceErrorKindNoInternetAccessTitle" xml:space="preserve">
+        <value>Pas de connexion Internet</value>
+    </data>   
+     <data name="ServiceErrorKindNoInternetAccessMessage" xml:space="preserve">
+        <value>Aucune connexion internet n'est disponible. Veuillez vérifier et réessayer.</value>
+    </data> 
+     <data name="ServiceErrorKindErrorAccessTitle" xml:space="preserve">
+        <value>Une erreur s'est produite</value>
+    </data>   
+     <data name="ServiceErrorKindErrorAccessMessage" xml:space="preserve">
+        <value>Le service semble ne pas être accessible actuellement. Veuillez réessayer plus tard.</value>
+    </data> 
+     <data name="ErrorViewRetryButton" xml:space="preserve">
+        <value>Réessayer</value>
+    </data>     
 </root>

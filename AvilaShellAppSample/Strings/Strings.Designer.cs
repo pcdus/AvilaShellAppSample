@@ -268,5 +268,35 @@ namespace AvilaShellAppSample.Strings {
                 return ResourceManager.GetString("AboutPageContactHourrappsEmail", resourceCulture);
             }
         }
+        
+        public static string ServiceErrorKindNoInternetAccessTitle {
+            get {
+                return ResourceManager.GetString("ServiceErrorKindNoInternetAccessTitle", resourceCulture);
+            }
+        }
+        
+        public static string ServiceErrorKindNoInternetAccessMessage {
+            get {
+                return ResourceManager.GetString("ServiceErrorKindNoInternetAccessMessage", resourceCulture);
+            }
+        }
+        
+        public static string ServiceErrorKindErrorAccessTitle {
+            get {
+                return ResourceManager.GetString("ServiceErrorKindErrorAccessTitle", resourceCulture);
+            }
+        }
+        
+        public static string ServiceErrorKindErrorAccessMessage {
+            get {
+                return ResourceManager.GetString("ServiceErrorKindErrorAccessMessage", resourceCulture);
+            }
+        }
+        
+        public static string ErrorViewRetryButton {
+            get {
+                return ResourceManager.GetString("ErrorViewRetryButton", resourceCulture);
+            }
+        }
     }
 }
