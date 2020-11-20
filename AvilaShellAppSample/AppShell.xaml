@@ -75,12 +75,12 @@
                 <FontImageSource Glyph="{StaticResource FalIconNews}" FontFamily="FontAwesomeLight" />
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent Title="Booking" Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}" >
+        <ShellContent Title="{x:Static strings:Strings.BookingPageTitle}" Route="BookingPage" ContentTemplate="{DataTemplate local:BookingPage}" >
             <ShellContent.Icon>
                 <FontImageSource Glyph="{StaticResource FalIconCalendar}" FontFamily="FontAwesomeLight" />
             </ShellContent.Icon>
         </ShellContent>
-        <ShellContent Title="About" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" >
+        <ShellContent Title="{x:Static strings:Strings.AboutPageTitle}" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" >
             <ShellContent.Icon>
                 <FontImageSource Glyph="{StaticResource FalIconInfo}" FontFamily="FontAwesomeLight" />
             </ShellContent.Icon>

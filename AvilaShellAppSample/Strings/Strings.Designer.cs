@@ -250,5 +250,23 @@ namespace AvilaShellAppSample.Strings {
                 return ResourceManager.GetString("AboutPageContactHourrappsDescription", resourceCulture);
             }
         }
+        
+        public static string AboutPageContactHourrappsPhoneNumber {
+            get {
+                return ResourceManager.GetString("AboutPageContactHourrappsPhoneNumber", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageContactHourrappsWebsite {
+            get {
+                return ResourceManager.GetString("AboutPageContactHourrappsWebsite", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageContactHourrappsEmail {
+            get {
+                return ResourceManager.GetString("AboutPageContactHourrappsEmail", resourceCulture);
+            }
+        }
     }
 }

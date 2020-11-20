@@ -30,7 +30,6 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh"
                      Order="Primary"
-                     
                      Priority="1"
                      Command="{Binding RefreshCommand}"
                      CommandParameter="{x:Reference webView}">                             

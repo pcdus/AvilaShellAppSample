@@ -113,5 +113,14 @@
     </data> 
      <data name="AboutPageContactHourrappsDescription" xml:space="preserve">
         <value>Vous pouvez contacter Hourrapps depuis sont site internet, par mail, par téléphone ou depuis Facebook à l'aide des icones ci-dessous :</value>
-    </data>       
+    </data>
+     <data name="AboutPageContactHourrappsPhoneNumber" xml:space="preserve">
+        <value>0622107947</value>
+    </data>
+     <data name="AboutPageContactHourrappsWebsite" xml:space="preserve">
+        <value>http://hourrapps.com/</value>
+    </data>
+     <data name="AboutPageContactHourrappsEmail" xml:space="preserve">
+        <value>contact@hourrapps.com</value>
+    </data>     
 </root>

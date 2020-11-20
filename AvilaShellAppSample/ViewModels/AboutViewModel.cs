@@ -1,12 +1,9 @@
-﻿using System;
-using System.Windows.Input;
-using AvilaShellAppSample.Infrastructure;
+﻿using AvilaShellAppSample.Infrastructure;
 using AvilaShellAppSample.Monitoring;
 using AvilaShellAppSample.Services;
 using MvvmHelpers.Commands;
 using Command = MvvmHelpers.Commands.Command;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 using System.Threading.Tasks;
 
 namespace AvilaShellAppSample.ViewModels
@@ -17,12 +14,6 @@ namespace AvilaShellAppSample.ViewModels
         private readonly IContact _contact;
         private readonly IBrowser _browser;
         private readonly IDeepLinkingLauncher _deepLinkingLauncher;
-
-        private readonly string hourrappsPhoneNumber = "0622107947";
-        private readonly string hourrappsUrl = "http://hourrapps.com/";
-        private readonly string hourrapsEmail = "contact@hourrapps.com";
-        private readonly string hourrappsFbPage = "https://www.facebook.com/hourrapps";
-        private readonly string hourrappsFbPageId = "1702965483338996";
 
         string avilaAppVersion;
         public string AvilaAppVersion
@@ -45,7 +36,6 @@ namespace AvilaShellAppSample.ViewModels
             _deepLinkingLauncher = new DeepLinkingLauncher();
 
             Title = Strings.Strings.AboutPageTitle;
-
             AvilaAppVersion = AppInfo.VersionString;
 
             _eventTracker.Display(EventPage.AboutPage);
@@ -54,25 +44,25 @@ namespace AvilaShellAppSample.ViewModels
         private void CallHourrapps()
         {
             _eventTracker.Click(EventName.HourrappsCall, EventPage.AboutPage, EventPage.NativeCallApp);
-            _contact.Call(hourrappsPhoneNumber);
+            _contact.Call(Strings.Strings.AboutPageContactHourrappsPhoneNumber);
         }
 
         private async Task SendHourrappsEmailAsync()
         {
             _eventTracker.Click(EventName.HourrappsMail, EventPage.AboutPage, EventPage.NativeMailApp);
-            await _contact.SendEmailAsync(hourrapsEmail);
+            await _contact.SendEmailAsync(Strings.Strings.AboutPageContactHourrappsEmail);
         }
 
         private async Task OpenHourrappsWebsiteAsync()
         {
             _eventTracker.Click(EventName.HourrappsWebsite, EventPage.AboutPage, EventPage.NativeMailApp);
-            await _browser.OpenAsync(hourrappsUrl);
+            await _browser.OpenAsync(Strings.Strings.AboutPageContactHourrappsWebsite);
         }
 
         private async Task OpenHourrappsFacebookPageAsync()
         {
             _eventTracker.Click(EventName.HourrappsFacebookPage, EventPage.AboutPage, EventPage.NativeMailApp);
-            await _deepLinkingLauncher.OpenFacebookPageAsync(hourrappsFbPage, hourrappsFbPageId);
+            await _deepLinkingLauncher.OpenFacebookPageAsync(ApiConfig.FbHourrappsPageUrl, ApiConfig.FbHourrappsPageId);
         }
     }
 }

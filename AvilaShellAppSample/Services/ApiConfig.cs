@@ -11,6 +11,8 @@ namespace AvilaShellAppSample.Services
         public static string FbAccessToken = "EAAYmP2nRRLYBACExrYukSsuBmSSOKY7NPxEm2bDkcZA7uomK5yobXPZCLPbixfYK87tT8AoAMbmdd3KUvTT5Ffew6jlsMFUYn31tgHhT3VrLDztHPUbPa1x45ynLwBIlHjPMofQ8ZB0RQN4bImXx9QWJoJ3karG4xeK7jJJ1gZDZD";
 
         public static string FbAvilaPageId = "115592608462989";
+        public static string FbHourrappsPageId = "1702965483338996";
+        public static string FbHourrappsPageUrl = "https://www.facebook.com/hourrapps";
 
         public static string WavyAvilaUrlBooking = "https://booking.wavy.pro/avila";
     }
