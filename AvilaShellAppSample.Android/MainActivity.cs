@@ -13,8 +13,9 @@ namespace AvilaShellAppSample.Droid
 {
     [Activity(Label = "AvilaShellAppSample",
         Icon = "@mipmap/ic_launcher",
+        RoundIcon = "@mipmap/ic_launcher_round",
         Theme = "@style/MainTheme",
-        MainLauncher = true,
+        MainLauncher = false,
         ScreenOrientation = ScreenOrientation.Portrait,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity

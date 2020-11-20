@@ -10,6 +10,7 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="splash_background">#facab2</color>
     <!-- Gray shades -->
     <color name="Gray-100">#f6f7f8</color>
     <color name="Gray-200">#ebecef</color>
