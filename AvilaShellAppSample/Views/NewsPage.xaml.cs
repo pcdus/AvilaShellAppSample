@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using AvilaShellAppSample.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace AvilaShellAppSample.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewsPage : ContentPage
     {
 

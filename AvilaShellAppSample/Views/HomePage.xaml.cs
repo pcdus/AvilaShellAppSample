@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using AvilaShellAppSample.Infrastructure;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace AvilaShellAppSample.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomePage : ContentPage
     {
         public HomePage()
