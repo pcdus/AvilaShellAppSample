@@ -190,5 +190,65 @@ namespace AvilaShellAppSample.Strings {
                 return ResourceManager.GetString("BookingPageTitle", resourceCulture);
             }
         }
+        
+        public static string AboutPageTitle {
+            get {
+                return ResourceManager.GetString("AboutPageTitle", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageAboutAvilaHeader {
+            get {
+                return ResourceManager.GetString("AboutPageAboutAvilaHeader", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageAboutAvilaDescription {
+            get {
+                return ResourceManager.GetString("AboutPageAboutAvilaDescription", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageAvilaMobileAppHeader {
+            get {
+                return ResourceManager.GetString("AboutPageAvilaMobileAppHeader", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageAvilaMobileAppDescription {
+            get {
+                return ResourceManager.GetString("AboutPageAvilaMobileAppDescription", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageAvilaMobileAppVersionHeader {
+            get {
+                return ResourceManager.GetString("AboutPageAvilaMobileAppVersionHeader", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageAboutHourrappsHeader {
+            get {
+                return ResourceManager.GetString("AboutPageAboutHourrappsHeader", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageAboutHourrappsDescription {
+            get {
+                return ResourceManager.GetString("AboutPageAboutHourrappsDescription", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageContactHourrappsHeader {
+            get {
+                return ResourceManager.GetString("AboutPageContactHourrappsHeader", resourceCulture);
+            }
+        }
+        
+        public static string AboutPageContactHourrappsDescription {
+            get {
+                return ResourceManager.GetString("AboutPageContactHourrappsDescription", resourceCulture);
+            }
+        }
     }
 }

@@ -83,5 +83,35 @@
     </data>
     <data name="BookingPageTitle" xml:space="preserve">
         <value>Rendez-vous</value>
+    </data>
+    <data name="AboutPageTitle" xml:space="preserve">
+        <value>A propos</value>
+    </data>
+    <data name="AboutPageAboutAvilaHeader" xml:space="preserve">
+        <value>Qui sommes nous?</value>
+    </data> 
+     <data name="AboutPageAboutAvilaDescription" xml:space="preserve">
+        <value>Avila est un havre de création regroupant des coiffeurs tous attachés à leur indépendance, comme autant de personnalités différentes.</value>
+    </data>
+    <data name="AboutPageAvilaMobileAppHeader" xml:space="preserve">
+        <value>L'application mobile Avila</value>
+    </data> 
+     <data name="AboutPageAvilaMobileAppDescription" xml:space="preserve">
+        <value>L'application mobile Avila vous permets de prendre facilement vos rendez-vous et de nous suivre sur les réseaux sociaux.</value>
+    </data>
+    <data name="AboutPageAvilaMobileAppVersionHeader" xml:space="preserve">
+        <value>Version de l'application</value>
     </data>    
+    <data name="AboutPageAboutHourrappsHeader" xml:space="preserve">
+        <value>Qui est Hourrapps?</value>
+    </data> 
+     <data name="AboutPageAboutHourrappsDescription" xml:space="preserve">
+        <value>Hourrapps est un cabinet de conseil en systèmes et logiciels informatiques, spécialisé dans le développement d’applications mobiles, de logiciels et de sites web.</value>
+    </data>
+    <data name="AboutPageContactHourrappsHeader" xml:space="preserve">
+        <value>Contacter Hourrapps</value>
+    </data> 
+     <data name="AboutPageContactHourrappsDescription" xml:space="preserve">
+        <value>Vous pouvez contacter Hourrapps depuis sont site internet, par mail, par téléphone ou depuis Facebook à l'aide des icones ci-dessous :</value>
+    </data>       
 </root>

@@ -44,7 +44,7 @@ namespace AvilaShellAppSample.ViewModels
             _browser = new Infrastructure.Browser();
             _deepLinkingLauncher = new DeepLinkingLauncher();
 
-            Title = "About";
+            Title = Strings.Strings.AboutPageTitle;
 
             AvilaAppVersion = AppInfo.VersionString;
 

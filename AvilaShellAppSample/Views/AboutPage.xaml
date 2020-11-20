@@ -4,6 +4,7 @@
              x:Class="AvilaShellAppSample.Views.AboutPage"
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:strings="clr-namespace:AvilaShellAppSample.Strings"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:vm="clr-namespace:AvilaShellAppSample.ViewModels"
              Shell.NavBarHasShadow="True">
@@ -52,7 +53,7 @@
                     <Expander>
                         <Expander.Header>
                             <Grid>
-                                <Label Text="Qui sommes nous?"
+                                <Label Text="{x:Static strings:Strings.AboutPageAboutAvilaHeader}" 
                                        Style="{StaticResource AboutPageCategoryLabelStyle}" />
                                 <Image Style="{StaticResource ChevronImageForExpander}" />
                                 </Grid>
@@ -60,7 +61,7 @@
                         <Expander.ContentTemplate>
                             <DataTemplate>
                                 <StackLayout Margin="0,8,0,0">
-                                    <Label Text="Avila est un havre de création regroupant des coiffeurs tous attachés à leur indépendance, comme autant de personnalités différentes."
+                                    <Label Text="{x:Static strings:Strings.AboutPageAboutAvilaDescription}" 
                                            Style="{StaticResource NewsPageDescriptionLabelStyle}" />
                                 </StackLayout>
                             </DataTemplate>
@@ -74,7 +75,7 @@
                     <Expander>
                         <Expander.Header>
                             <Grid>
-                                <Label Text="L'application mobile Avila"
+                                <Label Text="{x:Static strings:Strings.AboutPageAvilaMobileAppHeader}" 
                                        Style="{StaticResource AboutPageCategoryLabelStyle}" />
                                 <Image Style="{StaticResource ChevronImageForExpander}" />
                             </Grid>
@@ -82,7 +83,7 @@
                         <Expander.ContentTemplate>
                             <DataTemplate>
                                 <StackLayout Margin="0,8,0,0">
-                                    <Label Text="L'application mobile Avila vous permets de prendre facilement vos rendez-vous et de nous suivre sur les réseaux sociaux."
+                                    <Label Text="{x:Static strings:Strings.AboutPageAvilaMobileAppDescription}"
                                            Style="{StaticResource NewsPageDescriptionLabelStyle}" />
                                 </StackLayout>
                             </DataTemplate>
@@ -97,7 +98,7 @@
                                  HorizontalOptions="FillAndExpand">
                         <Label Style="{StaticResource AboutPageCategoryLabelStyle}"
                                VerticalTextAlignment="Center"
-                               Text="Version de l'application" />
+                               Text="{x:Static strings:Strings.AboutPageAvilaMobileAppVersionHeader}" />
                         <Label Style="{StaticResource AboutPageLabelStyle}"
                                HorizontalOptions="FillAndExpand"
                                VerticalTextAlignment="Center" HorizontalTextAlignment="End"
@@ -135,7 +136,7 @@
                     <Expander>
                         <Expander.Header>
                             <Grid>
-                                <Label Text="Qui est Hourrapps?"
+                                <Label Text="{x:Static strings:Strings.AboutPageAboutHourrappsHeader}"
                                        Style="{StaticResource AboutPageCategoryLabelStyle}" />
                                 <Image Style="{StaticResource ChevronImageForExpander}" />
                                 </Grid>
@@ -143,7 +144,7 @@
                         <Expander.ContentTemplate>
                             <DataTemplate>
                                 <StackLayout Margin="0,8,0,0">
-                                    <Label Text="Hourrapps est un cabinet de conseil en systèmes et logiciels informatiques, spécialisé dans le développement d’applications mobiles, de logiciels et de sites web."
+                                    <Label Text="{x:Static strings:Strings.AboutPageAboutHourrappsDescription}"
                                            Style="{StaticResource NewsPageDescriptionLabelStyle}" />
                                 </StackLayout>
                             </DataTemplate>
@@ -157,7 +158,7 @@
                     <Expander>
                         <Expander.Header>
                             <Grid>
-                                <Label Text="Contacter Hourrapps"
+                                <Label Text="{x:Static strings:Strings.AboutPageContactHourrappsHeader}"
                                        Style="{StaticResource AboutPageCategoryLabelStyle}" />
                                 <Image Style="{StaticResource ChevronImageForExpander}" />
                                 </Grid>
@@ -165,18 +166,8 @@
                         <Expander.ContentTemplate>
                             <DataTemplate>
                                 <StackLayout Margin="0,8,0,0">
-                                    <Label Style="{StaticResource NewsPageDescriptionLabelStyle}" >
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Vous pouvez contacter Hourrapps " />
-                                                <Span Text="depuis son site internet, " />
-                                                <Span Text="par téléphone, " />
-                                                <Span Text="par mail, " />
-                                                <Span Text="ou depuis Facebbok, " />
-                                                <Span Text="à l'aide des icones suivantes." />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
+                                    <Label Style="{StaticResource NewsPageDescriptionLabelStyle}"
+                                           Text="{x:Static strings:Strings.AboutPageContactHourrappsDescription}" />
                                     <StackLayout Orientation="Horizontal"
                                                  HorizontalOptions="CenterAndExpand"
                                                  VerticalOptions="Center"
