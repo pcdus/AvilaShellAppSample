@@ -66,6 +66,8 @@
     <None Remove="lottie_loading_2circles_rotating_apricot.json" />
     <None Remove="lottie_error_no_network_apricot.json" />
     <None Remove="lottie_error_warning_apricot.json" />
+    <None Remove="Resources\blackAvilaLogoTitleSubtitle.svg" />
+    <None Remove="Resources\blackAvilaLogoTitleSubtitle.svg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Resources\TitleAvilaLogo.svg" />
@@ -95,6 +97,7 @@
     <EmbeddedResource Include="lottie_loading_2circles_rotating_apricot.json" />
     <EmbeddedResource Include="lottie_error_no_network_apricot.json" />
     <EmbeddedResource Include="lottie_error_warning_apricot.json" />
+    <EmbeddedResource Include="Resources\blackAvilaLogoTitleSubtitle.svg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Strings\Strings.resx">

@@ -113,7 +113,8 @@
             <!-- transparent -->
             <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                 <ffimageloadingsvg:SvgCachedImage HeightRequest="120"
-                                                  Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitle.svg" />
+                                                  Margin="0,20,0,0"
+                                                  Source="resource://AvilaShellAppSample.Resources.blackAvilaLogoTitleSubtitle.svg" />
 
             </StackLayout>
 
