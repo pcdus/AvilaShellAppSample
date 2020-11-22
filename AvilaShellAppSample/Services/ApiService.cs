@@ -104,6 +104,7 @@ namespace AvilaShellAppSample.Services
                 Debug.WriteLine("ApiService - ProcessGetRequest() - !IsConnected");
                 throw new IOException("No internet access");
             }
+
             var response = await _client.Get(uri, ct);
             if (!response.IsSuccessStatusCode)
             {

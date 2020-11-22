@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using AvilaShellAppSample.Helpers;
 using AvilaShellAppSample.Models;
@@ -35,12 +32,10 @@ namespace AvilaShellAppSample.Services
             Debug.WriteLine("FacebookGraphApiService - GetEvents()");
             try
             {
-                var eventsUri = new Uri($"{ApiConfig.FbApiPath}{ApiConfig.FbApiEventsParams}&access_token={ApiConfig.FbAccessToken}");
-                //var res = await _apiService.GetAndRetryWithTimeout<FacebookEventDTO>(eventsUri, 15, 3);
-                //return res;
+                var eventsUri = new Uri($"{ApiConfig.FbApiPath}{ApiConfig.FbApiEventsParams}{ApiConfig.FbAccessToken}");
                 using (new DisposableStopwatch(duration => _eventTracker.Api(ApiType.FacebookEvents, (long)duration.TotalMilliseconds)))
                 {
-                    return await _apiService.GetAndRetryWithTimeout<FacebookEventDTO>(eventsUri, 15, 3);
+                    return await _apiService.GetAndRetryWithTimeout<FacebookEventDTO>(eventsUri, ApiConfig.FbApiCallTimeout, ApiConfig.FbApiCallMaxRetries);
                 }
             }
             catch (Exception ex)
@@ -55,12 +50,10 @@ namespace AvilaShellAppSample.Services
             Debug.WriteLine("FacebookGraphApiService - GetFeed()");
             try
             {
-                var feedUri = new Uri($"{ApiConfig.FbApiPath}{ApiConfig.FbApiPostsParams}&access_token={ApiConfig.FbAccessToken}");
-                //var res = await _apiService.GetAndRetryWithTimeout<FacebookFeedDTO>(feedUri, 15, 3);
-                //return res;
+                var feedUri = new Uri($"{ApiConfig.FbApiPath}{ApiConfig.FbApiPostsParams}{ApiConfig.FbAccessToken}");
                 using (new DisposableStopwatch(duration => _eventTracker.Api(ApiType.FacebookPosts, (long)duration.TotalMilliseconds)))
                 {
-                    return await _apiService.GetAndRetryWithTimeout<FacebookFeedDTO>(feedUri, 15, 3);
+                    return await _apiService.GetAndRetryWithTimeout<FacebookFeedDTO>(feedUri, ApiConfig.FbApiCallTimeout, ApiConfig.FbApiCallMaxRetries);
                 }
 
             }

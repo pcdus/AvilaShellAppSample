@@ -66,12 +66,7 @@ namespace AvilaShellAppSample.Services
                     }
                 }
             }
-            results = results.OrderByDescending(x => x.StartDate).ToList();
-            // debug display of events
-            foreach (var ev in results)
-            {
-                Debug.WriteLine(ev.Name + "-" + ev.StartDate);
-            }
+            results = results.OrderByDescending(x => x.StartDate).Take(ApiConfig.FbMaxEventsDisplayed).ToList();
             return results;
         }
 
@@ -99,6 +94,7 @@ namespace AvilaShellAppSample.Services
                     }
                 }
             }
+            results = results.OrderByDescending(x => x.Date).Take(ApiConfig.FbMaxPostsDisplayed).ToList();
             return results;
         }
 
@@ -196,6 +192,7 @@ namespace AvilaShellAppSample.Services
                     }
                 }
             }
+            results = results.OrderByDescending(x => x.Date).Take(ApiConfig.FbMaxPostsDisplayed).ToList();
             return results;
         }
 
@@ -243,12 +240,7 @@ namespace AvilaShellAppSample.Services
                     }
                 }
             }
-            results = results.OrderByDescending(x => x.StartDate).ToList();
-            // debug display of events
-            foreach (var ev in results)
-            {
-                Debug.WriteLine(ev.Name + "-" + ev.StartDate);
-            }
+            results = results.OrderByDescending(x => x.StartDate).Take(ApiConfig.FbMaxEventsDisplayed).ToList();
             return results;
         }
 
