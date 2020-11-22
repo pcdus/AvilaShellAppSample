@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AvilaShellApp.Views.HomePage"
+             xmlns:ctrl="clr-namespace:AvilaShellApp.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:strings="clr-namespace:AvilaShellApp.Strings"
+             xmlns:vm="clr-namespace:AvilaShellApp.ViewModels"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="True"
+             Shell.NavBarHasShadow="True"
+             Shell.NavBarIsVisible="True">
+    <Shell.TitleView>
+        <ffimageloadingsvg:SvgCachedImage Source="resource://AvilaShellApp.Resources.blackAvilaLogoTitle.svg"
+                                          DownsampleToViewSize = "True"
+                                          VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
+                                          Margin="{OnPlatform Android='0,0,16,0', Default=0}"/>
+    </Shell.TitleView>
+    <ContentPage.BindingContext>
+        <vm:HomeViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <!-- Page Styles -->
+        <ResourceDictionary>
+            <!-- Labels -->
+            <Style x:Key="HomePageLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratRegular" />
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Margin" Value="50,0,0,0"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-900}"/>
+                <Setter Property="MinimumHeightRequest" Value="24"/>
+                <!--<Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>-->
+            </Style>
+            <Style x:Key="HomePageHeaderLabelStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="MontserratMedium" />
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Margin" Value="50,0,0,0"/>
+                <Setter Property="TextColor" Value="{DynamicResource Gray-600}"/>
+                <Setter Property="HeightRequest" Value="18"/>
+                <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}"/>
+            </Style>
+            <!-- Images -->
+            <Style x:Key="ImageIconDuotonePart1Style" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">Start</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Opacity">1</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
+                                         FontFamily="FontAwesomeDuotoneSolid"
+                                         Size="30" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ImageIconDuotonePart2Style" TargetType="Image">
+                <Setter Property="BackgroundColor">Transparent</Setter>
+                <Setter Property="HorizontalOptions">Start</Setter>
+                <Setter Property="VerticalOptions">Center</Setter>
+                <Setter Property="Opacity">1</Setter>
+                <Setter Property="Source">
+                    <Setter.Value>
+                        <FontImageSource Color="{StaticResource BlondAvilaColor}"
+                                         FontFamily="FontAwesomeDuotoneSolid"
+                                         Size="30" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid RowSpacing="0"
+              Padding="0"
+              BackgroundColor="{StaticResource Gray-050}"
+              Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="1">
+                <!--  Parallax header view  -->
+                <ScrollView>
+                    <ContentView x:Name="headerView"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="FillAndExpand">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <!--  Article header image  -->
+                            <ffimageloading:CachedImage x:Name="headerImage"
+                                            Grid.Row="0"
+                                            Aspect="AspectFill"
+                                            BackgroundColor="{DynamicResource Gray-200}"
+                                            DownsampleToViewSize="true"
+                                            HeightRequest="280"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="Start"
+                                            Source="resource://AvilaShellApp.Resources.avila_indoor.jpg">
+                            </ffimageloading:CachedImage>
+                        </Grid>
+                    </ContentView>
+                </ScrollView>
+
+                <ctrl:ParallaxScrollView HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="FillAndExpand"
+                                         ParallaxHeaderView="{x:Reference headerView}"
+                                         LogoHeaderView="{x:Reference logoHeaderView}"
+                                         HiddenView="{x:Reference hiddenView}"
+                                         ContentView="{x:Reference mainContainer}">
+                    <Grid ColumnSpacing="0"
+                          RowSpacing="0"
+                          VerticalOptions="FillAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="220" /> <!-- used by ParallaxScrollView control -->
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="1" BackgroundColor="Transparent" Margin="0" Padding="0" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <yummy:PancakeView CornerRadius="16,16,0,0"
+                                               Padding="0,0,0,0"
+                                               BackgroundColor="{StaticResource Gray-050}"
+                                               Grid.Row="1">
+                                <StackLayout x:Name="mainContainer"
+                                             BackgroundColor="Transparent"
+                                             Spacing="16" Margin="16,16,16,16"> 
+
+                                    <!-- Hidden item to adjust margin with Logo -->
+                                    <BoxView x:Name="hiddenView"
+                                             BackgroundColor="Transparent"
+                                             Margin="0,-16,0,0"
+                                             HeightRequest="45" /> <!-- used by ParallaxScrollView control -->
+ 
+                                    <!-- Phone -->
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                                       Padding="16"
+                                                       Margin="{OnPlatform Android=2, Default=0}">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Style="{StaticResource HomePageHeaderLabelStyle}"
+                                                   Text="{x:Static strings:Strings.HomePagePhoneNumberHeader}" />
+                                            <Label Grid.Row="1"
+                                                   Style="{StaticResource HomePageLabelStyle}"
+                                                   Text="{Binding AvilaPhoneNumber}" />
+                                            <Image  Grid.RowSpan="2"
+                                                    Style="{StaticResource ImageIconDuotonePart1Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconPhonePart1}"
+                                                                     Color="{StaticResource BlondAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Image Grid.RowSpan="2" 
+                                                   Style="{StaticResource ImageIconDuotonePart2Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconPhonePart2}"
+                                                                     Color="{StaticResource ApricotAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+  
+                                                </Image.Source>
+                                            </Image>
+                                        </Grid>
+                                        <yummy:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding CallCommand}"/>
+                                        </yummy:PancakeView.GestureRecognizers>
+                                    </yummy:PancakeView>
+
+                                    <!-- Address -->
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                                       Padding="16"
+                                                       Margin="{OnPlatform Android=2, Default=0}">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label Style="{StaticResource HomePageHeaderLabelStyle}"
+                                                   Text="{x:Static strings:Strings.HomePageAddressHeader}" />
+                                            <Label Grid.Row="1"
+                                                   Style="{StaticResource HomePageLabelStyle}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding AvilaAddress.Street}" />
+                                                        <Span Text="&#10;" />
+                                                        <Span Text="{Binding AvilaAddress.ZipCode}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding AvilaAddress.City}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Image  Grid.RowSpan="2"
+                                                    Style="{StaticResource ImageIconDuotonePart1Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconMapPart1}"
+                                                                     Color="{StaticResource BlondAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Image Grid.RowSpan="2" 
+                                                   Style="{StaticResource ImageIconDuotonePart2Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconMapPart2}"
+                                                                     Color="{StaticResource ApricotAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                        </Grid>
+                                        <yummy:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding OpenMapCommand}"/>
+                                        </yummy:PancakeView.GestureRecognizers>
+                                    </yummy:PancakeView>
+
+                                    <!-- Schedule -->
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                                       Padding="16"
+                                                       Margin="{OnPlatform Android=2, Default=0}">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label Style="{StaticResource HomePageHeaderLabelStyle}"
+                                                   Text="{x:Static strings:Strings.HomePageScheduleHeader}" />
+                                            <Label Grid.Row="1"
+                                                   Style="{StaticResource HomePageLabelStyle}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleMonday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleTuesday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleWednesday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleThursday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleFriday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleSaturday}" />
+                                                        <Span Text="{x:Static strings:Strings.HomePageAvilaScheduleSunday}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Image  Grid.RowSpan="2"
+                                                    Style="{StaticResource ImageIconDuotonePart1Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconClockPart1}"
+                                                                     Color="{StaticResource BlondAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Image Grid.RowSpan="2" 
+                                                   Style="{StaticResource ImageIconDuotonePart2Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconClockPart2}"
+                                                                     Color="{StaticResource ApricotAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                        </Grid>
+                                    </yummy:PancakeView>
+
+                                    <!-- Mail -->
+                                    <yummy:PancakeView Style="{StaticResource YummyFrame}"
+                                                       Padding="16"
+                                                       Margin="{OnPlatform Android=2, Default=0}">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Style="{StaticResource HomePageHeaderLabelStyle}"
+                                                   Text="{x:Static strings:Strings.HomePageEmailHeader}" />
+                                            <Label Grid.Row="1"
+                                                   Style="{StaticResource HomePageLabelStyle}"
+                                                   Text="{Binding AvilaEmail}"  />
+                                            <Image  Grid.RowSpan="2"
+                                                    Style="{StaticResource ImageIconDuotonePart1Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconMailPart1}"
+                                                                     Color="{StaticResource BlondAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                            <Image Grid.RowSpan="2" 
+                                                   Style="{StaticResource ImageIconDuotonePart2Style}">
+                                                <Image.Source>
+                                                    <FontImageSource Glyph="{StaticResource FadsIconMailPart2}"
+                                                                     Color="{StaticResource ApricotAvilaColor}"
+                                                                     FontFamily="FontAwesomeDuotoneSolid"
+                                                                     Size="30" />
+                                                </Image.Source>
+                                            </Image>
+                                        </Grid>
+                                        <yummy:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SendEmailCommand}"/>
+                                        </yummy:PancakeView.GestureRecognizers>   
+                                    </yummy:PancakeView>
+
+                                </StackLayout>
+                            </yummy:PancakeView>
+
+                            <!-- Logo + Circle-->
+                            <yummy:PancakeView x:Name="logoHeaderView"
+                                               Grid.Row="1"
+                                               Margin="0,-45,0,0"
+                                               WidthRequest="90" HeightRequest="90"
+                                               VerticalOptions="Start" HorizontalOptions="Center"
+                                               CornerRadius="45"
+                                               BackgroundColor="{StaticResource Gray-050}">
+                                <yummy:PancakeView.Border>
+                                    <yummy:Border Color="{StaticResource Gray-050}"
+                                                  Thickness="2" />
+                                </yummy:PancakeView.Border>
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Source="resource://AvilaShellApp.Resources.4colorsCircleAvilaLogo.svg"
+                                    BackgroundColor="Transparent"
+                                    WidthRequest="86" HeightRequest="86"
+                                    VerticalOptions="Center" HorizontalOptions="Center" />
+                                </yummy:PancakeView>
+
+                        </Grid>
+                    </Grid>
+                </ctrl:ParallaxScrollView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

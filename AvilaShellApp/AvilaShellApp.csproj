@@ -1,0 +1,107 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="4.8.0.5822" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Refractored.MvvmHelpers" Version="1.6.2" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms.Svg" Version="1.0.3" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms.PancakeView" Version="2.3.0.759" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.4.3" />
+    <PackageReference Include="Microsoft.AppCenter" Version="3.4.3" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.4.3" />
+    <PackageReference Include="Polly" Version="7.2.1" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.454" />
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="4.0.6" />
+    <PackageReference Include="Xamarin.Forms.DebugRainbows" Version="1.1.4" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Models\DTO\" />
+    <Folder Include="Models\DTO\Enums\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Monitoring\" />
+    <Folder Include="Services\Abstractions\" />
+    <Folder Include="Infrastructure\" />
+    <Folder Include="Behaviors\" />
+    <Folder Include="Triggers\" />
+    <Folder Include="Strings\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\avila_indoor.jpg" />
+    <None Remove="Resources\Montserrat-Bold.ttf" />
+    <None Remove="Resources\Montserrat-Medium.ttf" />
+    <None Remove="Resources\Montserrat-Regular.ttf" />
+    <None Remove="Resources\Montserrat-SemiBold.ttf" />
+    <None Remove="Resources\FontAwesome5Brands-Regular-400.otf" />
+    <None Remove="Resources\FontAwesome5Duotone-Solid-900.otf" />
+    <None Remove="Resources\FontAwesome5Pro-Light-300.otf" />
+    <None Remove="Resources\ApricotCircleAvilaLogo.svg" />
+    <None Remove="Resources\CornsilkCircleAvilaLogo.svg" />
+    <None Remove="Resources\IndigoDyeCircleAvilaLogo.svg" />
+    <None Remove="Resources\MediumChampagneCircleAvilaLogo.svg" />
+    <None Remove="Resources\4colorsCircleAvilaLogoOmg.svg" />
+    <None Remove="Resources\blackAvilaLogoTitle.svg" />
+    <None Remove="Resources\whiteAvilaLogoTitle.svg" />
+    <None Remove="Resources\whiteHourrappsLogo.svg" />
+    <None Remove="Resources\blueHourrappsLogo.svg" />
+    <None Remove="Resources\hourrappsLogo.svg" />
+    <None Remove="Resources\Fichier_1.svg" />
+    <None Remove="Resources\Hourrapps_White.png" />
+    <None Remove="Resources\Hourrapps_Colored.png" />
+    <None Remove="lottie_loading_3dots_turning_3colors.json" />
+    <None Remove="lottie_loading_4dots merging_apricot.json" />
+    <None Remove="lottie_loading_2circles_rotating_apricot.json" />
+    <None Remove="lottie_error_no_network_apricot.json" />
+    <None Remove="lottie_error_warning_apricot.json" />
+    <None Remove="Resources\blackAvilaLogoTitleSubtitle.svg" />
+    <None Remove="Resources\blackAvilaLogoTitleSubtitle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\TitleAvilaLogo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\avila_indoor.jpg" />
+    <EmbeddedResource Include="Resources\Montserrat-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Montserrat-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Montserrat-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Montserrat-SemiBold.ttf" />
+    <EmbeddedResource Include="Resources\FontAwesome5Brands-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\FontAwesome5Duotone-Solid-900.otf" />
+    <EmbeddedResource Include="Resources\FontAwesome5Pro-Light-300.otf" />
+    <EmbeddedResource Include="Resources\ApricotCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\CornsilkCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\IndigoDyeCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\MediumChampagneCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\4colorsCircleAvilaLogo.svg" />
+    <EmbeddedResource Include="Resources\blackAvilaLogoTitle.svg" />
+    <EmbeddedResource Include="Resources\whiteAvilaLogoTitle.svg" />
+    <EmbeddedResource Include="Resources\Hourrapps_White.png" />
+    <EmbeddedResource Include="Resources\Hourrapps_Colored.png" />
+    <EmbeddedResource Include="lottie_loading_3dots_turning_3colors.json" />
+    <EmbeddedResource Include="lottie_loading_2circles_rotating_apricot.json" />
+    <EmbeddedResource Include="lottie_error_no_network_apricot.json" />
+    <EmbeddedResource Include="lottie_error_warning_apricot.json" />
+    <EmbeddedResource Include="Resources\blackAvilaLogoTitleSubtitle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Strings\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Strings\Strings.Designer.cs">
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

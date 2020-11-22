@@ -1,1 +1,1 @@
-AvilaShellAppSample
+AvilaShellApp

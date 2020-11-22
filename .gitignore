@@ -350,8 +350,10 @@ MigrationBackup/
 
 Files/
 
-AvilaShellAppSample/.DS_Store
+AvilaShellApp/.DS_Store
 
-AvilaShellAppSample.iOS/.DS_Store
+AvilaShellApp.iOS/.DS_Store
 
 .DS_Store
+
+.idea/
