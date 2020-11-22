@@ -23,7 +23,7 @@ namespace AvilaShellAppSample
 
         public App()
         {
-            //Register Syncfusion license: no longser used
+            //Register Syncfusion license: no longer used
             //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzMxMTM2QDMxMzgyZTMzMmUzMEZXOG80REI3eHlHcGREcE5jSFMxalFCYSswZXlIalNQNTNta3J0U2ZnbE09");
 
             InitializeComponent();
@@ -36,6 +36,7 @@ namespace AvilaShellAppSample
                 DependencyService.Register<MockDataStore>();
             else
                 DependencyService.Register<AzureDataStore>();
+
             MainPage = new AppShell();
         }
 
@@ -54,5 +55,6 @@ namespace AvilaShellAppSample
         protected override void OnResume()
         {
         }
+
     }
 }

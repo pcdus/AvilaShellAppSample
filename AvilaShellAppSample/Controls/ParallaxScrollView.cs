@@ -321,10 +321,6 @@ namespace AvilaShellAppSample.Controls
             var contentViewHeight = this.ContentView.Height;
             Debug.WriteLine($"contentViewHeight : {contentViewHeight}");
 
-            //var newMargin = height - contentViewHeight - 16 + (AppShell.TabBarHeight);
-            //var tabBarHeight = DependencyService.Get<IStatusBar>().GetTabBarHeight((int)height);
-            //var newMargin = height - contentViewHeight - 16 + tabBarHeight;
-
             double newMargin = 0;
             if (Device.RuntimePlatform == "iOS")
             {
